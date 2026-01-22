@@ -128,7 +128,7 @@ csrf=MlOs9Czkz8FENTRbtDS5pWc7WYOytbPJ&username=admin&password=123e
 
 
 
-![[Снимок экрана 2026-01-03 в 15.56.28.png]]
+![[Снимок-2026-01-03-15.56.28.png]]
 
 
 
@@ -137,4 +137,4 @@ csrf=MlOs9Czkz8FENTRbtDS5pWc7WYOytbPJ&username=admin&password=123e
 тут же если добавить этот запрос в intruader  и создать пейлоад и подставить туда например список паролей, и запустить и тогда 
 
 
-![[Снимок экрана 2026-01-03 в 16.07.49.png]]
+![[Снимок--16.07.49.png]]

