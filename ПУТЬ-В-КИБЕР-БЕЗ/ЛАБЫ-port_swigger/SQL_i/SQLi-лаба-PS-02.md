@@ -126,9 +126,7 @@ csrf=MlOs9Czkz8FENTRbtDS5pWc7WYOytbPJ&username=admin&password=123e
 применил изменения и отправил запрос на сервер!
 в итоге удалось залогиниться! и вошел в личный кабинет администратора!
 
-
-
-![[Снимок-2026-01-03-15.56.28.png]]
+<img src="../../assets/Снимок-2026-01-03-15.56.28.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -136,5 +134,5 @@ csrf=MlOs9Czkz8FENTRbtDS5pWc7WYOytbPJ&username=admin&password=123e
 -->  [[подбор паролей Burp Suite]]    <-- с использованием плагина ==Turbo Intruder==
 тут же если добавить этот запрос в intruader  и создать пейлоад и подставить туда например список паролей, и запустить и тогда 
 
+<img src="../../assets/Снимок--16.07.49.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[Снимок--16.07.49.png]]

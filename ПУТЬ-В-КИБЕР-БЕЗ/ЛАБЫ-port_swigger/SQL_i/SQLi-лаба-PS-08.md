@@ -71,13 +71,14 @@
 
 
 
+<img src="../../assets/deepc20318.png" alt="Скрин" style="width: 90%; max-width: 21000px;" />
 
 
-![[deepc20318.png]]
 
 борьба в waf
 
-![[deep-20260106-f524af.png]]
+<img src="../../assets/deep-20260106-f524af.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 
@@ -181,7 +182,11 @@ L --> M["📤 Отправляем payload на свою функцию<br>(xp_d
 M --> N{В логах функции есть запрос?}
 N -- "✅ ДА" --> O["🎉 ПОБЕДА! Уязвимость доказана.<br>Начинаем эксфильтрацию данных"]
 N -- "❌ НЕТ" --> P["📭 Вероятно, уязвимости нет<br>или WAF блокирует исходящие запросы"]
-![[deep6b5c99-1.png]]
+
+
+<img src="../../assets/deep6b5c99-1.png" alt="Скрин" style="width: 90%; max-width: 3000px;" />
+
+
 
 
 

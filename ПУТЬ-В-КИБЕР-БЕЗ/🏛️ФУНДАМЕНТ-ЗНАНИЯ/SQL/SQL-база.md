@@ -11,7 +11,9 @@ Structured Query Language
 есть внутр ключ - это id от других таблиц
 
 ==КАК ПОНЯТЬ КАКОЙ ДИАЛЕКТ У БД? 
-![[Снимок-14.57.06.png]]
+
+<img src="../../assets/Снимок-14.57.06.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 Эксплуатация бд строится по такому принципу:
 
 1.Обнаружение** (поиск уязвимой точки)
@@ -80,7 +82,10 @@ SELECT (5 * 2 - 6) / 2 AS Result;
 // показать все FamilyMembers где birthday старше '1970-12-30'
 SELECT * FROM FamilyMembers WHERE birthday > '1970-12-30'
 ```
-![[Снимок-14.45.36.png]]
+
+<img src="../../assets/Снимок-14.45.36.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 
 ==TRUE и FALSE, означающие истинность и ошибочность какого-либо утверждения.
@@ -164,7 +169,8 @@ SELECT * FROM Student
 WHERE first_name = 'Grigorij' AND EXTRACT(YEAR FROM birthday) > 2000;
 ```
 
-![[Снимок-16.18.54.png]]
+<img src="../../assets/Снимок-16.18.54.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 ### Результатом сравнения любого значения с NULL является NULL
 
 
@@ -256,7 +262,9 @@ where member_name LIKE '%иванов%'
 регисронезависимый!
 
 ==/== - для экранирования таких символов ==., *, +, ?, [, ], (, ), {, }, |, \ )== 
-![[Снимок-18.23.39.png]]
+
+<img src="../../assets/Снимок-18.23.39.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 ```sql
 // где  начало (^) с John
 SELECT * FROM Users WHERE name REGEXP '^John'  (JohnTravolta)

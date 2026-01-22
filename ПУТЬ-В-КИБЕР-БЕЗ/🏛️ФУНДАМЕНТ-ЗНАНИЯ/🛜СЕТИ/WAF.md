@@ -11,7 +11,8 @@
 
 
 
-![[deep20260106-c46071.png]]
+<img src="../../assets/deep20260106-c46071.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 **Web Application Firewall (WAF)** — это специализированный межсетевой экран, который защищает веб-приложения, анализируя HTTP/HTTPS-трафик на 7-м (прикладном) уровне модели OSI[](https://stormwall.pro/resources/terms/general/waf)[](https://ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B9%D1%80%D0%B2%D0%BE%D0%BB_%D0%B2%D0%B5%D0%B1-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9). Если обычный фаервол проверяет IP-адреса и порты, то WAF «понимает» логику веб-запросов: смотрит на URL, параметры, заголовки и тело запроса[](https://mk-company.ru/blog/web-application-firewall-waf-polnaya-zashhita-veb-prilozhenij-ot-atak/).

@@ -8,14 +8,14 @@
 
 когда входим в аккаунт свой, то нам в ответе приходит такой ответ
 
-<img src="../../assets/Снимок-23.08.31.png" alt="Скрин" style="width: 100%; max-width: 1000px;" />
+<img src="../../assets/Снимок-23.08.31.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
 интересует эта  строка:
 stay-logged-in=d2llbmVyOjUxZGMzMGRkYzQ3M2Q0M2E2MDExZTllYmJhNmNhNzcw
 
-<img src="../../assets/Снимок-23.09.16.png" alt="Скрин" style="width: 100%; max-width: 1000px;" />
+<img src="../../assets/Снимок-23.09.16.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 через инспектор - сразу ясно что тут логин:пароль
@@ -25,14 +25,14 @@ stay-logged-in=d2llbmVyOjUxZGMzMGRkYzQ3M2Q0M2E2MDExZTllYmJhNmNhNzcw
 
 едем на сайт https://crackstation.net чтобы понять че за кодировка это 51dc30ddc473d43a6011e9ebba6ca770
 
-<img src="../../assets/Снимок-23.12.58.png" alt="Скрин" style="width: 100%; max-width: 1000px;" />
+<img src="../../assets/Снимок-23.12.58.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 так как с основной страницы сайт не дает нам бут-форсить пароли
 
 то можно попробовать это сделать через эти параметры:
 
-<img src="../../assets/Снимок-23.13.41.png" alt="Скрин" style="width: 100%; max-width: 1000px;" />
+<img src="../../assets/Снимок-23.13.41.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
  вместо id = стамим ник жертвы
