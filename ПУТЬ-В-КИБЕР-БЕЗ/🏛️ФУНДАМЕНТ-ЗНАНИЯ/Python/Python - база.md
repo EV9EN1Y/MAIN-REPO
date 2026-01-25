@@ -16,7 +16,7 @@ target = "192.168.1.1"          # Строка
 port = 8080                     # Целое число
 is_vulnerable = True            # Булево значение
 open_ports = [80, 443, 8080]    # Список
-config = {"host": target, "port": port}  # Словарь
+config = {"host": target, "port": port}  # Словарь /люб типы внутри
 
 # Условия (проверка статуса)
 if port == 80:

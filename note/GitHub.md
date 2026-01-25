@@ -119,6 +119,18 @@ https://
 
 <span style="color:blue">Синий текст</span> и <span style="color:red; font-weight:bold">Красный жирный</span>.
 
+
+
+
+
+
+
+
+![Альтернативный текст](https://i.pinimg.com/originals/9a/34/83/9a3483a890a559ec60de7849b690be73.gif "Подсказка")
+
+
+
+
 <details>
 <summary>Нажми, чтобы развернуть</summary>
 Здесь скрытый контент. Можно использовать **Markdown** внутри.
@@ -150,3 +162,69 @@ https://skillicons.dev              https://github.com/tandpfun/skill-icons#read
 
 
 https://shields.io/badges
+
+
+
+
+<div style="border: 2px solid #0969da; border-radius: 8px; padding: 16px; margin: 20px 0;">
+  <strong>🔐 Важное замечание по
+   безопасности:</strong><br>
+  Все лабораторные работы
+   выполняются в 
+  учебных целях на специально
+   подготовленных 
+  стендах. Не пытайтесь тестировать 
+  уязвимости на сайтах без явного 
+  разрешения владельцев.
+</div>
+
+<div style="border-left: 6px solid #cf222e; background-color: #ffebe9; padding: 16px; margin: 20px 0; max-width: 200px; border-radius: 0 8px 8px 0;">
+<strong>⚠️ Критическое предупреждение</strong><br>
+Этот блок имеет фиксированную максимальную ширину (800px), красную полосу слева и скруглённые правые углы.
+</div>
+<div style="border: 2px dashed #8250df; border-radius: 20px; padding: 20px; margin: 20px 0; width: 60%; min-height: 80px; font-style: italic;">
+Этот блок занимает 60% ширины, имеет минимальную высоту и пунктирную фиолетовую рамку.
+</div>
+
+
+<div style="
+    width: 200px;
+    height: 400px;
+    border: 2px solid #0969da;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px 0;
+    overflow: auto; /* Добавляет прокрутку, если текст не помещается */
+">
+  <strong>🔐 Важное замечание по безопасности:</strong><br><br>
+  Все лабораторные работы выполняются в учебных целях на специально подготовленных стендах. Не пытайтесь тестировать уязвимости на сайтах без сайтов без явного разрешения владельцев.
+</div>
+
+
+
+
+<div style="display: flex; gap: 20px; justify-content: space-between;">
+    <!-- Колонка 1 -->
+    <div style="width: 200px; height: 400px; border: 2px solid #0969da; border-radius: 8px; padding: 16px; overflow: auto;">
+        <strong>🔐 Колонка 1</strong><br><br>
+        Первый блок с текстом. Все лабораторные работы выполняются в учебных целях.
+    </div>
+
+    <!-- Колонка 2 -->
+    <div style="width: 200px; height: 400px; border: 2px solid #cf222e; border-radius: 8px; padding: 16px; overflow: auto;">
+        <strong>⚠️ Колонка 2</strong><br><br>
+        Второй блок. Не пытайтесь тестировать уязвимости без разрешения владельцев.
+    </div>
+
+    <!-- Колонка 3 -->
+    <div style="width: 200px; height: 400px; border: 2px solid #1a7f37; border-radius: 8px; padding: 16px; overflow: auto;">
+        <strong>💡 Колонка 3</strong><br><br>
+        Третий блок. Специально подготовленные стенды для обучения безопасности.
+    </div>
+</div>
+
+
+
+[![](https://img.shields.io/badge/__My_RESUME__-ЦВЕТ?style=for-the-badge)
+
+[![](https://img.shields.io/badge/__My_PROGECT__-ЦВЕТ?style=for-the-badge)
