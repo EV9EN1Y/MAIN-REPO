@@ -1,5 +1,6 @@
 лаба https://portswigger.net/web-security/host-header/exploiting/password-reset-poisoning/lab-host-header-password-reset-poisoning-via-dangling-markup
 
+## Атаки заголовка HTTP Host
 # Отравление сброса пароля с помощью dangling markup
 
 **"Отравление сброса пароля с помощью dangling markup"** — это продвинутая атака, которая комбинирует две уязвимости:
@@ -154,6 +155,7 @@ Host: 0a6800e60484a9c3819170fb00e50060.web-security-academy.net:'<a href="//expl
 
 "/>
 # ВЫВОД 
+## Атаки заголовка HTTP Host
 
 чужие хосты лаба блокировала!
 но благодаря специфики http сервер пропускал, и не проверял что там пропускает!
