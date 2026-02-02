@@ -3,8 +3,9 @@ https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-localhost
 
 ---
 на сайте есть функционал подгрузки числа товаров
+<img src="../../assets/svnrefdg46e.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[svnrefdg46e.png]]
+
 
 вот ориг параметры
 
@@ -54,12 +55,16 @@ Content-Length: 3
 подменил адресс на проивольный - получил ответ 500 - значит до сервера достучался
 уже зацепка
 
-![[vvflnoe5ob9g89d7534g.png]]
+<img src="../../assets/vvflnoe5ob9g89d7534g.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 
 c запросом stockApi=http://localhost/admin подучил доступ к админ панели
 
-![[venm843n5ny365h.png]]
+<img src="../../assets/venm843n5ny365h.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 
 но не дает получить доступ к ее функциям
@@ -68,16 +73,21 @@ Admin interface only available if logged in as an administrator, or if requested
 
 ==**Loopback** — это виртуальный сетевой интерфейс, который существует **только на локальном компьютере** и не подключен к реальной физической сети. Его ещё называют **localhost**.==
 
-![[bt34643.png]]
+<img src="../../assets/bt34643.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 перехватил запрос на функцию удаления юзера карлоса
 
-![[ebt445b24.png]]
+<img src="../../assets/ebt445b24.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 так как панель требует действий через локальную сеть то я взял часть запроса пути из URL для удаления карлоса и подставил это в работающий параметр который позволил мне получить запрос админки
 
+<img src="../../assets/dcv675437g435g.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[dcv675437g435g.png]]
+
 
 вот запрос на делит
 
