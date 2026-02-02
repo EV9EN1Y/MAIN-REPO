@@ -49,6 +49,10 @@ Open Systems Interconnection
 **==Ключевые уязвимости** =  **OWASP Top 10**: SQLi, XSS, CSRF, SSRF, Bro
 **Injection** - **XSS** - **Broken Auth** - **SSRF** - **XXE** - **CSRF**
 
+тут команды:
+`gopher://`, `dict://`, `ldap://`, `tftp://`, `file://`, команды **`stats`** и **`quit `**
+(for ssrf)
+
 ---------
 ## **6-й уровень OSI — Представления (Presentation)**-------
 
@@ -74,6 +78,8 @@ Open Systems Interconnection
 **CRIME/BREACH** (атаки на сжатие TLS), 
 **XML External Entity (XXE)** — частично пересекается с 7 уровнем.
 
+тут же Кодирование `%0a` для перевода строки, `%20` для пробела в командах. (for ssrf)
+
 -------
 ## **5-й уровень OSI — Сеансовый (Session)**-------------
 СМЫСЛ 
@@ -98,6 +104,9 @@ Open Systems Interconnection
 **Broken Authentication** (часть OWASP Top 10), 
 атаки на **JWT** (подделка слабого алгоритма, раскрытие секрета), 
 **CSRF** (Cross-Site Request Forgery) — атака на доверие сессии.
+
+
+Доступ к **`/proc/self/fd/`**(файловым дескрипторам) — это работа с сессиями (сокетами) процесса. (for ssrf)
 
 
 -----------
@@ -129,6 +138,9 @@ Open Systems Interconnection
 **Network Attacks**: **SYN Flood**, **UDP Amplification** (использование открытых DNS/NTP серверов), 
 **Port exhaustion attacks** (исчерпание пула портов), атаки на **механизмы перегрузки** TCP.
 
+
+Указание порта **`:11211`** в `gopher://...:11211/...` или трюк **`:11211aaa`** в `fsockopen`. (for ssrf)
+
 --------
 ## **3-й уровень OSI — Сетевой (Network)**------------
 СУТЬ
@@ -158,6 +170,9 @@ Open Systems Interconnection
 **IP spoofing для обхода ACL**, 
 **Уязвимости в реализациях стека TCP/IP** (память, переполнение буфера), 
 **Атаки на BGP** (перехват трафика целых сетей).
+
+
+Указание `127.0.0.1`, `192.168.1.1`, `169.254.169.254`(облачные метаданные). (for ssrf)
 
 --------
 ## **2-й уровень OSI — Канала передачи данных (Data Link)**-----
