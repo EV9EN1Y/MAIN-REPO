@@ -1,3 +1,8 @@
+https://github.com/rkhal101/Web-Security-Academy-Series/blob/main/ssrf/lab-01/ssrf-lab-01.py
+
+
+
+
 
 🧑‍💻 Евгений Черников | iOS Developer → Application Security Engineer
 
