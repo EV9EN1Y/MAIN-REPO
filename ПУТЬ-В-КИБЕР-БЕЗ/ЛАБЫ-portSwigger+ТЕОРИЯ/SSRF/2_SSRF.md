@@ -16,7 +16,7 @@ https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-backend-system
 
 подставил пейлоад классич админ
 
-<img src="../../assets/wvvetb3 2.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/wvvetb3.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -24,7 +24,7 @@ https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-backend-system
 небольшой скрипт для турбо интрудера будет в конце файла
 на 149 в последнем октете - ответ 200! бинго!
 
-<img src="../../assets/2fecwecr4 1.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/2fecwecr4.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -40,20 +40,20 @@ https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-backend-system
 вижу путь и команду для нужного действия
 GET /admin/delete?username=carlos HTTP/2
 
-<img src="../../assets/wvv453452 1.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/wvv453452.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
 кодирую параметр также как и оригинал запрос (частичное кодир URL) 
 
 
-<img src="../../assets/wergt545 1.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/wergt545.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
 запрос сработал! карлос удален!
 
-<img src="../../assets/cv5g4g34g3 1.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/cv5g4g34g313а1.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
