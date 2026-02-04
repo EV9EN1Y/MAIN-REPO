@@ -30,7 +30,7 @@ https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-backend-system
 
 вижу админ панель! с нужным функционалом, необходимо удалить карлоса
 
-<img src="../../assets/ver3vr5 1.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/ver3vr5-1.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -67,7 +67,7 @@ GET /admin/delete?username=carlos HTTP/2
 
 --------
 
-
+Все адреса в диапазоне `127.0.0.0/8` (от `127.0.0.1` до `127.255.255.254`) указывают на локальную машину, но `127.0.0.1` используется по умолчанию.
 
 ## **Меры защиты**
 

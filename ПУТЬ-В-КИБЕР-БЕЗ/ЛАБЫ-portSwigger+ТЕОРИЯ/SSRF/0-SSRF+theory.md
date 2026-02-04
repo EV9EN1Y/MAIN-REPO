@@ -34,6 +34,8 @@ https://docs.google.com/document/d/1v1TkWZtrhzRLy0bYXBcdLUedXGb9njTNIJXa3u9akHM/
 3) **Атака на облачные метаданные**: Цель — внутренние сервисы облачных провайдеров. Классический пример — endpoint AWS EC2: `http://169.254.169.254/latest/meta-data/`. Утечка временных ключей IAM-роли может привести к полному компрометированию облачного аккаунта
 
 
+Все адреса в диапазоне `127.0.0.0/8` (от `127.0.0.1` до `127.255.255.254`) указывают на локальную машину, но `127.0.0.1` используется по умолчанию.
+
 # **Смежные уязвимости и векторы атаки**
 
 - **Протокол `file://`**: Позволяет читать локальные файлы (например, `file:///etc/passwd`)
@@ -378,3 +380,19 @@ ldap://127.0.0.1:389/
 есть для будформа прога **==Param Miner==** или ==X8==
 
 ---
+
+
+### Вот пример типичных  адрессов для админки (которые известны всем на свете конечно же...)
+
+| Категория                      | Примеры путей (выборочно из списков SecLists)                                                                                                               |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Стандартные англ.**          | `admin`, `administrator`, `panel`, `dashboard`, `control`, `manage`, `backend`, `backoffice`, `login`, `admin-login`, `system`, `console`, `user`, `secure` |
+| **CMS WordPress**              | `wp-admin`, `wp-login.php`, `wp-content`, `wp-includes`, `login.php`, `admin.php`, `dashboard.php`                                                          |
+| **CMS Joomla**                 | `administrator`, `joomla/administrator`, `admin/index.php`, `component/users`                                                                               |
+| **CMS Drupal**                 | `user/login`, `user/register`, `admin/config`, `admin/dashboard`                                                                                            |
+| **Другие CMS/Frameworks**      | `adminer`, `phpmyadmin`, `myadmin`, `database`, `manager/html`, `webdav`, `_admin`, `_panel`                                                                |
+| **Пути с расширениями**        | `admin.cgi`, `admin.jsp`, `admin.aspx`, `admin.action`, `admin.do`, `admin.py`                                                                              |
+| **Вариации регистра**          | `Admin`, `ADMIN`, `AdMiN`, `aDmIn`                                                                                                                          |
+| **Защищённые/скрытые**         | `.admin`, `private`, `hidden`, `secret`, `restricted`, `internal`, `staff`, `sysadmin`, `root`                                                              |
+| **API/Служебные**              | `api/admin`, `v1/admin`, `internal`, `debug`, `env`, `config`, `.env`, `.git`, `.svn`, `.htaccess`                                                          |
+| **Актуальные тренды (2020-е)** | `admin123`, `adminarea`, `adminpanel`, `adminportal`, `admincenter`, `superadmin`, `sysadmin`, `platform-admin`, `platform/login`                           |
