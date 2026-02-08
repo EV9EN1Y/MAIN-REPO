@@ -17,6 +17,13 @@ https://cheatsheetseries.owasp.org/assets/Server_Side_Request_Forgery_Prevention
 https://docs.google.com/document/d/1v1TkWZtrhzRLy0bYXBcdLUedXGb9njTNIJXa3u9akHM/mobilebasic
 
 ==это уязвимость веб-безопасности, которая позволяет злоумышленнику заставить серверное приложение выполнять HTTP-запросы к произвольным, часто внутренним, адресам от своего имени==
+
+
+owasp
+https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
+
+
+
 <img src="../../assets/hqdefault.jpg" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 ****Атака возможна, когда приложение принимает от пользователя URL (например, для загрузки изображения, импорта данных, проверки наличия товара) и не проводит должную валидацию этого URL перед выполнением запроса*
 
