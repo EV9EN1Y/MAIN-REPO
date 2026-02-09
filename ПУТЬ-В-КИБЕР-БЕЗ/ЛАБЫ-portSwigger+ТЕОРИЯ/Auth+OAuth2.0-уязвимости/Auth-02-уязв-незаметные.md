@@ -13,12 +13,16 @@
 
 перебирая ответы на подствленные имена нашел что при имени anaheim
 пропадает точка после password - но в других ответах такого нет!
+<img src="../../assets/Снимок-11.10.59.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-  <img src="../../assets/Снимок-11.10.59.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 теперь подбираем пароль
-  <img src="../../assets/Снимок-11.15.21.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+<img src="../../assets/Снимок-11.15.21.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 
 

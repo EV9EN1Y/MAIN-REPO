@@ -48,12 +48,12 @@ administrator
 
 
 
+<img src="../../assets/Снимок-10.12.47.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-  <img src="../../assets/Снимок-10.12.47.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
+<img src="../../assets/Снимок-10.12.59.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-  <img src="../../assets/Снимок-10.12.59.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 подобрал пароль к anaheim : подбира через интрудер
@@ -61,7 +61,9 @@ administrator
 при пароле 11111111 - и получилось войти в аккаунт!
 интересно что через репитер все равно там показывался ответ 200 и некорректный пароль в самом burpSuite но введя данные на самом сайте - удалось войти!
 
-  <img src="../../assets/Снимо-10.24.49.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+<img src="../../assets/Снимо-10.24.49.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 

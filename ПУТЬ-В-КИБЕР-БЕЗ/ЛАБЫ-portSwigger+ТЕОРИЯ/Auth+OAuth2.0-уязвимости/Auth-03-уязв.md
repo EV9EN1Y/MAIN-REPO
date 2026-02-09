@@ -1,7 +1,8 @@
 # Username enumeration via response timing
 
 # ограничение числа попыток!
-  <img src="../../assets/Снимок-11.23.01.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+<img src="../../assets/Снимок-11.23.01.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 пробовал менять куки - помогло
@@ -65,9 +66,9 @@ X-Forwarded-For: 1.1.1.1
 
 идея можно в пейлоад пихнуть нормальные запросы через раз с проверочными
 
-  <img src="../../assets/Снимок-13.05.10.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок-13.05.10.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-  <img src="../../assets/Снимок-13.04.42.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок-13.04.42.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 ==ВОТ В ЧЕМ ПРИКОЛ==
 
@@ -76,7 +77,7 @@ X-Forwarded-For: 1.1.1.1
 
 использую это
 
-  <img src="../../assets/Снимок-13.10.19.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок-13.10.19.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 обнаружил что длинный ответ я получаю на пользоватлей 
 ansible  - значит тоже существует!

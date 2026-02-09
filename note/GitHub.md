@@ -1,6 +1,7 @@
 https://github.com/rkhal101/Web-Security-Academy-Series/blob/main/ssrf/lab-01/ssrf-lab-01.py
 
 
+<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 

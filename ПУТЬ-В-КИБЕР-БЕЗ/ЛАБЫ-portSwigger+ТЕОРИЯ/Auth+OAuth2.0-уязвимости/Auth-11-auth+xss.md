@@ -124,7 +124,7 @@ body: document.cookie
 
 
 сработало, результаты пришли на мой собственный сервер!
-<img src="../../assets/0999 1.png" alt="Скрин" style="width: 90%; max-width: 700px;" />
+<img src="../../assets/09991.png" alt="Скрин" style="width: 90%; max-width: 700px;" />
 но я не вижу в них параметр ==stay-logged-in== который мне нужен!
 
 
