@@ -179,10 +179,10 @@ https://portswigger.net/burp/documentation/desktop/tools/repeater/send-group#sen
 **Тестирование многошаговых процессов**, где состояние хранится на сервере (аутентификация, смена пароля), проверка идемпотентности.
 
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/race0103.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-![[race0103.png]]
+
 
 
 либо это же скриптами сделать

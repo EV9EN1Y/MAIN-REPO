@@ -11,44 +11,44 @@ https://portswigger.net/web-security/race-conditions/lab-race-conditions-limit-o
 
 это запрос на применение промокода
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/race01.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-![[race01.png]]
+
 
 естественно, повторно использовать купон невозможно
  
 создал в репитере несколько одинаковых паралельных запросов которые можно отправить одновременно!
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/race0102.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
  
-![[race0102.png]]
+
 
 отправить запросы параллельно
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/race01031.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-![[race01031.png]]
+
 
 
 увеличивая число запросов - все больше и больше промокодов срабатывает
 
 удалось многократно
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/race0104.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-![[race0104.png]]
+
 
 лаба решена
 заметил что в зависимости от числа запросов - результат разный, то есть необязательно, чтобы большое число сделок приведет к большому влиянию.
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/race0105.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-![[race0105.png]]
+
 
 
 # защита
