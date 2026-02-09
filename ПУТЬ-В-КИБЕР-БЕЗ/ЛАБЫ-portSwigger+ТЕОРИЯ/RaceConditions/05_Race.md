@@ -1,4 +1,4 @@
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 https://portswigger.net/web-security/race-conditions/lab-race-conditions-exploiting-time-sensitive-vulnerabilities
 использование данных чувствительных ко времени

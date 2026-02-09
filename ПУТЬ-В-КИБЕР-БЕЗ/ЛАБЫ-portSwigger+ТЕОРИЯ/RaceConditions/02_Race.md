@@ -1,4 +1,4 @@
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 https://portswigger.net/web-security/race-conditions/lab-race-conditions-bypassing-rate-limits
 
 # Обход предельных частот через условия гонки

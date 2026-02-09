@@ -1,4 +1,4 @@
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 обход проверки email при регистрации
 
