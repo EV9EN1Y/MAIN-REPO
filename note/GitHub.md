@@ -234,3 +234,32 @@ https://shields.io/badges
 [![](https://img.shields.io/badge/__My_RESUME__-ЦВЕТ?style=for-the-badge)
 
 [![](https://img.shields.io/badge/__My_PROGECT__-ЦВЕТ?style=for-the-badge)
+
+
+# GIT
+
+  
+
+cd "/Users/evgeniy/Documents/Obsidian Vault"
+
+  
+
+git status    -провепка что в папке работает гит
+
+git branch   -посмотрим текущ ветку 
+
+  
+
+git pull origin obsidian   -загрузить всю ветку себе(актуалочкка с сервера)
+
+  
+
+git add .      - Добавить все изменения в индекс
+
+  
+
+git commit -m "Мой комментарий о проделанной работе"      -Создать коммит с описанием
+
+  
+
+git push origin obsidian       - Отправить коммиты на GitHub в ветку obsidian
