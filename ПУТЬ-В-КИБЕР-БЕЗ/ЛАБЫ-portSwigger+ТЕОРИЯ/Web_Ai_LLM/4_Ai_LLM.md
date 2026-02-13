@@ -142,7 +142,7 @@ https://0a29004704e89c5280f803cc00d400e5.web-security-academy.net/my-account/del
 пробую!
 вау!   XSS сработала и удалила нах мой аккаунт!
 
-<img src="../../assets/Снимок14.19.13AILLM8.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
