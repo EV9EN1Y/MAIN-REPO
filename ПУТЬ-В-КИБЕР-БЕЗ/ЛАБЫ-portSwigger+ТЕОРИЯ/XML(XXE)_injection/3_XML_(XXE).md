@@ -162,9 +162,9 @@ productId=<foo+xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include+parse="tex
 
 в ответе пришел файл:
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок экранаXML_(XXE)13.03.024.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[Снимок экранаXML_(XXE)13.03.024.png]]
+
 
 лаба решена!
 

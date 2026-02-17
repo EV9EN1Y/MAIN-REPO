@@ -66,9 +66,9 @@ https://portswigger.net/web-security/xxe/lab-xxe-via-file-upload
 
 я создал простую картинку SVG и открыл ее код:
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок экранаXML_(XXE)13.28.185.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[Снимок экранаXML_(XXE)13.28.185.png]]
+
 оказалось - там обычный XML
 ```xml
 <svg width="384" height="384" viewBox="0 0 384 384" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -254,10 +254,10 @@ Content-Length: 0
 
 заметил особенность, все мои комменты , в них моя аватарка грузится как PNG , то есть я гружу туда SVG - и оно переделывается в PNG
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок экранаXML_(XXE)14.25.428.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-![[Снимок экранаXML_(XXE)14.25.428.png]]
+
 
 также я заметил, что при загрузки моих аватарок с сервера (обновляю страницу комментов)
 то сама картинка одна и таже имеет разный размер в ответе
@@ -306,20 +306,20 @@ MQí´!Y9ÑòÐ`D´k EY¢´S#L-F;EQÓ6¢H4YX¦fT/ûø½:
 
 вот запрос на получение картинки из комментов
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/СнимокXML_(XXE)15.01.3910.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[СнимокXML_(XXE)15.01.3910.png]]
+
 
 но если его отредерить - вот видно картинку!
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок экранаXML_(XXE)15.01.307.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[Снимок экранаXML_(XXE)15.01.307.png]]
+
 
 вот страница с комментами, и здесь вместо картинки и отображается тот самый нужный мне код! практически все мои пейлоады сработали выдали код   `aaf1902a1df2` 
 #### данный код     aaf1902a1df2  и есть решение лабы! лаба решена!
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
-![[Снимок экрана 2026-02-17 в 15.03.38.png]]
+<img src="../../assets/СнимокXML_(XXE)15.03.38922.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 

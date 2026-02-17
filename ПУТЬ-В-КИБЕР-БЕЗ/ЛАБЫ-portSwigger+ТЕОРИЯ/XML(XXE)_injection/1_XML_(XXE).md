@@ -18,9 +18,9 @@ https://portswigger.net/web-security/xxe/lab-exploiting-xxe-to-retrieve-files
 </stockCheck>
 ```
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок экранаXML_(XXE)21.01.072.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[Снимок экранаXML_(XXE)21.01.072.png]]
+
 
 
 
