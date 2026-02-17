@@ -225,7 +225,7 @@ Content-Length: 119
 ## решение лабы (подсмотрел)
 #### запрос / ответ
 
-<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 ![[СнимокXML_(XXE)19.16.1911.png]]
 
