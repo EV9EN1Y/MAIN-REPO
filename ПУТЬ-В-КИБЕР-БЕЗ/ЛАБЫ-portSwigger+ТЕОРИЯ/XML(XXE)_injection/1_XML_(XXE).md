@@ -18,7 +18,9 @@ https://portswigger.net/web-security/xxe/lab-exploiting-xxe-to-retrieve-files
 </stockCheck>
 ```
 
-![[Снимок экрана 2026-02-13 в 21.01.07.png]]
+<img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+![[Снимок экранаXML_(XXE)21.01.072.png]]
 
 
 

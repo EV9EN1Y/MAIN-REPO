@@ -126,12 +126,12 @@
 
 ##  ** РАЗВЕДКА ПОЛЬЗОВАТЕЛЕЙ И ПРОЦЕССОВ**
 
-|Действие|Результат|Значение|
-|---|---|---|
-|`cat /etc/passwd`|`carlos`, `academy`, `postgres`, `mysql`|**Карта атаки**|
-|`ps aux \| grep academy`|**root → sudo -u academy → java**|**Архитектура лабы**|
-|`ps aux \| grep root`|`inotifywait -m /academy/aws_credentials`|**AWS-ключи появятся**|
-|`cat /etc/apache2/envvars`|`APACHE_RUN_USER=carlos`|**Веб-сервер от carlos**|
+| Действие                   | Результат                                 | Значение                 |
+| -------------------------- | ----------------------------------------- | ------------------------ |
+| `cat /etc/passwd`          | `carlos`, `academy`, `postgres`, `mysql`  | **Карта атаки**          |
+| `ps aux \| grep academy`   | **root → sudo -u academy → java**         | **Архитектура лабы**     |
+| `ps aux \| grep root`      | `inotifywait -m /academy/aws_credentials` | **AWS-ключи появятся**   |
+| `cat /etc/apache2/envvars` | `APACHE_RUN_USER=carlos`                  | **Веб-сервер от carlos** |
 
 - Root запускает **academy**
 - Academy запускает **Java-приложение**
