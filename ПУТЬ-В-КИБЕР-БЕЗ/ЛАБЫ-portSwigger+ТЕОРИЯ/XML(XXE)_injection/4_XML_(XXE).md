@@ -14,7 +14,9 @@
 
 ==SVG== — это **векторная графика**, но по сути это **чистый XML**. 
 любой SVG-файл ,  там теги:
+
 ```xml
+
 <svg width="100" height="100">
   <circle cx="50" cy="50" r="40" fill="red" />
 </svg>
@@ -32,6 +34,7 @@
 <image xlink:href="/member/profile/testing68-1586481096585.png" />
 
 ```
+
 -----
 
 ==DOCX==,==XLSX==, ==PPTX== — это **ZIP-архивы**, внутри которых лежат XML-файлы. Например:
@@ -150,11 +153,15 @@ Content-Disposition: form-data; name="website"
 пишет
  что не знает это пространство имен
  `http://www.w3.org/2000/svg, name: foo`
-```html
-                   <p class=is-warning>SVG transcoder exited with an error: null
+ 
+```
+
+
+  <p class=is-warning>SVG transcoder exited with an error: null
 Enclosed Exception:
 The current document is unable to create an element of the requested type (namespace: http://www.w3.org/2000/svg, name: foo).</p>
-                </div>
+  </div>
+  
 ```
 
 
@@ -261,7 +268,8 @@ Content-Length: 0
 
 также я заметил, что при загрузки моих аватарок с сервера (обновляю страницу комментов)
 то сама картинка одна и таже имеет разный размер в ответе
-```
+```text
+`
 
 PNG
 
@@ -288,12 +296,13 @@ X-Frame-Options: SAMEORIGIN
 Content-Length: 1400
 
 PNG
-
-   
+`
+   `
 IHDR         Ã>aË    cHRM  z&    ú   è  u0  ê`  :  pºQ<   gAMA  ±|ûQ   sRGB ®Îé   bKGD ÿ ÿ ÿ ½§   	pHYs  Ä  Ä+  ÏIDATxÚíØyUU ÇñgMFSD
 MQí´!Y9ÑòÐ`D´k EY¢´S#L-F;EQÓ6¢H4YX¦fT/ûø½:î{sï»óì¾øñ{Ï{sÎ¹ç{Î­T  ÿS#ZüûÛ+{)#¯èîì­lU¾ý¯û«­¿}µr»Ò®lTvWWT&);(3ußíRæ(G((/+s_2Êî¨\¯é|G¹Qù!*s°Ò­ ì©¬U^QîU~k¢míÚåaåweZþÚ¥õÞf C¯Ü¢Ü­*G)o¸â=k2:íå=å;e±²rrªr¢+ÁSVîT6+W*§yðlr¹ÊÊÊÊAÊ<åBå²"ò¶¥Lµ¢ÞÛl Lôo/îÚ~ß-ásrWï;}ï°|ì%å}åeaTö_ìéÊR{QùB¹ÊZññ¡R¾û¶òr¾òxÁöåmKþjE½ë0å^ëNSõ;òfßUåf+øïE>þr²>G&+¯G?ø@ùÆ#? áÂÿ¨<[áNêÀòÿó¼;rBÁöUÜõ9û8<nUöSV+7$çõWÞz yQ2ÏÏÎ.W,<ãNÊç)÷2ÖwÈÓ¾p+
 ÔiT2Í×úÿÇU>SþJ¢\î5Á`ÿs¸?Wl_Ç*Ï*¯z0vø"}MöWV½K§M¹+=%ÈÊ-÷Bfï¾uúÜøâMpÚã»yN­óJz\²¬ë5C2{äí¼nò]?-Æû½Píf§¼ýU¯ÞÃ²ïî£qç-×¬ù¾zAVù·yÁÓæ[32y>ÖT¬qÂ êõà	íÏäüp¶o²/X\Çw5Mn©Õ»Ô 8#~>ös¨ÝçFGåó+#ì½{Í¢ÅÖ»íÏ&ß©ý¹1ãñÒëgüé³Çp¶oWÞsk¨z ÷xynt.l9f$åó+ëIgT4Ò?U>JÊ­ò6)},ÜB[x×0ÕËJÛ·Á»qçÆû|Þk4T½¶÷Òû{jJïô­arÃ©vñOöï±ä|!:øÅÐ_ÈøQÑã<Û»JÛWõ#cJr|ß:6Kz¶º¢3¼b
 ÓÓYÞÅòkôÚù<ÿ=ÉS½`[u|§§¹°PúU9Éëpþä7T®Su½6û;Æ5½e\ä»oztnµ^EÚ·-wx¯>Û[·°x¨Àó;O½åp÷«¢gÔÌfÞrõFsorì~.^ö6¬ößâ)pVÆïg¯'ÚýùEÞÖçÏKØÿvöåmËÞZÎõkÞjò¦o(yëÝ´É*³3zRm°ÍS®ìÀè;ùk_è¡e]®[ÉW¤­h_·±kJ¼.                                                                                  üëoça1wÛj    IEND®B`
+`
 ```
 
 то есть какие-то данные которые все таки приходят - но видимо кодируются в PNG 
@@ -376,7 +385,7 @@ settings.DtdProcessing = DtdProcessing.Prohibit; // или Ignore
 ```
 ###### ИСПОЛЬЗОВАТЬ JSON ВМЕСТО XML
 - JSON тоже может быть уязвим (JSON injection, prototype pollution) — но XXE там нет
-JSON **не поддерживает** DTD и сущности — XXE там просто невозможен [](https://www.tencentcloud.com/techpedia/117813)[](https://www.oreilly.com/library/view/wang-luo-ying-yong-cheng-xu-an-quan/9798341659544/ch24.html). 
+JSON **не поддерживает** DTD и сущности — XXE там просто невозможен
 Если API может принимать JSON — используй его. 
 Меньше функционала = меньше дыр.
 
@@ -384,7 +393,7 @@ JSON **не поддерживает** DTD и сущности — XXE там 
 ошибки не должны выходить наружу!
 ###### ВСЕГДА ЯВНО НАСТРАИВАТЬ ПАРСЕР
 
-Никогда не полагайся на настройки "по умолчанию"  в парсерах / библиотеках — они часто опасны [](https://docs.veracode.com/r/xxe-processing#what-are-xxe-attacks)[](https://www.oreilly.com/library/view/wang-luo-ying-yong-cheng-xu-an-quan/9798341659544/ch24.html). В каждом языке/библиотеке надо **целенаправленно запретит**ь
+Никогда не полагайся на настройки "по умолчанию"  в парсерах / библиотеках — они часто опасны  В каждом языке/библиотеке надо **целенаправленно запретит**ь
 - `DOCTYPE`
 - Внешние сущности (`SYSTEM`, `PUBLIC`)
 - XInclude (если не нужно)
