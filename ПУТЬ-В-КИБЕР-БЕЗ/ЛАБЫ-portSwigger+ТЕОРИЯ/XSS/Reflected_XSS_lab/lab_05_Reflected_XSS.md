@@ -352,7 +352,9 @@ html ломает  жОска!
 с ним даже выводящаяся сюда надпись стала реагировать на наведение курсора
 <img src="../../../assets/ferg5yhlkmioh5ougf98reweth-iwbr.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-<img src="../../../assets/wrfwrvelkn;afv;fjvbdljfkhgljkdfgkjlhdfghp95yt-qe[rif.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+<img src="../../../assets/332ecdc43343d3cwec.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 вот так выглядит отраженный ответ теперь , видно только Clickme
