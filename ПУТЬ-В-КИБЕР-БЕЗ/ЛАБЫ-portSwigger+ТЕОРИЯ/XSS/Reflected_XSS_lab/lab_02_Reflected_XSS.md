@@ -83,6 +83,7 @@ def queueRequests(target, wordlists):
     raw_payloads = """
 a
 g
+svg
 abbr
 acronym
 address
