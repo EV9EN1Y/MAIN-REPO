@@ -164,7 +164,8 @@ Cache-Control: max-age=0
 
 и вуаля! получил доступ!
 
-![[fffffdesere49f7ue803033.png]]
+<img src="../../assets/fffffdesere49f7ue803033.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 копирую путь (в html но можно и в браузере с кнопки скопироватть)
 
@@ -182,7 +183,8 @@ Cookie: session=Tzo0OiJVc2VyIjoyOntzOjg6InVzZXJuYW1lIjtzOjEzOiJhZG1pbmlzdHJhdG9y
 
 попадаю в админку
 
-![[daadmin04deser.png]]
+<img src="../../assets/daadmin04deser.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 вот методы удаления юзеров (пути)
 

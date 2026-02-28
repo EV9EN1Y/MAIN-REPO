@@ -17,7 +17,9 @@
 выполнил вход на сайт
 тут приходит такая шляпа десириализованная и кодированная через- base 64 кодировка
 
-![[deserias01001.png]]
+<img src="../../assets/deserias01001.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 ```http
 HTTP/2 302 Found
@@ -47,7 +49,8 @@ O:4:"User":2:{s:8:"username";s:6:"wiener";s:5:"admin";b:1;}
 
 эта же шляпа при обновлении страницы отправляется на сервер
 
-![[deserias0202020203.png]]
+<img src="../../assets/deserias0202020203.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 подменю запрос с такими данными
 
@@ -67,7 +70,9 @@ Tzo0OiJVc2VyIjoyOntzOjg6InVzZXJuYW1lIjtzOjY6IndpZW5lciI7czo1OiJhZG1pbiI7YjoxO30=
 -------
 получил доступ к админке, но сами действия просто так не работают, видимо нужно везде передавать этот сериализ обьект
 
-![[fdes03030334.png]]
+<img src="../../assets/fdes03030334.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 --------
 
@@ -95,8 +100,9 @@ Priority: u=0, i
 ```
 
 получаю доступ к функциям!
+<img src="../../assets/deser00404040405.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[deser00404040405.png]]
+
 
 ---------
 
@@ -119,7 +125,8 @@ Priority: u=0, i
  /admin/delete?username=carlos
 
 ## готово!!! лаба решена!
-![[deser050505005054.png]]
+<img src="../../assets/deser050505005054.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 оч просто все тут было
 

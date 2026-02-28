@@ -79,12 +79,14 @@ Priority: u=0, i
 csrf=ljg1m6AQVKSVS5xkPrdaKLwAWejyIFcd&username=administrator&new-password-1=123&new-password-2=123
 ```
 
-![[frfrg542026-02-279.09.10.png]]
+<img src="../../assets/frfrg542026-02-279.09.10.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 зашел  в ак админа (такие бизнес-логик лабы меня удивляют все больше)
 удалил карлоса - лаба решена!
 
-![[454342026-02-2719.09.57.png]]
+<img src="../../assets/454342026-02-2719.09.57.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 

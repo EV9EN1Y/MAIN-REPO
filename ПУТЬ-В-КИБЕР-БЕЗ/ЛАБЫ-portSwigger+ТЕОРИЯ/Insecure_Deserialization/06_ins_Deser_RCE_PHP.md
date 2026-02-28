@@ -98,8 +98,9 @@ Cache-Control: max-age=0
 
 ```
 
+<img src="../../assets/keydesir3453482345.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[keydesir3453482345.png]]
+
 
 
 -------

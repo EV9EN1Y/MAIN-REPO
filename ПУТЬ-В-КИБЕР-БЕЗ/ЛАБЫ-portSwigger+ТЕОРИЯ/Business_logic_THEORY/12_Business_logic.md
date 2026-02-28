@@ -95,8 +95,8 @@ burp и https://crackstation.net не справились
 сервер отвечает мне такой кукой 
 stay-logged-in=3zb%2fAvviGm2DeAZD%2bDM29o6W4mQeKk2L9dvZULJTI8Y%3d
 
+<img src="../../assets/644rrr2026-02-2722.35.27.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[644rrr2026-02-2722.35.27.png]]
 и если с неверными лог+пар - тоже выдает мне такой ключ - то я бы мог собрать пейлоад конечно, зашифровал бы там администратор + неверный шифрованный пароль, и ничего с этим не сделал - НО КАК ВАРИАНТ, ТАК МОЖНО ПРОБОВАТЬ РАСКРУТИТЬ ТОГОДА ДО   RCE  - но лаба про другое
 
 -----
@@ -192,8 +192,8 @@ w65upjVIBSca%2bBmvp6vLLYSwpchmuNAVDELW5cCsfn6VRaZIs4FV1QEbyWCjmD67
 
 да - получилось расшифровать это дело...
 я вижу в ошибке теперь                    wiener:1772212957892   
+<img src="../../assets/ffffff332d2026-02-2723.00.13.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[ffffff332d2026-02-2723.00.13.png]]
 
 
 ---
@@ -350,7 +350,8 @@ w65upjVIBSca Bmvp6vLLUBtpqF87Qgqp54 tySz5Pza9nemx4B4ajPi48iX/d7xwoNsB/thwnEIJk z
 то есть удалить шляпу  `"Invalid email address: "`
 у меня это первые две строки
 
-![[65456542026-02-2723.22.52.png]]
+<img src="../../assets/65456542026-02-2723.22.52.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 после удаления 32 байтов осталось вот это 
 p54tySz5Pza9nemx4B4ajPi48iX/d7xwoNsB/thwnEIJkz16s/Tg==
@@ -638,7 +639,8 @@ Priority: u=0, i
 
 получил                    wiener:1772212957892        
 
-![[gjkexfg2026-02-2800.11.00.png]]
+<img src="../../assets/gjkexfg2026-02-2800.11.00.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 
@@ -752,7 +754,8 @@ w65upjVIBSca+Bmvp6vLLQDNx10mB/Mq5aU5gk/yGK4sPd+0KOoPWIa9XZtAH395jRDlP3KPMUsgnnMw
 выделил первый байт
 правой кноп мыши -> удалить ->
 
-![[2026-02-2800.24.12.png]]
+<img src="../../assets/2026-02-2800.24.12.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 удаляю первые 23 байта
 
@@ -846,7 +849,9 @@ w65upjVIBSca+Bmvp6vLLUBtpqF87Qgqp54+tySz5Pza9nemx4B4ajPi48iX/d7xwoNsB/thwnEIJk+z
 
 удаляю первые 32 байта
 
-![[etgeg5r342026-02-2838.17.png]]
+<img src="../../assets/etgeg5r342026-02-2838.17.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 
 32 байта и должно потом остаться
@@ -867,7 +872,8 @@ Host: 0ad100be04ea5441832a558400ef0030.web-security-academy.net
 Cookie: notification=%32%76%5A%33%70%73%65%41%65%47%6F%7A%34%75%50%49%6C%2F%33%65%38%63%4B%44%62%41%66%37%59%63%4A%78%43%43%5A%50%73%39%65%72%50%30%34%3D; stay-logged-in=3zb%2fAvviGm2DeAZD%2bDM29o6W4mQeKk2L9dvZULJTI8Y%3d; session=UlYNqXkgBxtoSMoSpmw2DlzcTFsooGtH
 ```
 
-![[4453452026-02-2800.40.45.png]]
+<img src="../../assets/4453452026-02-2800.40.45.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 получаю ответ                    administrator:1772212957892 
 он аналогичен оригиналу  wiener:1772212957892        
@@ -886,7 +892,8 @@ Sec-Ch-Ua-Mobile: ?0
 
 и получаю доступ к админке
 
-![[54gt452026-02-2800.44.40.png]]
+<img src="../../assets/54gt452026-02-2800.44.40.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 удалил карлоса - победа... эта лаба вымотала мне мозг - но я ее досканально разобрал.. и решил, я наступил на все грабли что только можно было...
 

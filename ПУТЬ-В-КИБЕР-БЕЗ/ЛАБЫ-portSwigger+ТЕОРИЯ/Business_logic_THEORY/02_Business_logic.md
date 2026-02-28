@@ -67,9 +67,9 @@ productId=1&quantity=-1&redir=CART
 ```
 
 и я сделал productId=1&quantity=-120&redir=CART
+<img src="../../assets/ffffffffff7f7f7f78f78d8d8dd8d8zero.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-![[ffffffffff7f7f7f78f78d8d8dd8d8zero.png]]
 
 не получилось купить отрицательное число
 
@@ -82,13 +82,13 @@ productId=1&quantity=-1&redir=CART
 
 и так как баланс не может быть отрицательным - то я выровнял баланс так - чтобы он был положительным и купил куртку по цене 1300 заплатив 8 , ну и купил минус 189 товаров
 
+<img src="../../assets/bissenes02020202.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-![[bissenes02020202.png]]
 
 лаба раешена!! 
+<img src="../../assets/bsisssisiisissi03030.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[bsisssisiisissi03030.png]]
 
 
 вывод просто и очевидный

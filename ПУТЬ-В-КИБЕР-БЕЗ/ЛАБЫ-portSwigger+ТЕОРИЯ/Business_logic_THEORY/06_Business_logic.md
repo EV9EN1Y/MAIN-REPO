@@ -73,7 +73,9 @@ Your email is: dontwannacry.com.attacker@exploit-0a9100a30392fdc28bfbbba8015d00
 
 получилось!
 доступна админка
-![[32026-02-2714.30.17.png]]
+
+<img src="../../assets/32026-02-2714.30.17.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 -----
 

@@ -77,12 +77,11 @@ labalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalaba
 
 ( буду считать - что имеется ввиду - что я могу в майл.ру создать адресс длинной 300 символов  )- ? да я сильно сомневаюсь.
 какой-то бред.
+<img src="../../assets/345026-02-210.48.57.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[345026-02-210.48.57.png]]
 
 я зашел на свой акк и вижу тут 
-
-![[2026-02-2710.52.14.png]]
+<img src="../../assets/2026-02-2710.52.14.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 то есть здесь мой адресс обрезался и не видно оконцовку адреса
 
@@ -134,8 +133,8 @@ labalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalabalaba
 письмо мне пришло
 
 вошел в акк и там админ панель
+<img src="../../assets/2026-02-2711.06.38.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[2026-02-2711.06.38.png]]
 
 удалил карлоса
 лаба решена

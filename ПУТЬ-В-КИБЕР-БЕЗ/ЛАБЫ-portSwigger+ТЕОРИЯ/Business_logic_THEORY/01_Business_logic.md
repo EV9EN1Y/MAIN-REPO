@@ -41,8 +41,8 @@ productId=1&redir=PRODUCT&quantity=1&price=133700
 
 пробую ее поменять
 добавил кучу курток по цене 1 бакс
+<img src="../../assets/bissines01010101.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[bissines01010101.png]]
 
 ну и я смог это оплатить 
 

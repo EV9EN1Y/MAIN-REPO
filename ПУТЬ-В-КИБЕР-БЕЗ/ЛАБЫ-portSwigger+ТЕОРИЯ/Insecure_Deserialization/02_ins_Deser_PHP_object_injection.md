@@ -47,7 +47,8 @@ O:4:"User":2:{s:8:"username";s:6:"wiener";s:12:"access_token";s:32:"cwq4401xas9b
 
 O:4:"User":2:{s:8:"username";s:6:"wiener";s:12:"access_token";s:32:"cwq4401xas9bfaobnz3qe2tknf9dzxus";}
 
-![[wferfrf3f3f34f43f34f3443343343434fwwdefdeseriaz.png]]
+<img src="../../assets/wferfrf3f3f34f43f34f3443343343434fwwdefdeseriaz.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 ```http
 GET /academyLabHeader HTTP/2
@@ -69,8 +70,9 @@ Sec-Websocket-Key: scf49XLE9Lm+3tpBQOGXyg==
 
 я хз... мыслей нет, так как опыта нет с такой шнягой..
 и вот подарок богов!
+<img src="../../assets/phphdeser43534teg5.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[phphdeser43534teg5.png]]
+
 нарыл такую строчку
 ```html
 
