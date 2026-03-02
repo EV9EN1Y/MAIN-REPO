@@ -17,7 +17,9 @@ https://portswigger.net/web-security/access-control/lab-user-id-controlled-by-re
 
 через адрессную строку `https://0ae5007704e29cfa81fb3fcf00f2003a.web-security-academy.net/my-account?id=wiener`  подменил wiener на administrator и увелиичв гориз эскалацию - получил доступ к акку админа!
 
-![[Снимок2026-03-0200.01.33.png]]
+<img src="../../assets/Снимок2026-03-0200.01.33.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 вот пароль админа + csrf
 ```html
@@ -33,7 +35,8 @@ value="jRRc05MrObxWhe4dkw6C33s7Zp0bQuq3">
 далее вхожу в ак админа и выполняю целевое дествие 
 карлос удален - лаба решена!
 
-![[Снимо2026-03-0200.05.56.png]]
+<img src="../../assets/Снимо2026-03-0200.05.56.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 

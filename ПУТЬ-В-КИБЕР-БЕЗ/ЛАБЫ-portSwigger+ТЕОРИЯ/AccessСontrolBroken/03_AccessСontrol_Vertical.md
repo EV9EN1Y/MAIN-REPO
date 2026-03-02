@@ -57,8 +57,8 @@ Priority: u=0, i
 ```http
 https://0a4600c503beb3ac862f0f6b005c00e6.web-security-academy.net/admin
 ```
+<img src="../../assets/accesscontroll01026-03-0119.24.34.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[accesscontroll01026-03-0119.24.34.png]]
 
 а вот запрос на удаление карлоса
 

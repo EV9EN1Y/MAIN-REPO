@@ -51,8 +51,8 @@ username=carlos&action=upgrade
 
 
 #### шаг 2 - запрос ПОДТВЕРЖДЕНИЕ на смену роли
+<img src="../../assets/Сни2026-03-012.29.07.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[Сни2026-03-012.29.07.png]]
 
 ```http
 POST /admin-roles HTTP/2

@@ -39,7 +39,8 @@ Priority: u=0, i
 
 заметил пост, автор поста как раз-таки карлос
 
-![[accesscontrol072026-03-0122.44.00.png]]
+<img src="../../assets/accesscontrol072026-03-0122.44.00.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 иду в HTML
@@ -76,8 +77,9 @@ Your API Key is: L7uOsJNpHmmukNCKSb5weWq3KjitfX1l
 нужно попасть на страницу карлоса значит
 
 подставил в запрос GET /my-account?id=полученный карлоса id
+<img src="../../assets/0808dbrocen2026-03-0122.55.45.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-![[0808dbrocen2026-03-0122.55.45.png]]
+
 
 и получилось попасть в акк карлоса
 

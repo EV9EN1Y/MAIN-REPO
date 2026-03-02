@@ -25,7 +25,8 @@ GET /my-account?id=carlos
 и получил апи ключ d914eBdpgPwgiQTEHtjGgjYBY9EDbupQ
  и лаба решена!
 
-![[sss2026-03-0123.49.57.png]]
+<img src="../../assets/sss2026-03-0123.49.57.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 ```html
 <div>Your API Key is: d914eBdpgPwgiQTEHtjGgjYBY9EDbupQ</div><br/>
 ```
