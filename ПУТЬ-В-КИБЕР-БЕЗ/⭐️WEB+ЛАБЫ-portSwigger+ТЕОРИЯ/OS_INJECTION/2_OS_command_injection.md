@@ -23,7 +23,9 @@ To solve the lab, exploit the blind OS command injection vulnerability to cause 
 
 ориг запрос/ответ 
 
-![[СнимокAILLM012.22.01.png]]
+<img src="../../assets/СнимокAILLM012.22.01.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 заметил аномалию
 ```
