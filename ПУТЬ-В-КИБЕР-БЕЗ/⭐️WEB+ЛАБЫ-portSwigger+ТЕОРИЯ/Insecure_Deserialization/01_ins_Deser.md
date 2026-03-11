@@ -1,4 +1,4 @@
-теория с примерами тут [[theory_insecureDeserialization+Object+Injection]]
+теория с примерами тут [[0_theory_insecureDeserialization+Object+Injection]]
 
 -------
 
