@@ -25,6 +25,7 @@ REST API самый популярный - там JSON туда-сюда лет�
 
 ```
 /api  
+/api/ 
 /v1  
 /v2  
 /graphql  

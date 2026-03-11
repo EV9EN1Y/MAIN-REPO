@@ -7,9 +7,11 @@ https://portswigger.net/web-security/file-path-traversal/lab-absolute-path-bypas
  значит не блокирует слэш
 
 
-не знаю, в чем смысл - 
+смысл прост
+
 GET /image?filename=../../../etc/passwd
-но этот обычный путь сработал
+
+этот обычный путь сработал
 
 ../../../etc/passwd  в url кодировке тоже сработал (неудивительно)
 

