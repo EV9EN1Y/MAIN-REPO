@@ -95,7 +95,7 @@ forgotPwdReady(() => {
 ```
 
 запущу тррррРРРбо интрудер 
-с пейлоадом как здесь [[theory_APi_testing]]
+с пейлоадом как здесь [[0-theory_APi_testing]]
 
 результаты: 
 GET /admin

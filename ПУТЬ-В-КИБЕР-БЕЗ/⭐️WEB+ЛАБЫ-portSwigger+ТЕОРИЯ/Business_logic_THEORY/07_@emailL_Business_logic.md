@@ -37,7 +37,7 @@ https://portswigger.net/research/splitting-the-email-atom
 
 unicode soft hyphen (`U+00AD`) "p-a-s-s-w-o-r-d" — бессмыслица. для пользователя в почтовом клиенте отображается как обычное "password"
 
-подробнее смотреть здесь -> [[Business_logic_THEORY+email]]
+подробнее смотреть здесь -> [[0-Business_logic_THEORY+email]]
 
 ------------
 
