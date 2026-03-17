@@ -1,4 +1,4 @@
-https://portswigger.net/web-security/file-path-traversal/lab-validate-start-of-path
+лаба https://portswigger.net/web-security/file-path-traversal/lab-validate-start-of-path
 
 нужно достать /etc/passwd
 

@@ -21,7 +21,7 @@ HTTP/2 сам по себе устойчив к контрабанде, пото
 
 )
 
-подробнее здесь [[Theory_base_HTTP_Request _Smuggling]]
+подробнее здесь [[0-Theory_base_HTTP_Request _Smuggling]]
 
 
 - Сервер должен вернуть **два ответа** на один твой запрос
