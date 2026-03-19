@@ -63,6 +63,12 @@ CSP - штука мощная, но если разработчик накося
 ---
 
 
+
+
+
+
+
+## ============================================
 ## лаба 
 #### Отраженный XSS, защищенный CSP, с обходом CSP
 https://portswigger.net/web-security/cross-site-scripting/content-security-policy/lab-csp-bypass

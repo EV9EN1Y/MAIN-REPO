@@ -82,6 +82,8 @@ window.addEventListener('message', function(e) {
 -------
 ------
 --------
+
+
 лаба https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages
 # DOM XSS using web messages
 нужно использовать свой сервер
@@ -402,11 +404,11 @@ function animateLabHeader() {
 
 вот че делает этот код на самом деле:
 
-1. Слушает все входящие сообщения (`message`) от кого угодно
-    
-2. Берет содержимое сообщения (`e.data`)
-    
-3. И вставляет это содержимое в DOM через `innerHTML` в элемент с id `ads`
+1. слушает все входящие сообщения (`message`) от кого угодно
+   
+2. берет содержимое сообщения (`e.data`)
+   
+3. и вставляет это содержимое в DOM через `innerHTML` в элемент с id `ads`
 
 короче говоря, это слушатель+делатель, это такой биба+боба, один слушает всех подряд - другой делает (вставляет в код innerHTML)  все что попало.
 
