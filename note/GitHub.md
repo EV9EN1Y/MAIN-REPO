@@ -128,11 +128,11 @@ https://
 
 
 
+<img src="https://i.pinimg.com/originals/9a/34/83/9a3483a890a559ec60de7849b690be73.gif" width="300" alt="Подсказка">
 
 
 
 
-![Альтернативный текст](https://i.pinimg.com/originals/9a/34/83/9a3483a890a559ec60de7849b690be73.gif "Подсказка")
 
 
 
