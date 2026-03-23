@@ -21,7 +21,8 @@ stockApi=http://stock.weliketoshop.net:8080/product/stock/check?productId=1&stor
 
 Протокол     Хост (сервис)        Порт       Путь к API              
      |              |                 |             |                            
-     ▼              ▼                 ▼             ▼                            
+     ▼              ▼                 ▼             ▼                           
+     
   http://   stock.weliketoshop.net  :8080  /product/stock/check  ?
   
 Параметры:
@@ -52,7 +53,7 @@ Content-Length: 3
 ```
 
 
-подменил адресс на проивольный any - получил ответ 500 - значит до сервера достучался
+подменил адресс на проивольный apy - получил ответ 500 - значит до сервера достучался
 уже зацепка
 
 <img src="../../assets/vvflnoe5ob9g89d7534g.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
@@ -60,7 +61,7 @@ Content-Length: 3
 
 
 
-c запросом stockApi=http://localhost/admin подучил доступ к админ панели
+c запросом stockApi=http://localhost/admin получил доступ к админ панели
 
 <img src="../../assets/venm843n5ny365h.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
@@ -69,7 +70,7 @@ c запросом stockApi=http://localhost/admin подучил доступ �
 
 но не дает получить доступ к ее функциям
 Admin interface only available if logged in as an administrator, or if requested from loopback
-нужно быть залог как админ или loopback запрос нужен
+нужно быть залогинен, как админ или loopback запрос нужен
 
 ==**Loopback** — это виртуальный сетевой интерфейс, который существует **только на локальном компьютере** и не подключен к реальной физической сети. Его ещё называют **localhost**.==
 
