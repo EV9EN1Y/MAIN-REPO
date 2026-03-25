@@ -154,7 +154,9 @@ GET /?xxx='/><script>alert(1)</script> HTTP/2
 
 все зашифровалось html кодированием!!!
 
-![[Снимок экрана 2026-03-24 в 23.39.13.png]]
+<img src="../../assets/Сним2026-03-2423.39.13.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 и еще, ничего не сохранилось в сам кеш, то есть потом при запросе GET / HTTP/2 в ответе уже ничего не отразилось!
 
@@ -236,7 +238,9 @@ GET /?utm_content=12#callback=<script>alert(1)</script> HTTP/2      - нет
 <link rel="canonical" href='//0abd002c040fac358097038f0049009a.web-security-academy.net/?utm_content=666'/>
 ```
 
-![[Снимок экрана 2026-03-24 в 23.59.08.png]]
+<img src="../../assets/Снимо2026-03-2423.59.08.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 -----------
 если так сделать 
@@ -437,7 +441,9 @@ GET /js/geolocate.js?callback=setCountryCookie&utm_content=foo;callback=alert(1)
 
 и при обновлении главной стр - срабатывает алерт!
 
-![[Снимок экрана 2026-03-25 в 00.31.00.png]]
+<img src="../../assets/Снимо2026-03-2500.31.00.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 ---------
 

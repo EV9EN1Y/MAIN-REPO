@@ -65,7 +65,10 @@ Content-Length: 11052
 Cache-Control: max-age=30
 ```
 то есть, что-то сохраняется в кеш и хранится там 30 сек!
-![[Снимок экрана 2026-03-24 в 10.31.29.png]]
+
+<img src="../../assets/Снимо2026-03-2410.31.29.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 этот же запрос повторно делаю и вижу
 ```http
@@ -84,7 +87,9 @@ Content-Length: 11052
 Age: 4        -- уже 4 сек этому кешу (но макс жизнь его 30 сек)
 X-Cache: hit  -- ТО ЕСТЬ ОТВЕТ Я ПОЛУЧИЛ ИЗ КЕША
 ```
-![[Снимок экрана 2026-03-24 в 10.34.52.png]]
+
+<img src="../../assets/Сним2026-03-2410.34.52.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 
 ------
@@ -96,7 +101,10 @@ X-Forwarded-Host: 6666
 ```
 
 и запрос отразился в html
-![[Снимок экрана 2026-03-24 в 10.41.17.png]]
+
+<img src="../../assets/Снимок2026-03-2410.41.17.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
  И ВОТ САМОЕ ВЕСЕЛОЕ - САМОЕ ВАЖНОЕ
 я сделал вот так повторно запрос уже без  X-Forwarded-Host
@@ -108,7 +116,9 @@ Host: 0a2c00aa0328399e80240d9900d9006e.web-security-academy.net
 НО В ОТВЕТЕ - все равно есть в html 
 `<script type="text/javascript" src="//6666/resources/js/tracking.js"></script>`
 
-![[Снимок экрана 2026-03-24 в 10.43.52.png]]
+<img src="../../assets/Снимо2026-033-210.43.52.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 то есть этот заголовок помимо того, что сам по себе отражается в html 
 так он еще и сохраняется в кеш сервера, и в течении 30 сек раздается и всем другим юзерам!
@@ -127,7 +137,10 @@ Host: 0a2c00aa0328399e80240d9900d9006e.web-security-academy.net
            <script>alert("1")</script>
            "/resources/js/tracking.js"></script>
 ```
-![[Снимок экрана 2026-03-24 в 10.55.57.png]]
+
+<img src="../../assets/Сни2026-03-2410.55.57.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 ------
 
@@ -135,7 +148,9 @@ Host: 0a2c00aa0328399e80240d9900d9006e.web-security-academy.net
 
 и получаю алерт!
 
-![[Снимок экрана 2026-03-24 в 10.56.55.png]]
+<img src="../../assets/Снимо2026-03-2410.56.55.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 --------
 
@@ -183,7 +198,9 @@ X-Forwarded-Host: "></script>;<script>alert(document.cookie)</script>"
 -----------------
 ```
 
-![[Снимок экрана 2026-03-24 в 11.12.20.png]]
+<img src="../../assets/Сним2026-03-2411.12.20.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 запустил режим ==Guess headers==
 

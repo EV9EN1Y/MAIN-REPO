@@ -472,9 +472,10 @@ get /contact/report-abuse?report=albinowax http/1.1
 host: github.com  
 content-type: application/x-www-form-urlencoded  
 content-length: 22
+
+report=innocent-victim
 ```
 
-``report=innocent-victim``
 
 в кеш-ключ попал параметр `report=albinowax`, а бэкенд обработал `report=innocent-victim`
 
