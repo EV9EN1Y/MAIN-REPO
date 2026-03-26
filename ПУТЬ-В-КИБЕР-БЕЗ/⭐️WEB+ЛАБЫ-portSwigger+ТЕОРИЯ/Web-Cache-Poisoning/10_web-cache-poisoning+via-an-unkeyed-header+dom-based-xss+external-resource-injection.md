@@ -36,7 +36,9 @@ Priority: u=0, i
 ```js
  <script type="text/javascript" src="/resources/js/geolocate.js"></script>
 ```
-![[Снимок экрана 2026-03-25 в 19.54.18.png]]
+<img src="../../assets/Снимок2026-03-2519.54.18.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 пробую его подгрузить GET /resources/js/geolocate.js HTTP/2
 вот сам файл
@@ -147,7 +149,9 @@ Vary: xxx444
 }
 ```
 
-![[Снимок экрана 2026-03-25 в 20.14.29.png]]
+<img src="../../assets/Снимо2026-03-2520.14.29.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 теперь стало более ясно, откуда берется инфа про местоположеине 
 
 --------
@@ -262,12 +266,16 @@ Content-Length: 11572
 
 сделал вот так: и есть отражение!
 сработал X-Forwarded-Host: xxxx11
-![[Снимок экрана 2026-03-25 в 20.49.03.png]]
+<img src="../../assets/Снимо2026-03-2520.49.03.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 делаю обычный запрос и получаю тот отравленный вариант!!!
 епта! кеш отравлен!!!
 
-![[Снимок экрана 2026-03-25 в 20.48.25.png]]
+<img src="../../assets/Снимо2026-03-2520.48.25.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 
 ---------
@@ -300,7 +308,10 @@ X-Forwarded-Scheme: xxx2
         </script>
 ```
 к серверу запросов не было
-![[Снимок экрана 2026-03-25 в 20.55.20.png]]
+
+<img src="../../assets/Снимо2026-03-24420.55.20.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 --------
 
@@ -376,7 +387,11 @@ data = {"host":"\"}alert(document.cookie){\"","path":"/"}
 и вуаля: вот такие ошибки появились, потому что сайт ждал json, а я ему выдал стандартный ответ от эксплойт сервера Hello, world!
 
 вот эти ссылки из ошибок - они все ведут на мой эксплойт сервер
-![[Снимок экрана 2026-03-25 в 21.10.15.png]]
+
+<img src="../../assets/Снимок2026-03-2521.10.15.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
+
 
 
 ошибки говорят, что загрузки скрипта была запрещена политикой CORS
@@ -394,7 +409,9 @@ Access-Control-Allow-Origin: *
 -----
 пробую вот так настроить сервер
 
-![[Снимок экрана 2026-03-25 в 21.30.08.png]]
+<img src="../../assets/Сним2026-03-2521.30.08.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 и делаю вот такой запрос 
 ```http
@@ -430,7 +447,10 @@ X-Forwarded-Scheme: xxx2
 <div id="shipping-info" class="shipping-info">
 <img src="/resources/images/localShipping.svg"><div>Free shipping to ZDAROVA ZAE AL</div></div>
 ```
-![[Снимок экрана 2026-03-25 в 21.31.11.png]]
+
+<img src="../../assets/Снимо2026-03-2521.31.11.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 -------
 
@@ -452,7 +472,10 @@ X-Forwarded-Scheme: xxx2
 <script>alert(document.cookie)</script>
 </div>
 ```
-![[Снимок экрана 2026-03-25 в 21.40.32.png]]
+
+<img src="../../assets/Снимо2026-03-2521.40.32.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 но алерт не срабатывает почему-то
 хотя с виду , алерт норм выглядит или я туплю
@@ -513,7 +536,9 @@ function initGeoLocate(jsonUrl)
 -------
 вот конфигурация сервера
 
-![[Снимок экрана 2026-03-25 в 21.58.14.png]]
+<img src="../../assets/Сни2026-03-2521.58.14.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 вот запрос
 ```http

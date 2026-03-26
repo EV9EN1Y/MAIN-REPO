@@ -274,9 +274,6 @@ git push origin obsidian       - Отправить коммиты на GitHu
 
 
 
-
-
-
 <div align="center">
   <img src="assets/777.gif" alt="Описание" style="width: 100%; max-width: 100px;" />
 </div>
