@@ -30,10 +30,9 @@ apps дольше всех выполняется
 
 
 
-*Ваш исходный запрос был **POST**:
+ исходный запрос был POST:
 
-text
-
+```http
 POST /login HTTP/2
 Host: example.com
 Content-Type: application/x-www-form-urlencoded
@@ -43,23 +42,28 @@ username=carlos&password=123456  <- Данные ЗДЕСЬ, в теле (body)
 
 *Чтобы превратить его в **GET**, вы должны **переместить параметры из тела в URL**:
 
-text
 
+```
+
+```http
 GET /login?username=carlos&password=123456 HTTP/2  <- Данные ЗДЕСЬ, в URL
 Host: example.com
 (тело запроса становится пустым, Content-Length: 0)
+```
 
 
 
 ---------------
 -------------
 ----------
+```http
 GET /login?username=wiener&password=peter HTTP/2 
 не сработало - нет разницы в ответе!
 GET /login?username=мцукам3&password=мк34м3 HTTP/2
+```
 
 --------
-X-Forwarded-For: 1.1.1.1
+==X-Forwarded-For: 1.1.1.1==
 добавил  -  этот заголовок и сработало, подсмотрел первую подсказку, так как я сам не знад что так можно делать вообще в принципи!
 
 теперь нужно просто менять X-Forwarded-For: 1.1.1.1 при каждом запросе
@@ -107,4 +111,3 @@ X-Forwarded-For: jordan1232
 в конце запроса перед параетрами!
 
 
-# УСТРАНЕНИЕ ПРОБЛЕМЫ

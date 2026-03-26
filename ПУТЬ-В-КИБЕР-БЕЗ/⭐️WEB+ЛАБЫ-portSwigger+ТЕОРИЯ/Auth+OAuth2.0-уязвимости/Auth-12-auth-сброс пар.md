@@ -42,6 +42,7 @@ https://portswigger.net/web-security/authentication/other-mechanisms/lab-passwor
 
 я просто поменял пароль для чужого акк в своем email.
 
+-----
 # суть 
 
 банально и просто

