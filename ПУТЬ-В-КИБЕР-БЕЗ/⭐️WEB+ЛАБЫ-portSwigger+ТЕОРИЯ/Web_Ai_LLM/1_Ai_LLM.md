@@ -10,7 +10,7 @@ https://portswigger.net/web-security/llm-attacks/lab-exploiting-llm-apis-with-ex
 попросил удалить карлоса - она выполнила команду
    "arguments": "{\"sql_statement\":\"DELETE FROM users WHERE username = 'carlos'\"}"
 
-```
+```c
 # Live chat
 
 

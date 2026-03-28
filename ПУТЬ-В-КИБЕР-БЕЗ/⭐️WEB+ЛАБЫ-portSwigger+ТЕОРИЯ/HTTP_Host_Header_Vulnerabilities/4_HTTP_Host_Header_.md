@@ -1,7 +1,8 @@
 #### SSRF via flawed request parsing
 лаба https://portswigger.net/web-security/host-header/exploiting/lab-host-header-ssrf-via-flawed-request-parsing
 
-зашибись перевод: "практикующий врач!!!"
+
+ перевод: "практикующий врач!!!"
 
 <img src="../../assets/Снимо2026-03-2212.43.37.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 

