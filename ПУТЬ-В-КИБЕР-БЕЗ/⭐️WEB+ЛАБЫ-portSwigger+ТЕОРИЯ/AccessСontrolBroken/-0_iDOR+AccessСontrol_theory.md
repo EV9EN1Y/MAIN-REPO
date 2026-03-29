@@ -177,7 +177,7 @@ https://portswigger.net/web-security/access-control/idor
 
 Если посмотреть на то, как эти случаи классифицируют в базах уязвимостей, то чаще всего мелькает **один код**:
 
-**CWE-639: Authorization Bypass Through User-Controlled Key** — это мать всех IDOR. Сюда попадает всё, где ключ доступа (цифра, UUID, имя файла) контролируется юзером, а сервер не проверяет права [](https://securitricks.com/cve/CVE-2026-22588)[](https://www.cybersecurity-help.cz/vdb/vulns/123336/)[](https://www.sentinelone.com/vulnerability-database/cve-2026-22404/)
+**CWE-639: Authorization Bypass Through User-Controlled Key** - это мать всех IDOR. Сюда попадает всё, где ключ доступа (цифра, UUID, имя файла) контролируется юзером, а сервер не проверяет права [](https://securitricks.com/cve/CVE-2026-22588)[](https://www.cybersecurity-help.cz/vdb/vulns/123336/)[](https://www.sentinelone.com/vulnerability-database/cve-2026-22404/)
 
 
 -------
@@ -202,7 +202,7 @@ https://portswigger.net/web-security/access-control/idor
     
 - **IDOR как часть цепочки атаки на SaaS-компанию** — В одном реальном кейсе (разбор на SecureMyMind) хакер начал с тупого IDOR в файловом API (`/files/{file_id}`). Насобирав файлов, он нашел там внутренние ключи и смог проникнуть в тестовую среду, где повысил привилегии и утащил тысячи клиентских записей [](https://blog.securemymind.com/tag/%e5%a4%9a%e6%99%ba%e8%83%bd%e4%bd%93).
     
-- **IDOR в интернет-знакомствах (эпик с 10 ГБ переписок)** — Это твой же первый пример, но он настолько показателен, что его грех не упомянуть еще раз. Чувак просто подбирал ID комнат (`room_no`) в запросах и выкачал 10 гигов чужих интим-переписок. Никаких эксплоитов, одна арифметика [](https://www.sentinelone.com/vulnerability-database/cve-2026-1271/).
+- **IDOR в интернет-знакомствах (эпик с 10 ГБ переписок)** - Чувак просто подбирал ID комнат (`room_no`) в запросах и выкачал 10 гигов чужих интим-переписок. Никаких эксплоитов, одна арифметика [](https://www.sentinelone.com/vulnerability-database/cve-2026-1271/).
     
 
 ---

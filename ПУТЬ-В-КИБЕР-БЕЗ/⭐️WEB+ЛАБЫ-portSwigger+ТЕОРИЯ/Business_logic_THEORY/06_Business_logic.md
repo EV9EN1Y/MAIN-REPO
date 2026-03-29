@@ -24,7 +24,6 @@ Cache-Control: max-age=0
 
 
 
-
 пробую сразу админку
 ```http
 GET /admin HTTP/2
@@ -38,9 +37,9 @@ Accept-Language: ru-RU,ru;q=0.9
 
 ответ 
 ```html
-                   </header>
-                    Admin interface only available if logged in as a DontWannaCry user
-                </div>
+</header>
+Admin interface only available if logged in as a DontWannaCry user
+</div>
 ```
 
 

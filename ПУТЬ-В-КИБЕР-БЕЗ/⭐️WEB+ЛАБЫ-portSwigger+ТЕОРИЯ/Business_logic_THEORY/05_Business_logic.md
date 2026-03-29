@@ -36,6 +36,7 @@ If you work for DontWannaCry, please use your @dontwannacry.com email address
 -------
 
 не зря подсмотрел решение, так как это вроде и простой кейс - но догадаться до него просто так... нереально (наверно)
+да, пиндец вообще 
 
 ----
 

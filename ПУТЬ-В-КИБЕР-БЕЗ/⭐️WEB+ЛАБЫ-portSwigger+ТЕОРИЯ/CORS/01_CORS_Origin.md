@@ -89,7 +89,7 @@ X-Frame-Options: SAMEORIGIN
 Content-Length: 4128
 
 
-                       <div>Your API Key is: <span id=apikey></span></div>
+<div>Your API Key is: <span id=apikey></span></div>
                         <script>
                             fetch('/accountDetails', {credentials:'include'})
                                 .then(r => r.json())
@@ -101,12 +101,12 @@ Content-Length: 4128
                             <input required type="hidden" name="csrf" value="Rn3rjQ2LookM97pwHWnsgsbzkRLjdGrp">
                             <button class='button' type='submit'> Update email </button>
 ```
-но в нем нет в ответе `Access-Control-Allow-Credentials: true`
+но в нем  - нет в ответе `Access-Control-Allow-Credentials: true`
 и апи ключ тут не присутствует в открытом виде, так как апи ключ приходит позже запросом (что выше)  `GET /accountDetails HTTP/2`
 
 ------------
 
-для начала попробую просто сделать просто запрос к своему эксплойй серверу
+для начала попробую просто сделать просто запрос к своему эксплойт серверу
 то есть - сначала - нужно найти уязвимость корс 
 
 и в первом запросе `GET /accountDetails`

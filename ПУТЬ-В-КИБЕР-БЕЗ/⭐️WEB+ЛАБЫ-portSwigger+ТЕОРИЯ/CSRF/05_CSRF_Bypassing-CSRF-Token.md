@@ -50,7 +50,7 @@ csrf токен типа hidden появляется при первом отк�
 и если тупо вырезать от сюда csrfKey
 то запрос тоже успешно выполняется
 
-то есть я могу просто скинул ссылку на пост.. браво..
+то есть я могу просто скинуть ссылку на пост.. браво..
 ```http
 GET /?search=7777zapros HTTP/2
 Host: 0a0c00f6036db67f808a03b700fa00c0.web-security-academy.net
@@ -148,8 +148,10 @@ email=hacker22%40bk.ru&csrf=rnjslXR8djr2YRhhKMY3oEUN0q6cwBsY
 и у меня как раз есть в описании лабы два аккаунта (кажись , я на верном пути)
 
 я залогинился под карлосом и взял его токен  и сессию
+
 `      csrf=y9KJdhcCQdVCoeYPyr2Y2YMlmLpvXZFi      `
 `     session=zrBuaCwuUjWAp9dhS8JYVeZnY2dEcEu9   `
+
 теперь я подставлю этот токен в свой запрос (/my-account/change-email) смены уже моего емейл , - подставил - не сработало, чужой csrf токен не подходит - ответ 400  "Invalid CSRF token"
 
 то есть подсунуть свой токен втупую не вышло

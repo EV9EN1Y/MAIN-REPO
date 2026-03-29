@@ -22,8 +22,6 @@ http://vulnerable-website.com/reset-password?token=a0ba0d1cb3b63d13822572fcff1a2
 
 https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic
 
----------
-
 - Ваши учетные данные:`wiener:peter /emai= wiener@exploit-0a8d00fe03233bc2818bde38019800b5.exploit-server.net`
 - 
 - Имя пользователя жертвы:`carlos`

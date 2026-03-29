@@ -2,7 +2,6 @@
 сперва гориз эскалация (захват аккаунта админа)
 и через него уже вертикальная эскалация
 
-
 лаба 
 https://portswigger.net/web-security/access-control/lab-user-id-controlled-by-request-parameter-with-password-disclosure
 
@@ -23,6 +22,7 @@ https://portswigger.net/web-security/access-control/lab-user-id-controlled-by-re
 
 вот пароль админа + csrf
 ```html
+
                            <input required type="hidden" name="csrf" 
 value="jRRc05MrObxWhe4dkw6C33s7Zp0bQuq3">
                             <input required type=password name=password value='zgnefd61n0rnfdlff7n8'/>

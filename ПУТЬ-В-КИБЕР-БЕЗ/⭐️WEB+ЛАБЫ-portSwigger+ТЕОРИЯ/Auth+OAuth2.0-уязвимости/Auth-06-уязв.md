@@ -39,11 +39,14 @@ GET /login?username=carlos&password=123123 HTTP/2    но различий не�
 менял user-agent - не влияет
 
 оригинал:
+```json
 {"username":"121","password":"wwww"}
 
 изменил:
+
 {"username":"121","password":"wwww",
 "username":"23e","password":"wwe"}
+```
 
 
 ------------

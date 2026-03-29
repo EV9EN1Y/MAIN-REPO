@@ -17,14 +17,13 @@
 
 чат
 
-/chat
-viewTranscript('/download-transcript')
+/chat/viewTranscript('/download-transcript')
 /resources/js/chat.js
 /resources/js/viewTranscript.js
 
 ```
 
-по путям оежат разного рода файлы
+по путям в html лежат разного рода файлы
 
 ```js
 HTTP/2 200 OK
