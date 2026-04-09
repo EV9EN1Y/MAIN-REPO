@@ -1216,7 +1216,7 @@ evgeniy@Evgeniys-MacBook-Pro MeetWay.app % strings -t x ./MeetWay.debug.dylib | 
 90fee0 messa-geEnc34yptio-nKey
 91d968 8134324237t-r8gf
 92be10 424CAJESl-8Vc6eod-TSiavKAGVh-fw42
-92be30 24erfY-MZYg-s2XIJ-upQen234fq4f-sqeCNLN5xjaK-tGj17ep234r2
+92be30 24erfy-jzqg-sqXeG-upQen234fq4f-sqeCNLN5xjaK-tGj17ep234r2
 
 ```
 
@@ -1236,7 +1236,7 @@ evgeniy@Evgeniys-MacBook-Pro MeetWay.app % strings -t x ./MeetWay.debug.dylib | 
 
 | 0x92be10 | `424CAJESl-8Vc6eod-TSiavKAGVh-fw42` | AWS Access Key |
 
-| 0x92be30 | `24erfY-MZYg-s2XIJ-upQen234fq4f-sqeCNLN5xjaK-tGj17ep234r2` | AWS Secret Key |
+| 0x92be30 | `24erfy-jzqg-sqXeG-upQen234fq4f-sqeCNLN5xjaK-tGj17ep234r2` | AWS Secret Key |
 
 | 0x90fee0 | `messa-geEnc34yptio-nKey` | Ключ шифрования сообщений |
 
