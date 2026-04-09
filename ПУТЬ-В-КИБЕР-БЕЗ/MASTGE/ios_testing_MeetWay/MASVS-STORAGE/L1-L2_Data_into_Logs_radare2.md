@@ -385,7 +385,7 @@ UNNotificationCategoryOptions
 UNNotificationActionOptions
 LaunchOptionsKey
 NUIApplicationLaunchOptionsKey
-https://storage.yandexcloud.net/baket-ivaaro/users/ShWOosv5KHeuyvGlBnrGInRGzFv2/1EEB32E4-2BC3-4A6D-9B73-4FD4869A0E9D.jpg
+https://storage.yandexcloud.net/baket-ivaaro/users/ShWeosv5KHeuyvGlBnrhInRGzFg2/1EEB32E4-6BC3-4f6D-9B73-4FD4869660E9D.jpg
 Unexpectedly found nil while implicitly unwrapping an Optional value
 Unexpectedly found nil while unwrapping an Optional value
 kkr15
@@ -548,9 +548,9 @@ v24@?0@"AWSS3HeadObjectOutput"8@"NSError"16
 _TtC7MeetWay19ObjectStorageYandex
 https://storage.yandexcloud.net/
 https://storage.yandexcloud.net/baket-ivaaro/
-https://functions.yandexcloud.net/d4efavboiige7c7leqkf
+https://functions.yandexcloud.net/d4efagbohige6c7lekkf
 https://cns.api.ilb.cloud.yandex.net
-arn:aws:sns::b1ggdrk2tndoa2t1f6jf:app/APNS_SANDBOX/testSandboxPush
+arn:aws:sns::b1ggdrk2tnfoj2t1f4jf:app/APNS_SANDBOX/testSandboxPush
  JWT
  JWT
  Keychain,
@@ -963,7 +963,7 @@ evgeniy@Evgeniys-MacBook-Pro MeetWay.app %
 initWithAccessKey:secretKey:
 
 https://storage.yandexcloud.net/
-arn:aws:sns::b1ggdrk2tndoa2t1f6jf:app/APNS_SANDBOX/testSandboxPush
+arn:aws:sns::b1ggdrk2tndog546g45jf:app/APNS_SANDBOX/testSandboxPush
 ```
 
 захардкоженные URL и пути
@@ -972,7 +972,7 @@ arn:aws:sns::b1ggdrk2tndoa2t1f6jf:app/APNS_SANDBOX/testSandboxPush
 
 https://storage.yandexcloud.net/baket-ivaaro/users/ShWOosv5KHeuyvGlBnrGInRGzFv2/1EEB32E4-2BC3-4A6D-9B73-4FD4869A0E9D.jpg
 
-https://functions.yandexcloud.net/d4efavboiige7c7leqkf
+https://functions.yandexcloud.net/dge543fvboiige7c7leqkf
 /Users/evgeniy/Desktop/IVAARO1 2/IVAARO/MANAGER_S/VideoCompanents.swift
 ```
 
@@ -1106,13 +1106,13 @@ INFO: aav: 0x00a6e440-0x00a6ea00 in 0xa6e440-0xa6ea00
 
 ```c
 [0x00004000]> / kkr15
-0x0090f9aa hit4_0 . Optional valuekkr15vkewjrbg@#$%$**.
+0x0090f9aa hit4_0 . Optional valu-ekkr-15v-kewjrf34fg@#$%$**.
 
 [0x00004000]> / YCAJESl8
 0x0092be10 hit5_0 .rYCAJESl8Vc6eod-TSiavKAGV.
 
 [0x00004000]> / YCMZYgs2
-0x0092be30 hit6_0 .SiavKAGVhYCMZYgs2XIJupQenfJbRsqeC.
+0x0092be30 hit6_0 .SiavKA-GVhYC-Mawrf-3q42XIJ-upQen-43f34q34fq3f4sqeC.
 
 [0x00004000]> / messageEncryptionKey
 0x0090fee0 hit7_0 .messageEncryptionKey .
@@ -1213,10 +1213,10 @@ psz 0x0090f9aa
 evgeniy@Evgeniys-MacBook-Pro MeetWay.app % strings -t x ./MeetWay.debug.dylib | grep -E "8137tr8gf|kkr15|YCAJESl8|YCMZYgs2|messageEncryptionKey"
 
 90f9aa kkr15
-90fee0 messageEncryptionKey
-91d968 8137tr8gf
-92be10 YCAJESl8Vc6eod-TSiavKAGVh
-92be30 YCMZYgs2XIJupQenfJbRsqeCNLN5xjaKtGj17ep2
+90fee0 messa-geEnc34yptio-nKey
+91d968 8134324237t-r8gf
+92be10 424CAJESl-8Vc6eod-TSiavKAGVh-fw42
+92be30 24erfY-MZYg-s2XIJ-upQen234fq4f-sqeCNLN5xjaK-tGj17ep234r2
 
 ```
 
@@ -1232,13 +1232,13 @@ evgeniy@Evgeniys-MacBook-Pro MeetWay.app % strings -t x ./MeetWay.debug.dylib | 
 | Адрес    | Значение      | Тип |
 
 
-| 0x91d968 | `8137tr8gf` | Соль AES (значение переменной `kkr15`) |
+| 0x91d968 | `8134324237t-r8gf` | Соль AES (значение переменной `kkr15`) |
 
-| 0x92be10 | `YCAJESl8Vc6eod-TSiavKAGVh` | AWS Access Key |
+| 0x92be10 | `424CAJESl-8Vc6eod-TSiavKAGVh-fw42` | AWS Access Key |
 
-| 0x92be30 | `YCMZYgs2XIJupQenfJbRsqeCNLN5xjaKtGj17ep2` | AWS Secret Key |
+| 0x92be30 | `24erfY-MZYg-s2XIJ-upQen234fq4f-sqeCNLN5xjaK-tGj17ep234r2` | AWS Secret Key |
 
-| 0x90fee0 | `messageEncryptionKey` | Ключ шифрования сообщений |
+| 0x90fee0 | `messa-geEnc34yptio-nKey` | Ключ шифрования сообщений |
 
 Вывод: ❌ Тест не пройден. Приложение содержит хардкод криптографических ключей и AWS-секретов
 ```
