@@ -114,7 +114,9 @@ strings dynamic-text.dat | grep -i "testpassword\|testnick"
 
 так как в коде нигде не используются данные атрибуты - значит , что все слова введенные в эти текстовые поля - будут сохраняться в кеш телефона глобальный
 
-![[Снимок2026-04-1013.40.40.png]]
+<img src="../../../assets/Снимок2026-04-1013.40.40.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 ----------
 
@@ -135,7 +137,9 @@ Alsas
 Alsasd
 ```
 
-![[Снимок2026—04—1013.19.54.jpeg]]
+<img src="../../../assets/Снимок2026—04—1013.19.54.jpeg" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 
 
@@ -148,7 +152,9 @@ Zaqzaqzaq
 
 ```
 
-![[IMG_3123.jpg]]
+<img src="../../../assets/IMG_3123.jpg" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 
 
