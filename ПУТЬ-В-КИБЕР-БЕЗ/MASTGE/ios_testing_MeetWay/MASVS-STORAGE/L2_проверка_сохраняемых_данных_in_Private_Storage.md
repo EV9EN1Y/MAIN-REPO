@@ -1,6 +1,6 @@
 🟡 `(SAST)`
-
-### MASTG-TEST-0300: References to APIs for Storing Unencrypted Data in Private Storage
+### MASTG-TEST-0300: 
+References to APIs for Storing Unencrypted Data in Private Storage
 
 > Цель теста MASTG-TEST-0300 - проверить, что приложение не сохраняет конфиденциальные данные в незашифрованном виде в своем приватном хранилище (песочнице)
 
@@ -46,7 +46,7 @@ cd ~/Library/Developer/Xcode/DerivedData/MeetWay-*/Build/Products/Debug-iphoneos
 👉  -  когда есть `.ipa` файл:
 (это уже сложно, если например, просто скачать с AppStore - то чтобы распаковать чужой IPA нужен джейлбрейк, так как файл будет шифрованный, и расшифровать можно например frida-ios-dump на устройстве с джейлбрейк)
 
- Распакуйте .ipa
+ Распаковать .ipa
 ```q
 unzip MeetWay.ipa -d MeetWay_extracted
 ```
@@ -54,6 +54,8 @@ unzip MeetWay.ipa -d MeetWay_extracted
 
 
 ----------
+**проверку буду выполнять тестируя приложение MeetWay [[0_MeetWay]]**
+
 
 так как у меня нет джейбрейка и нет лицензии apple dev - то я сделаю так:
 
