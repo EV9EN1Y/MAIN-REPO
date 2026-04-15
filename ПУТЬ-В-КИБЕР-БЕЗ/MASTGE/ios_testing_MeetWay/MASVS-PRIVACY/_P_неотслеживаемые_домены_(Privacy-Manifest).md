@@ -1,3 +1,4 @@
+уровень безопасности P
 # MASTG-TEST-0281
 Undeclared Known Tracking Domains
 
@@ -387,3 +388,9 @@ Exodus ETIP (платформа): https://etip.exodus-privacy.eu.org
 </dict>
 </plist>
 ```
+
+
+
+
+
+

@@ -87,7 +87,8 @@ TLS использует **гибридную схему**, о которой �
 ### Реальные атаки на TLS (исторические)
 
 |Атака|Год|Что делает|Какие версии|
-|---|---|---|---|
+
+```c
 |**BEAST**|2011|Расшифровывает HTTPS-куки через JavaScript-инъекцию [](http://www.mobilecomm.ru/metod-ataki-crime-pokazal-potentsialnuiu-uyazvimost-ssl-protokola)[](https://www.wolfssl.com/broken-ssl-tls-versions-attacks-weaknesses-and-mitigations/)|TLS 1.0|
 |**CRIME**|2012|Использует сжатие данных до шифрования, чтобы украсть куки [](http://www.mobilecomm.ru/metod-ataki-crime-pokazal-potentsialnuiu-uyazvimost-ssl-protokola)[](https://www.wolfssl.com/broken-ssl-tls-versions-attacks-weaknesses-and-mitigations/)|TLS 1.0 (сжатие)|
 |**POODLE**|2014|Заставляет сервер опуститься до SSL 3.0 и расшифровывает сообщения [](https://www.wolfssl.com/broken-ssl-tls-versions-attacks-weaknesses-and-mitigations/)|SSL 3.0|
@@ -96,6 +97,7 @@ TLS использует **гибридную схему**, о которой �
 |**DROWN**|2016|Если сервер использует один сертификат для TLS и SSLv2 [](https://www.wolfssl.com/broken-ssl-tls-versions-attacks-weaknesses-and-mitigations/)|Все версии с общим сертификатом|
 |**Lucky 13**|2013|Атака на CBC-режимы шифрования [](https://www.wolfssl.com/broken-ssl-tls-versions-attacks-weaknesses-and-mitigations/)|TLS 1.0-1.2|
 |**Opossum/ALPACA**|2025|Путаница между разными протоколами (HTTPS/FTP) [](https://www.tii.ae/ar/node/3747)[](https://iacr.org/news/item/26178)|HTTP, FTP, SMTP|
+```
 
 
 ###  TLS 1.3 — это пуленепробиваемый танк""
@@ -143,7 +145,7 @@ TLS нельзя взломать математически (если у теб
 через криптографию — **никак, если не квантовый компьютер**. Но есть обходные пути:
 
 | Вектор атаки                          | Как работает                                      | Пример                                                                                                         |
-| ------------------------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+ -------------------------------------------------------------------------------------------------------------- |
 | **Атака "человек посередине" (MitM)** | Подменить сертификат, чтобы браузер поверил       | Хакер в кафе подсовывает свой сертификат, но браузер орёт красным, если CA не тот                              |
 | **Уязвимости в реализации**           | Баги в коде OpenSSL, библиотек                    | CCS Injection в Cisco ASA , CVE-2022-20927                                                                     |
 | **Слабые настройки сервера**          | Админ включил поддержку SSL 3.0 или слабых шифров | Атака POODLE или FREAK [](https://www.wolfssl.com/broken-ssl-tls-versions-attacks-weaknesses-and-mitigations/) |
@@ -372,7 +374,7 @@ WebSocket handshake (уже внутри TLS)
 ## Кому и зачем это нужно
 
 |Кто|Зачем использует TLS|
-|---|---|
+
 |**Владелец сайта**|Чтобы браузер показывал замочек, пользователи доверяли, Google не штрафовал в выдаче|
 |**Разработчик API**|Чтобы пароли, токены, номера карт не летели в открытом виде|
 |**Пользователь**|Чтобы хакер в кафе не украл пароль от соцсетей|
@@ -380,4 +382,10 @@ WebSocket handshake (уже внутри TLS)
 |**Интернет-магазин**|Чтобы принять оплату картой (PCI DSS требует шифрование)|
 
 ------
+
+
+
+
+
+
 
