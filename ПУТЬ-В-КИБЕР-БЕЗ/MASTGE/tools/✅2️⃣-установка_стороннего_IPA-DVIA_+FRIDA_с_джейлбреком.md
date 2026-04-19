@@ -47,6 +47,10 @@ https://github.com/prateek147/DVIA-v2/releases/download/v2.0/DVIA-v2-swift.ipa
 
 скачал , приложение лежит  в файлах айфона
 
+или вот это (рабочее)
+https://github.com/prateek147/DVIA-v2/raw/refs/heads/master/DVIA-v2.ipa
+также через браузер прям
+
 -------
 
 ### 🟣 нужно скачать  filza
