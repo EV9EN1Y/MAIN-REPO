@@ -131,10 +131,10 @@ frida-ps -Uai
 
 # 🔥🔥🔥🔥🔥🔥
 
-<img src="../../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../../assets/Снимок2026-04-1622.52.22.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
-![[Снимок2026-04-1622.52.22.png]]
+
 
 ------
 
