@@ -62,6 +62,27 @@ filza установлена - ярлык появился
 
 ### 🟣 нужно скачать Frida
 
+на мак
+```c
+# Если pipx не установлен
+brew install pipx
+pipx ensurepath
+
+# Затем установите Frida
+pipx install frida-tools
+
+pip3 install --user frida-tools
+
+frida --version
+```
+
+
+на телефон
+
+через sileo **`https://build.frida.re`** - и там же через поиск установить ее
+
+короче, и так и так можно, главное, чтобы версии совпадали на маке и на телефоне
+
 https://github.com/frida/frida/releases/download/16.4.3/frida_16.4.3_iphoneos-arm.deb  это фриду качал на макбук и перекинул на айфон в файлы
 
 ![[frida_16.4.3_iphoneos-arm.deb]]
