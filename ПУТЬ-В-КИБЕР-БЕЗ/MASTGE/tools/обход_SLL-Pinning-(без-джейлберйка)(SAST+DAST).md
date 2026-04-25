@@ -361,7 +361,7 @@ evgeniy@Evgeniys-MacBook-Pro MeetWay.app %
 
 ##### план  
 ```shell
-# 1. Скачай insert_dylib (если ещё нет)
+# 1. качаю insert_dylib (если ещё нет)
 git clone https://github.com/tyilo/insert_dylib
 cd insert_dylib
 xcodebuild
@@ -474,8 +474,11 @@ evgeniy@Evgeniys-MacBook-Pro ~ % frida -U MeetWay
 
 ##### ОТЛИЧНО! фрида гаджет успешно установлен и коннектится с фридой на маке!
 
-теперь нужно загрузить `ssl-kill-switch3` но, нигде не могу найти готовое
-поэтому файл сам создам
+
+-----
+
+
+теперь нужно загрузить скриптик простенький    
 ```js
 cat > ~/ssl-kill-switch3.js << 'ENDOFSCRIPT'
 // SSL Kill Switch
@@ -523,6 +526,7 @@ ENDOFSCRIPT
 
 <img src="../../../assets/Снимок2026-04-2516.28.09.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
+------
 
 
 
