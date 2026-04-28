@@ -1,7 +1,6 @@
 # MASTG-TEST-0228: 
 Position Independent Code (PIC) not Enabled
 
-
 PIC (Position Independent Code) или PIE (Position Independent Executable) - это когда главный бинарник приложения можно загрузить в случайный участок памяти, а не по фиксированному адресу. 
     Без PIC бинарник всегда садится на один и тот же адрес (например, 0x100000000). С PIC = на случайный, и злоумышленнику нужно будет оч долго искать
 
