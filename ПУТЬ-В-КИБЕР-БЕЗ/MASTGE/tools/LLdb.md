@@ -345,7 +345,7 @@ lldb -n DVIA-v2 -o "b ptrace" -o "c"
 
 #### запуск LLDB:
 вот тут можно посмотреть первый запуск - [[LLdb]] 
-```c
+```q
 -----------
 отдельный терминал для фриды
 узнать бандл id
@@ -366,10 +366,13 @@ ssh -p 44444 root@localhost
 
 
 запуск дебаг-сервера lldb к нужному приложению по его PID
-debugserver 0.0.0.0:12345 -a 1475
+ не поможет - так как приложение падает сразу и pid узнать невозможно вот так : // debugserver 0.0.0.0:12345 -a 1475
+
+поэтмоу вот так
+debugserver localhost:12345 --waitfor MeetWay
 
 
-вижу Listening - отлично
+вижу Listening - отлично - теперь дебаг сервер ждет запуска приложения ручками
 
 
 ----------
@@ -390,21 +393,148 @@ lldb
 process connect connect://localhost:12345
 ---------
 
- вижу  - значит - все окей
+
+теперь включаю приложеине в телефоне
+
+---
+
+  вижу в терминале LLDB это ниже - значит - все окей
  
- Process 1475 stopped
+evgeniy@Evgeniys-MacBook-Pro ~ % lldb
+(lldb) process connect connect://localhost:12345
+Process 1851 stopped
 * thread #1, stop reason = signal SIGSTOP
-    frame #0: 0x0000000100698914 dyld`dyld3::MachOFile::trieWalk(Diagnostics&, unsigned char const*, unsigned char const*, char const*) + 240
+    frame #0: 0x0000000100e3c8b0 dyld`dyld3::MachOFile::trieWalk(Diagnostics&, unsigned char const*, unsigned char const*, char const*) + 140
 dyld`dyld3::MachOFile::trieWalk:
-->  0x100698914 <+240>: ldrb   w13, [x8]
-    0x100698918 <+244>: cbz    w13, 0x100698988 ; <+356>
-    0x10069891c <+248>: mov    w11, #0x0 ; =0
-    0x100698920 <+252>: add    x10, x8, #0x1
+->  0x100e3c8b0 <+140>: ldrsb  w8, [x9], #0x1
+    0x100e3c8b4 <+144>: str    x9, [sp, #0x10]
+    0x100e3c8b8 <+148>: tbnz   w8, #0x1f, 0x100e3c8c4 ; <+160>
+    0x100e3c8bc <+152>: and    x24, x8, #0xff
+Target 0: (MeetWay) stopped.
+(lldb)
+
+
+LLDB подключился к процессу MeetWay с PID 1851, и процесс ЗАМОРОЖЕН на самой ранней стади
+
+приложение - висит с белым экраном
+
+------------------------
+
+нужно найти адресс бинарника 
+
+image list -o -f MeetWay.debug.dylib
+
+вижу 
+[  0] 0x0000000100ed0000 /private/var/containers/Bundle/Application/7ED22691-DC92-497F-BA18-4BB68280EF8F/MeetWay.app/MeetWay.debug.dylib(0x0000000100ed0000)
+
+
+вот адресс 0x0000000100ed0000
+
+
+----------------
+
+гляну - где находится сама функция которую нашел через радар 
+
+image lookup -rn "JailbreakDetector.isJailbroken"
+
+вижу
+1 match found in /private/var/containers/Bundle/Application/7ED22691-DC92-497F-BA18-4BB68280EF8F/MeetWay.app/MeetWay.debug.dylib:
+        Address: MeetWay.debug.dylib[0x00000000004f4544] (MeetWay.debug.dylib.__TEXT.__text + 5178692)
+        Summary: MeetWay.debug.dylib`static MeetWay.JailbreakDetector.isJailbroken() -> Swift.Bool at JailbreakDetector.swift:13
+
+----------
+
+теперь нужно поставить брейк на этот адресс (со смещением)
+
+br set -a 0x0000000100ed0000+0x004f4544
+
+вижу - что брейк установился
+Breakpoint 1: where = MeetWay.debug.dylib`static JailbreakDetector.isJailbroken() at JailbreakDetector.swift:13, address = 0x00000001013c4544
+
+------------
+
+далее продолжу выполнение программы для брейка
+
+c
+
+вижу место - где сраболал брейк!
+это функция в структуре! идеально, удалось четко попасть в ту самую функцию!
+
+
+(lldb) c
+Process 1851 resuming
+Process 1851 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x00000001013c4544 MeetWay.debug.dylib`static JailbreakDetector.isJailbroken() at JailbreakDetector.swift:13
+   10
+   11  	struct JailbreakDetector {
+   12
+-> 13  	    static func isJailbroken() -> Bool {
+   14
+   15
+   16  	        let jailbreakPaths = [
 Target 0: (MeetWay) stopped.
 
+--------
+
+теперь посмотрю первые штук 5 инструкций этой функции
+
+dis -f -c 5
+
+вижу
+
+MeetWay.debug.dylib`static JailbreakDetector.isJailbroken():
+->  0x1013c4544 <+0>:  stp    x22, x21, [sp, #-0x30]!
+    0x1013c4548 <+4>:  stp    x20, x19, [sp, #0x10]
+    0x1013c454c <+8>:  stp    x29, x30, [sp, #0x20]
+    0x1013c4550 <+12>: add    x29, sp, #0x20
+    0x1013c4554 <+16>: sub    sp, sp, #0x430
+
+------------
+
+теперь можно сделать так - чтобы не выполнять то - что внутри функции и при этом - вернуть значение - напрмиер false (так как функция называется isJailbroken - логично - что если вернет функция false - типо не нашла джейл)
+
+итак - по порядку - эти команды
+
+register write x0 0
+br delete 1
+thread return 0
+
+разбор команд
+register write x0 0 - Записывает значение 0 в регистр x0 - - В ARM64 (процессор iPhone) регистр x0 используется для возврата значений из функций -
+В Swift Bool представляется как 0 = false, 1 = true
+то есть - Записывая 0 в x0, мы "кладём" туда значение false
+
+
+после этих трех команд - вижу
+
+(lldb) register write x0 0
+(lldb) br delete 1
+1 breakpoints deleted; 0 breakpoint locations disabled.
+(lldb) thread return 0
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x000000010175d784 MeetWay.debug.dylib`AppDelegate.application(application=0x0000000602808340, launchOptions=nil) at AAIVAApp.swift:59:30
+   56
+   57  	        // ---------------------
+   58
+-> 59  	        if JailbreakDetector.isJailbroken() {
+   60  	            // Показываем алерт СИНХРОННО (без DispatchQueue)
+   61  	            let alert = UIAlertController(
+   62  	                title: "⚠️ Внимание, епта!",
+(lldb)
+
+
+то есть - я выше вернул функции значение false -  и следующий шаг - это проверка в if JailbreakDetector.isJailbroken() - и так как я выше - дал значение функции false - то условие это вообще не будет выполняться!
+
+---------
+поэтому - просто продолжаю выполнение!
+
+c
+
+---------------
+
+и ура!!!!!!!!!!! епта!!!!!!!! получилось обойти защиту!!!!!!!
+
+приложение запустилось!!!
 ```
 
-теперь можно работать с LLDB
-
-
-Target 0: (MeetWay) stopped - приложение остановлено на самом старте!
