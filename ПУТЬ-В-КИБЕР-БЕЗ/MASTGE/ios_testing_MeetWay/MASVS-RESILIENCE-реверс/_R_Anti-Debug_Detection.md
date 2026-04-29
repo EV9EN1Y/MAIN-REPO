@@ -74,12 +74,8 @@ ps aux | grep DVIA-v2
 ```
 
 <img src="../../../assets/IMG_32B4F783079C-1.jpeg" alt="Скрин" style="width: 90%; max-width: 1000px;" />
-вывод -
 
-
-нихуя, вот такой вывод, не хочет у меня запускаться LLDB
-
-видимо - приложение блокирует подключение, потому что я перепробовал наверно 30 способов
+не получается подключить сервер
 
 -----------
 
@@ -200,16 +196,10 @@ ptrace\x00MobileSubstrate\x00cycript\x00SSLKillSwitch\x00SSLKillSwitch2\x00/User
 
 
 
+защита есть, я вижу сигнатуры , имена
 
+подробнее про обнаружение отладчиков - можно прочесть здесь:
+я там и установил такую защиту и потом взломал
 
-перв терминал
-evgeniy@Evgeniys-MacBook-Pro ~ % iproxy 2222 44
-
-второй терми
-evgeniy@Evgeniys-MacBook-Pro ~ % ssh -p 2222 root@localhost
-
-ввод пароля
-
-
-
+вот здесь [[_R_(SAST+DAST)-Jailbreak-Detection-in-Code+Runtime(radare2-Frida-LLDB-patch-Objection)]]
 
