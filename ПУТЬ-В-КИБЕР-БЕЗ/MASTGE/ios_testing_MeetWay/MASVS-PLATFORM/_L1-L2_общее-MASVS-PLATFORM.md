@@ -1,3 +1,10 @@
+23 теста  MASVS-PLATFORM - все они простые
+тесты выполняются:
+либо через радар2 статически можно  проверять 
+либо подключать фрида к работающему процессу и смотреть нужные события
+
+----------
+
 **MASVS-PLATFORM** (платформа iOS). Это тесты на **безопасность взаимодействия приложения с iOS-средой** - как приложение общается с другими приложениями, с системой, с пользователем
 
 -----
@@ -10,15 +17,15 @@
 
 ### MASTG-TEST-0056: Sensitive Data Exposed via IPC
 
-**О чём:** Проверяет, не передаёт ли приложение чувствительные данные (токены, пароли, личную информацию) через механизмы общения между приложениями.
+**О чём:** Проверяет, не передаёт ли приложение чувствительные данные (токены, пароли, личную информацию) через механизмы общения между приложениями
 
-**Как тестировать:** Отслеживать отправку данных через `UIPasteboard`, `Custom URL Schemes`, `App Extensions`, `Shared UserDefaults`.
+**Как тестировать:** Отслеживать отправку данных через `UIPasteboard`, `Custom URL Schemes`, `App Extensions`, `Shared UserDefaults`
 
 через радар 2 - искать вызовы и тоже самое через frida смотреть динамически!
 ```
 generalPasteboard
 pasteboardWithName
- setItems:options
+setItems:options
 canOpenURL
 application:openURL:options
 NSExtension  в Info.plist
@@ -41,7 +48,7 @@ suiteName
 
 ### MASTG-TEST-0059: Auto-Generated Screenshots for Sensitive Information
 
-**О чём:** iOS делает скриншот приложения перед уходом в фон (в switcher). Если на этом скриншоте видны личные данные - утечка.
+**О чём:** iOS делает скриншот приложения перед уходом в фон (в switcher). Если на этом скриншоте видны личные данные - утечка
 
 **Защита:** все просто и банально - затемнять экран или скрывать чувствительные данные в `applicationDidEnterBackground`
 
@@ -89,6 +96,9 @@ Universal Links - это механизм, который позволяет п�
 внутри entitlements нужно смотреть ключ  com.apple.developer.associated-domains и там есть applinks - это домены которые приложение считает «своими»
 (нужно подробнее читать про этот тест)
 
+
+---
+
 ### MASTG-TEST-0071: Testing UIActivity Sharing
 
 **О чём:** Проверяет, не отправляет ли приложение через системное меню "Поделиться" (`UIActivityViewController`) чувствительные данные (документы, фотографии, текст)
@@ -102,6 +112,10 @@ Universal Links - это механизм, который позволяет п�
 [0x00000000]> izz~UIActivityViewController
 [0x00000000]> izz~activityItems
 ```
+
+
+---
+
 ### MASTG-TEST-0072: Testing App Extensions
 
 **О чём:** Проверяет расширения приложения (например, клавиатура, виджет, шэринг). Не утекают ли через них данные или нет ли у них избыточных прав
@@ -127,6 +141,9 @@ frida-ps -Uai | grep -i "keyboard\|share\|widget"
 # Подключиться и смотреть логи происходящего там, лишнего не должно быть,  вдруг там данные уходят куда-то...
 frida -U <PID> -e 'console.log("[*] Watching extension...");'
 ```
+
+
+---
 
 ### MASTG-TEST-0075: Testing Custom URL Schemes
 
@@ -214,6 +231,9 @@ Interceptor.attach(generalPB.setString, {
 
 вот например в приложении банка Tmobile - можно скопировать номер карты и другие данные - и вставить в любом месте айфона (то есть - они в общем буфере) при этом - есть риск, что какое -то приложение - может спокойно брать эти данные и делать с ними что захочет на законных основаниях, так как это общий буфер
 
+
+---
+
 ### MASTG-TEST-0276: Use of iOS General Pasteboard
 
 **О чём:** Проверяет, использует ли приложение **общий** буфер обмена (доступен всем приложениям)
@@ -230,6 +250,8 @@ strings MeetWay.app | grep -i "generalPasteboard"
 
 ну и динамически = копировать чувствит данные в одном месте и вставлять в другое
 
+
+---
 
 ### MASTG-TEST-0277: Sensitive Data in General Pasteboard at Runtime
 
@@ -269,6 +291,9 @@ Interceptor.attach(UIPasteboard["- setItems:"].implementation, {
 
 frida -U MeetWay -l track_general_pasteboard.js
 ```
+
+
+---
 
 ### MASTG-TEST-0278: Pasteboard Contents Not Cleared After Use
 
@@ -336,6 +361,10 @@ axt @0x00xxxxxx
 - Открыть другое приложение
 - Попробовать Paste again
 - Если вставилось → **fail**
+
+
+---
+
 ### MASTG-TEST-0279: Pasteboard Contents Not Expiring
 
 **О чём:** Проверяет, не хранятся ли данные в буфере бесконечно долго без таймаута
@@ -347,6 +376,9 @@ axt @0x00xxxxxx
 - Открыть другое приложение
 - Попробовать Paste
 - Если вставилось → **fail**
+
+
+---
 
 ### MASTG-TEST-0280: Pasteboard Contents Not Restricted to Local Device
 
@@ -840,8 +872,7 @@ func openWebView(with urlString: String) {
 
 ```
 
-![[Снимок экрана 2026-04-29 в 21.01.29.png]]
-
+<img src="../../../assets/Снимок2026-04-2921.01.29.png" alt="Скрин" style="width: 99%; max-width: 1000px;" />
 
 -----
 
@@ -954,7 +985,9 @@ webView.loadFileURL(fileURL, allowingReadAccessTo: documentsURL)
 
 ```
 
-![[Снимок экрана 2026-04-29 в 21.05.06.png]]
+<img src="../../../assets/Снимок2026-04-2921.05.06.png" alt="Скрин" style="width: 99%; max-width: 1000px;" />
+
+
 
 
 ------------------
@@ -1109,6 +1142,13 @@ Interceptor.attach(WKWebView["- evaluateJavaScript:completionHandler:"].implemen
 ```
 
 --------
+
+
+
+
+								⚠️   ⚠️   ⚠️ 
+
+
 
 ##### вот - что необходимо внедрить (если этого нет) в мое приложение MeetWay
 ##### для того - чтобы я мог по настроящему протестировать все эти тесты  MASVS-PLATFORM

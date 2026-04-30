@@ -218,3 +218,217 @@ frida - это швейцарский нож для динамического �
 
 
 -------
+
+
+
+
+
+##### пример: - перехват  -  LAContext
+
+подрубаю фриду к айфону, там уде все настроено и готово - стоит и фрида и паралель и все че надо
+ подробнее о настройке - можно найти в папке `tools`
+
+подрубаю ssh для удобства
+
+перв терминал
+`iproxy 44444 44`
+второй терминал
+`ssh -p 44444 root@localhost`
+стандарт пароль: alpine
+
+на айфоне - сервер фриды
+`sudo frida-server -l 0.0.0.0 `
+Пароль: alpine
+
+и после ввода пароля - терминал завис, типо это так и должно быть
+и его нужно просто свернуть, но не закрывать
+
+теперь на маке подкл
+`frida-ps -H 192.168.0.107`
+
+
+ЗАПУСКАЮ ПРИЛОЖЕНИЕ НА АЙФОНЕ
+
+нахожу бандл айди или  pid
+
+`frida-ps -Uai`
+MeetWay         AIVARO22-2025-1.0
+2078   MeetWay
+
+или   
+`frida-ps -Ua`
+i | grep MeetWay
+
+
+
+готовлю скрипт 
+
+
+```q
+cat > ~/block-setup-ssl.js << 'ENDOFSCRIPT'
+
+
+console.log("\n[🔍] Starting Biometric/Screen Lock API Observer");
+console.log("[🔍] Listening for LAContext API calls...\n");
+
+try {
+    var LAContext = ObjC.classes.LAContext;
+    
+    if (LAContext) {
+        console.log("[✓] LAContext class FOUND");
+        
+        // нook canEvaluatePolicy
+        var canEvaluate = LAContext["- canEvaluatePolicy:error:"];
+        Interceptor.attach(canEvaluate.implementation, {
+            onEnter: function(args) {
+                var policy = args[2].toInt32();
+                var policyName = {
+                    1: "🔐 deviceOwnerAuthenticationWithBiometrics (Face ID/Touch ID)",
+                    2: "📱 deviceOwnerAuthentication (passcode/biometrics)",
+                    3: "⌚️ deviceOwnerAuthenticationWithWatch"
+                }[policy] || `unknown(${policy})`;
+                
+                console.log(`\n[📞 API CALL] canEvaluatePolicy`);
+                console.log(`   → Policy: ${policyName}`);
+                
+                // Упрощённый stack trace (без DebugSymbol)
+                console.log("   📍 Stack trace (✅адреса!):");
+                var trace = Thread.backtrace(this.context, Backtracer.ACCURATE);
+                for (var i = 0; i < Math.min(trace.length, 5); i++) {
+                    var addr = trace[i];
+                    var module = Process.findModuleByAddress(addr);
+                    if (module && module.name.indexOf("MeetWay") !== -1) {
+                        var offset = addr.sub(module.base);
+                        console.log(`      → ${module.name} + 0x${offset.toString(16)}`);
+                    }
+                }
+            },
+            onLeave: function(retval) {
+                var result = retval.toInt32() ? "✅ AVAILABLE" : "❌ NOT AVAILABLE";
+                console.log(`   → Result: ${result}`);
+            }
+        });
+        console.log("[✓] Hooked: canEvaluatePolicy");
+        
+        // Hook evaluatePolicy
+        var evaluate = LAContext["- evaluatePolicy:localizedReason:reply:"];
+        Interceptor.attach(evaluate.implementation, {
+            onEnter: function(args) {
+                var policy = args[2].toInt32();
+                var reason = ObjC.Object(args[3]);
+                console.log(`\n[🔐 BIOMETRIC AUTH] evaluatePolicy called!`);
+                console.log(`   → Policy: ${policy == 2 ? 'deviceOwnerAuthentication' : 'biometrics'}`);
+                console.log(`   → Reason: "${reason}"`);
+            }
+        });
+        console.log("[✓] Hooked: evaluatePolicy");
+        
+        console.log("\n[✅] Observer ready! Go interact with the app...\n");
+    } else {
+        console.log("[❌] LAContext не найден");
+    }
+} catch(e) {
+    console.log(`[❌] Error: ${e.message}`);
+}
+
+ENDOFSCRIPT
+```
+подсасываюсь к процессу приложения 
+
+`frida -U 2126 -l ~/block-setup-ssl.js`
+
+нажимаю на кнопку чата
+фрида ловит процесс
+
+```q
+[📞 API CALL] canEvaluatePolicy
+   → Policy: 🔐 deviceOwnerAuthenticationWithBiometrics (Face ID/Touch ID)
+   📍 Stack trace (✅адреса!):
+      → MeetWay.debug.dylib + 0x599dd8
+      → MeetWay.debug.dylib + 0x59945c
+   → Result: ❌ NOT AVAILABLE
+
+```
+deviceOwnerAuthenticationWithBiometrics - это политика - которая требует биометрию + я вижу адереса, и проверку можно обойти!
+
+
+
+----------
+
+
+##### пример: - перехват  вызова функции с подменой значения (обход SSL pinning)
+
+
+сперва через радар нашел - нужную функцию (адрес) 0x004ec554
+
+```q
+[0x004ec554]> axt @0x004ec554
+sym.MeetWay.AppDelegate.application.allocator.didFinishLaunchingWithOptions...SbSo13UIApplicationC_SDySo0k6LaunchJ3KeyaypGSgtF 0x4eb9dc [CALL:--x] bl sym.MeetWay.AppDelegate.setupTrustKitWithGRPC.allocator.
+```
+эта функция вызывается в AppDelegate.application.allocator.didFinishLaunchingWithOptions
+
+
+далее -  фридой просто поймать и заблокировать вызов этой функции (0x004ec554 setupTrustKitWithGRPC)еще до запуска приложения
+
+
+```js
+cat > ~/block-setup-ssl.js << 'ENDOFSCRIPT'
+console.log("ну че народ, погнали!!!");
+
+// джу загрузки модуля
+var module = Process.findModuleByName("MeetWay.debug.dylib");
+if (!module) {
+    console.log("[!] Module not found yet, waiting...");
+    // попытка найти позже
+    var interval = setInterval(function() {
+        module = Process.findModuleByName("MeetWay.debug.dylib");
+        if (module) {
+            clearInterval(interval);
+            hookFunction(module);
+        }
+    }, 100);
+} else {
+    hookFunction(module);
+}
+
+function hookFunction(module) {
+    console.log("[*] Module base: " + module.base);
+    
+    // setupTrustKitWithGRPC оффсет
+    var setupPinningOffset = 0x4ec554;
+    var setupPinningAddr = module.base.add(setupPinningOffset);
+    
+    console.log("[*] setupTrustKitWithGRPC at: " + setupPinningAddr);
+    
+    // БЛОКИРУЕЮ функцию полностью
+    Interceptor.replace(setupPinningAddr, new NativeCallback(function() {
+        console.log("[BLOCK] setupTrustKitWithGRPC CALLED AND BLOCKED!");
+        console.log("[BLOCK] SSL Pinning DEAD — returning immediately");
+        
+        return; // void функция - (но если нужно - то можно вернуть все че угодно)
+    }, 'void', []));
+    
+    console.log("[BLOCK] setupTrustKitWithGRPC REPLACED with empty function");
+    console.log("[BLOCK] SSL Pinning should be completely disabled!");
+}
+
+console.log("[BLOCK] Script loaded — waiting for module...");
+ENDOFSCRIPT
+```
+
+нужно запустить приложение так, чтобы фрида изначально запускала скрипт и только потом запуск приложения происходил, чтобы функция не успела выполниться!
+
+
+```q
+узнал  bundle-id
+evgeniy@Evgeniys-MacBook-Pro ~ % frida-ps -Uai | grep MeetWay
+2278  MeetWay                  AIVARO22-2025-1.0
+
+и потом:
+запуск
+
+frida -U -f AIVARO22-2025-1.0 -l ~/block-setup-ssl.js
+```
+
+пиннинг обошел успешно
+

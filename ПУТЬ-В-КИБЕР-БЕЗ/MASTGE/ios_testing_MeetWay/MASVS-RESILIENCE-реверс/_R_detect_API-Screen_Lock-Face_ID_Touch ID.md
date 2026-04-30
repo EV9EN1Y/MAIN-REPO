@@ -273,7 +273,7 @@ i | grep MeetWay
 ```q
 cat > ~/block-setup-ssl.js << 'ENDOFSCRIPT'
 
-// watch_auth.js - исправленный stack trace
+
 console.log("\n[🔍] Starting Biometric/Screen Lock API Observer");
 console.log("[🔍] Listening for LAContext API calls...\n");
 
@@ -283,7 +283,7 @@ try {
     if (LAContext) {
         console.log("[✓] LAContext class FOUND");
         
-        // Hook canEvaluatePolicy
+        // нook canEvaluatePolicy
         var canEvaluate = LAContext["- canEvaluatePolicy:error:"];
         Interceptor.attach(canEvaluate.implementation, {
             onEnter: function(args) {
