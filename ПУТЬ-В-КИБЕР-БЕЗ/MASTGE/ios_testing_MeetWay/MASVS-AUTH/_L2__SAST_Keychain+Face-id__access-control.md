@@ -138,7 +138,9 @@ MacBook-Pro MeetWay.app % r2 -A ./MeetWay.debug.dylib
 
 # первичный анализ 
 
-![[Снимок экрана 2026-04-30 в 13.12.49.png]]
+<img src="../../../assets/Снимок2026-04-3013.12.49.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 ```shell
 [0x00004000]> izz~LAContext
@@ -273,7 +275,9 @@ sym.MeetWay.KeychainHelper.save.allocator.for...SbSS_SStF 0x3a144c [CALL:--x] bl
   0x0039f28c      3e0b1694       bl sym.imp.SecItemDelete
 
 
-![[Снимок экрана 2026-04-30 в 13.48.40.png]]
+<img src="../../../assets/Снимок2026-04-3013.48.40.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 
 также вижу вызов другой функции
 ```q
@@ -365,7 +369,11 @@ sym.MeetWay.listAllMyChats.authenticateUser.completion_...F_ 0x599f0c [DATA:r--]
 
 ```
 
-![[Снимок экрана 2026-04-30 в 15.01.59.png]]
+
+<img src="../../../assets/Снимок2026-04-3015.01.59.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
+
 
 
 ```c
@@ -388,8 +396,11 @@ sym.MeetWay.listAllMyChats.authenticateUser.completion_...F_ 0x599f0c [DATA:r--]
 ```
   ; [0xa909b0:4]=0xa46cba str.evaluatePolicy:localizedReason:reply: ; reloc.fixup.evaluatePolicy:localizedReason: ; char *selector
 ```
-  
-![[Снимок экрана 2026-04-30 в 15.09.46.png]]
+
+<img src="../../../assets/Снимок2026-04-3015.09.46.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
+
 
 короче говоря, что функция используется , судя по имени класса listAllMyChats  - это класс/структура/вьюха - в которой используется face-id - например - для доступа к чатам!
 я полагаю - что если это не какие-то секретные чаты - то этого обычного , ручного face-id будет достаточно!
