@@ -160,34 +160,104 @@
 
 ## Роадмап: от MASTG до CI/CD и DevSecOps
 
-###  1. Освоить основы CI/CD на практике (1–2 недели)
+###  1. Освоить основы CI/CD на практике
 
-**Цель:** понять механику пайплайнов и научиться запускать автоматические задачи.
+**Цель:** понять механику пайплайнов и научиться запускать автоматические задачи
 
 **Что нужно сделать:**
 
-1. Зарегистрироваться на GitHub.
-    
+1. Зарегистрироваться на GitHub
+   
 2. Взять любой существующий репозиторий (например, с документацией MASTG).
-    
+   
 3. Создать файл `.github/workflows/learn.yml` с простейшим пайплайном:
-    
-    - триггер: `push` в любую ветку;
-        
-    - jobs: запуск `echo "Hello CI/CD"` и `ls -la`.
-        
+
+   - триггер: `push` в любую ветку;
+   
+   - jobs: запуск `echo "Hello CI/CD"` и `ls -la`.
+   
 4. Изучить вкладку **Actions** — отслеживать, как запускаются задачи, где смотреть логи, как обрабатываются ошибки.
-    
+   
 5. Повторить тот же эксперимент в **GitLab CI** (создать бесплатный проект, настроить раннер).
-    
+   
 
 **Результат:** понимание, что CI/CD — это просто автоматическое выполнение команд на удалённой машине по событиям в репозитории.
 
 ---
 
+
+
+GitLab и GitHub предоставляют встроенные мощности для сканирования безопасности. Вам не нужно поднимать отдельную инфраструктуру для базовых проверок — всё работает прямо в CI/CD.
+
+---
+
+==Какие сканеры доступны -из коробки
+
+Обе платформы имеют встроенные инструменты, которые покрывают типы проверок, которые проводили , например,  вручную через radare2.
+ 
+*GitLab Ultimate* предоставляет полный комплект:
+
+SAST (Static Application Security Testing) — статический анализ кода. Это автоматическая версия того, что  делали в radare2: поиск `CCCrypt`, `kSecAccessControlUserPresence` и подобных небезопасных паттернов [](https://docs.gitlab.com/ja-jp/user/application_security/security_inventory/#view-the-security-inventory)[](https://ones.com/ja/blog/best-high-security-compliant-cicd-integration-tools-compared-pros-cons-and-pricing/)
+
+
+*Secret Detection* — поиск секретов. Автоматически находит API ключи, токены и пароли в коде. Именно то, что вы делали через `strings | grep` для поиска Firebase ключа [](https://aquilax.ai/blog/gitlab-security-scanning-cicd).
+
+*Dependency Scanning* — анализ зависимостей. Проверяет сторонние библиотеки на известные уязвимости (аналог Dependency-Track, который у вас уже есть в папке tools) [](https://docs.gitlab.com/ja-jp/user/application_security/security_inventory/#view-the-security-inventory)[](https://about.gitlab.com/de-de/blog/migration-guide-github-advanced-security-to-gitlab-ultimate/).
+
+*Container Scanning* — сканирование контейнеров (если используете Docker) [](https://docs.gitlab.com/ja-jp/user/application_security/security_inventory/#view-the-security-inventory)
+
+DAST (Dynamic Application Security Testing) — динамический анализ запущенного приложения. Может пригодиться для API-тестирования [](https://aquilax.ai/blog/gitlab-security-scanning-cicd).
+
+-------
+
+*GitHub Advanced Security* предоставляет:
+
+*Code Scanning (на базе CodeQL) *— статический анализ кода с возможностью написания своих запросов. Более гибкий, чем стандартный SAST GitLab, но требует отдельной настройки [](https://docs.github.com/ko/get-started/learning-about-github/about-github-advanced-security)[](https://about.gitlab.com/de-de/blog/migration-guide-github-advanced-security-to-gitlab-ultimate/).
+
+*Secret Scanning *— поиск секретов. В публичных репозиториях работает бесплатно, для приватных — требуется GitHub Advanced Security [](https://docs.github.com/ko/get-started/learning-about-github/about-github-advanced-security).
+
+*Dependency Review* — проверка зависимостей при создании Pull Request. Показывает, есть ли уязвимости в новых библиотеках [](https://docs.github.com/ko/get-started/learning-about-github/about-github-advanced-security).
+
+---
+
+Что доступно бесплатно
+
+Для публичных репозиториев:
+
+GitHub — *Code Scanning* (CodeQL) и Secret Scanning работают бесплатно [](https://docs.github.com/ko/get-started/learning-about-github/about-github-advanced-security)
+
+*GitLab Free* — базовая версия SAST доступна, но без расширенной аналитики и Security Dashboard [](https://aquilax.ai/blog/gitlab-security-scanning-cicd)
+
+Для тестирования и обучения этого достаточно
+
+
+---------
+
+
+Что доступно на платных тарифах
+
+Полный набор сканеров (SAST + Secret Detection + Dependency Scanning) доступен только в платных версиях:
+
+GitLab Premium/Ultimate — все сканеры включены. Стоимость: от ~19запользователявмесяц(Premium)до 99запользователявмесяц(Premium)до 99 за Ultimate [](https://ones.com/ja/blog/best-high-security-compliant-cicd-integration-tools-compared-pros-cons-and-pricing/)[](https://about.gitlab.com/de-de/blog/migration-guide-github-advanced-security-to-gitlab-ultimate/)
+
+GitHub Advanced Security — Code Scanning + Secret Scanning + Dependency Review. С 2025 года продукты разделены: Secret Protection (~19/мес)иCodeSecurity( 30/мес)иCodeSecurity( 30/мес). Оба нужны для полного покрытия [](https://about.gitlab.com/de-de/blog/migration-guide-github-advanced-security-to-gitlab-ultimate/).
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----
 ###  2. Автоматизировать уже пройденные MASTG-тесты (2–3 недели)
 
-**Цель:** превратить ручные проверки безопасности в скрипты и пайплайн.
+**Цель:** превратить ручные проверки безопасности в скрипты и пайплайн
 
 **Что нужно сделать:**
 
@@ -198,17 +268,16 @@
 3. Добавить скрипт в репозиторий.
     
 4. Настроить GitHub Actions, который при каждом `push` или `pull_request`:
-    
     - устанавливает radare2, strings, python3;
-        
+      
     - запускает `mastg_checks.sh` на бинарнике приложения;
-        
+      
     - сохраняет результат в формате Markdown.
-        
+      
 5. Настроить **фейл-условия**: если скрипт находит `CCCrypt` или `kSecAccessControlUserPresence`— пайплайн падает с ошибкой.
     
 
-**Результат:** автоматизированная проверка безопасности при каждом изменении кода. Разработчик видит результат прямо в Pull Request.
+**Результат:** автоматизированная проверка безопасности при каждом изменении кода. Разработчик видит результат прямо в Pull Request
 
 ---
 
@@ -229,7 +298,7 @@
 
 **SCA (анализ зависимостей):**
 
-1. Развернуть **Dependency-Track** (через Docker) — это уже есть в структуре файлов.
+1. Развернуть **Dependency-Track** (через Docker) — это уже есть в структуре файлов
     
 2. Настроить его на проверку iOS-зависимостей (CocoaPods, SPM).
     

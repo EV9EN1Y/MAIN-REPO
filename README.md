@@ -1,475 +1,248 @@
-🔥🕸️ рекомендую скачать обсидиан и открывать данные файлы через него
-        таким образом каждая статья будет в цвете и структурированна лучше, чем на гитхабе
+# iOS Dev → AppSec → Mobile & Web Application Security Research
 
+## 👨‍💻 Обо мне
 
-🟣 главная папка -> (ПУТЬ-В-КИБЕР-БЕЗ)
+**iOS разработчик - 2 года опыта.**
 
+Выпустил 3 собственных приложения в App Store, включая:
+- iOS-социальную сеть **MeetWay**
+- полностью свой **Back-end** для неё
 
--> ВНУТРИ: (полный список смотри в конце READMI ⇩⇩⇩)
+После разработки соцсети:
+- провёл её полный аудит по мобильной безопасности
+- настроил защиту на основе всех пройденных тестов OWASP MASVS
+- взломал свою же защиту (проверка на прочность)
+- разобрался в том, как сделать такую защиту -которую будет ну очень сложно сломать
 
-🔶 решение лаб по WEB с отчетами / пейлоадами и скриптами + теория по тематикам лаб
-
-🔶 база по сетям (OSI, TCP/IP, DNS, HTTP...)
-
-🔶 криптография
-
-🔶 база по ОС
-
-🔶 база JavaScript
-
-🔶 база Python
-
-🔶 база HTML/CSS // SQL/XML
-
-
-ВСЕ СТАТЬИ И ИССЛЕДОВАНИЯ ПРЕДСТАВЛЕННЫ ИСКЛЮЧИТЕЛЬНО В ИНОФОРМАЦИОННЫХ ЦЕЛЯХ ДЛЯ ОБУЧЕНИЯ ЗАЩИТЕ ОТ КИБЕР АТАК, ВСЕ ЧТО ЗДЕСЬ СОДЕРЖИТСЯ - ПРИМЕНЯЛОСЬ ЛИБО НА МОИХ СОБСТВЕННЫХ ПРОЕКТАХ, ЛИБО В СПЕЦ ЛАБОЛАТОРИЯХ. ИСПОЛЬЗОВАТЬ ДАННУЮ ИНФОРМАЦИЮ НА РЕАЛЬНЫХ РЕСУРСАХ ЗАПРЕЩЕНО ЗАКОНОМ
-
-| Ст. 272 УК РФ | Ст. 272.1 УК РФ | Ст. 273 УК РФ | (GDPR, COPPA, ФЗ-152) |
-
-
-АВТОР КОНТЕНТА НЕ НЕСЕТ НИКАКОЙ ОТВЕТСТВЕННОСТИ И НЕ ОТВЕЧАЕТ ЗА ЛЮБОЕ НЕПРАВИЛЬНОЕ ИСПОЛЬЗОВАНИЕ ИЛИ УЩЕРБ, ПРИЧИНЕННЫЙ ИСПОЛЬЗОВАНИЕМ ДАННЫХ ОТЧЕТОВ И СКРИПТОВ
-
-----------------------------------------
-## **СТРУКТУРА РЕПОЗИТОРИЯ**
-
-### 🔥 **ЛАБЫ PortSwigger + ТЕОРИЯ**
-
-
-
-**🔥 КВИНТЭССЕНЦИЯ_всех_лаб** / ВЫЖИМКА_КАЖДОЙ РЕШЕННОЙ_ЛАБЫ_САМА_СУТЬ.md - шпаргалка-конспект по всем типам атак с видами, примерами и защитами
-(по лабам портсвиггер)
-
-
-
-**Access Control (14 лаб)**
-
-- теория + iDOR
-    
-- вертикальное, горизонтальное повышение прав
-    
-- GUID, IDOR
-   
-
-**Authentication & OAuth 2.0 (20+ лаб)**
-
-- уязвимости на основе пароля (5)
-    
-- 2FA уязвимости (3)
-    
-- атаки на сброс пароля
-    
-- HTTP host header атаки
-    
-- OAuth 2.0 (4 лабы: CSRF, redirect_uri, Open Redirect)
-   
-
-**Business Logic (12 лаб)**
-
-- теория
-    
-- уязвимости на email
-    
-- 12 практических лаб
-   
-
-**GraphQL (5 лаб + шпаргалка)**
-
-- теория
-    
-- скрытые запросы
-    
-- обход brute force защиты
-    
-- CSRF через GraphQL
-   
-
-**Insecure Deserialization (8 лаб)**
-
-- PHP object injection
-    
-- PHP 7 уязвимости
-    
-- RCE через Java (Apache, ysoserial)
-    
-- Ruby, Java
-   
-
-**JWT (9 лаб)**
-
-- теория
-    
-- Hashcat брутфорс
-    
-- Jwk injection
-    
-- alg: none атака
-    
-- Jku атака
-    
-- Kid + Path Traversal
-    
-- Algorithm Confusion (2 лабы)
-   
-
-**OS Injection (5 лаб)**
-
-- теория
-    
-- OS command injection (5 лаб)
-   
-
-**Path Traversal (6 лаб)**
-
-- теория
-    
-- Path traversal (6 лаб)
-   
-
-**Race Conditions (6 лаб)**
-
-- теория
-    
-- Race Conditions (6 лаб)
-   
-
-**SQL Injection (16 лаб)**
-
-- выводы
-    
-- 15 практических лаб + теория
-   
-
-**SSRF (7 лаб)**
-
-- теория
-    
-- SSRF с редиректом
-    
-- Blind SSRF + Shellshock
-    
-- SSRF парсеры
-   
-
-**Web Ai LLM (4 лабы)**
-
-- теория
-    
-- LLM уязвимости (4 лабы)
-   
-
-**Web Cache Deception (5 лаб)**
-
-- теория
-    
-- WCD (5 лаб)
-   
-
-**XML/XXE (9 лаб)**
-
-- теория
-    
-- XXE (9 лаб)
-   
-
-**XSS (база + лаборатории)**
-
-- CSP
-    
-- DOM XSS
-    
-- Reflected XSS
-    
-- Stored XSS
-    
-- теория
-   
+**Результат:** замкнутый полный цикл «атакую → защищаю → аудирую» на реальном проекте
 
 ---
 
-### 🏛️ **ФУНДАМЕНТАЛЬНЫЕ ЗНАНИЯ**
+## ⚠️ Дисклеймер
 
-**Сети**
+ВСЕ СТАТЬИ И ИССЛЕДОВАНИЯ ПРЕДСТАВЛЕНЫ ИСКЛЮЧИТЕЛЬНО В ИНФОРМАЦИОННЫХ ЦЕЛЯХ ДЛЯ ОБУЧЕНИЯ ЗАЩИТЕ ОТ КИБЕРАТАК.
 
-- OSI, OSI 7, TCP, UDP, IP, NAT
-    
-- DNS, HTTP, WAF
-    
-- SOCKET, PORTs
-    
-- Tor, VPN
-    
-- Web Cache
-    
-- Анатомия веб-запроса
-   
+ВСЁ, ЧТО ЗДЕСЬ СОДЕРЖИТСЯ, ПРИМЕНЯЛОСЬ ЛИБО НА МОИХ СОБСТВЕННЫХ ПРОЕКТАХ, ЛИБО В СПЕЦИАЛЬНЫХ ЛАБОРАТОРИЯХ.
 
-**Криптография**
+ИСПОЛЬЗОВАТЬ ДАННУЮ ИНФОРМАЦИЮ НА РЕАЛЬНЫХ РЕСУРСАХ ЗАПРЕЩЕНО ЗАКОНОМ.
 
-- PKI-сертификаты
-    
-- X.509
-    
-- Hash функции
-    
-- SSL/TLS рукопожатия
-    
-- E2EE (сквозное шифрование)
-    
-- Асимметричное и симметричное шифрование
-   
+Ст. 272 УК РФ | Ст. 272.1 УК РФ | Ст. 273 УК РФ | GDPR | COPPA | ФЗ-152
 
-**Базы данных**
-
-- SQL база
-    
-- XML
-    
-- Базы данных (общее)
-   
-
-**Языки программирования**
-
-- JavaScript (база + Secure + payloads)
-    
-- Python (база + типы данных)
-    
-- HTML/CSS
-    
-- SQL
-
-**API Testing (5 лаб)**
-
-- теория
-    
-- брутфорс путей, OpenAPI/Swagger
-    
-- Server-Side Parameter Pollution (SSPP)
-    
-- Mass Assignment, переполнение integer
-    
-- Path Traversal к legacy endpoints
-
-
-**CORS (3 лабы)**
-
-- теория
-    
-- Origin reflection
-    
-- Null origin whitelist
-    
-- XSS + trusted subdomain
-
-**CSRF (12 лаб)**
-
-- теория
-    
-- No defenses / token missing
-    
-- Token validation depends on method / presence
-    
-- Token not tied to user session / tied to non-session cookie
-    
-- Double submit + CRLF injection
-    
-- SameSite Lax bypass (method override, cookie refresh)
-    
-- SameSite Strict bypass (client-side redirect, sibling domain)
-    
-- Referer validation bypass (missing header, substring check)
-
-
-
-   **Clickjacking (5 лаб)**
-
-- теория
-    
-- Basic overlay (iframe + button)
-    
-- Prefilled form via GET
-    
-- Frame buster bypass (sandbox)
-    
-- DOM-based XSS + clickjacking
-    
-- Multistep clickjacking
-    
-
-**HTTP Host Header Vulnerabilities (5 лаб)**
-
-- теория
-    
-- Authentication bypass (localhost)
-    
-- Web cache poisoning (double Host)
-    
-- Routing-based SSRF
-    
-- Flawed request parsing
-    
-- Connection state attack
-
-
-**HTTP Request Smuggling (12 лаб)**
-
-- теория
-    
-- CL.TE / [TE.CL](https://te.cl/)
-    
-- TE.TE obfuscated
-    
-- Differential responses (CL.TE / [TE.CL](https://te.cl/))
-    
-- Bypass front-end controls (CL.TE / [TE.CL](https://te.cl/))
-    
-- Reveal front-end rewriting
-    
-- Capture other users' requests
-    
-- Deliver reflected XSS
-    
-- H2.TE queue poisoning
-    
-- [H2.CL](https://h2.cl/) JS smuggling
-    
-
-**Information Disclosure (5 лаб)**
-
-- теория
-    
-- Error messages (stack traces)
-    
-- Debug pages (phpinfo)
-    
-- Backup files (.bak, .git)
-    
-- Custom headers (X-Custom-IP-Authorization)
-    
-- Version control history
-
-**SSTI (Server-Side Template Injection) (5 лаб)**
-
-- теория
-    
-- Ruby (ERB) RCE
-    
-- Python (Tornado, Django) RCE / info disclosure
-    
-- Java (Freemarker) RCE
-    
-- Node (Handlebars) RCE
-
-
-**Prototype Pollution (10 лаб)**
-
-- теория
-    
-- Client-side DOM XSS (URL, constructor, flawed sanitization)
-    
-- Third-party library gadget
-    
-- Server-side privilege escalation
-    
-- Server-side RCE (NODE_OPTIONS, shell+input)
-    
-- Detection without reflection
-    
-- Constructor prototype bypass
-
-
-**Web Cache Poisoning (11 лаб)**
-
-- теория
-    
-- Unkeyed header (X-Forwarded-Host)
-    
-- Unkeyed cookie
-    
-- Multiple headers
-    
-- Targeted User-Agent
-    
-- Unkeyed query string / parameter
-    
-- Parameter cloaking
-    
-- Fat GET
-    
-- Normalization mismatch (404)
-    
-- DOM XSS via external resource
-    
-- Combining vulnerabilities
-    
-
-**WebSocket (3 лабы)**
-
-- теория
-    
-- Message manipulation (XSS)
-    
-- Handshake manipulation (X-Forwarded-For)
-    
-- CSWSH (Cross-Site WebSocket Hijacking)
-    
-
-**Операционные системы**
-
-- Linux архитектура
-    
-- Windows архитектура
-    
-- OS command
-    
-- POINT RECON
-
-
-   
-
-**Браузеры**
-
-- Browser DOM, BOM, JS теория
-   
+АВТОР КОНТЕНТА НЕ НЕСЕТ НИКАКОЙ ОТВЕТСТВЕННОСТИ ЗА ЛЮБОЕ НЕПРАВИЛЬНОЕ ИСПОЛЬЗОВАНИЕ ИЛИ УЩЕРБ.
 
 ---
 
-### 🛡️ **AppSec**
+## 📊 Общая статистика репозитория
 
-- MASTG
-    
-- MASVS
-   
-
----
-
-### 📝 **Инструменты**
-
-- общий список ссылок 
-   
+- Лабораторные PortSwigger (Web) - **238+**
+- Тесты по мобильной безопасности iOS (MASVS) - **65+**
+- Темы / артефакты - **полное покрытие от фундамента до CI-CD**
 
 ---
 
-### 🔍 **Аудиты**
+## 🕸️ WEB Security (PortSwigger + теория)
 
-- Аудит безопасности соц-сети MeetWay (чуть позже начну)
-    
-- план проверки
-   
+**Решено лабораторных: 238+**
+
+### Access Control - 14 лаб
+теория / iDOR / вертикальное / горизонтальное / GUID / IDOR
+
+### Authentication & OAuth 2.0 - 20+ лаб
+пароль / 2FA / сброс пароля / HTTP host header / OAuth 2.0 (CSRF, redirect_uri, Open Redirect)
+
+### Business Logic - 12 лаб
+теория / email / 12 практик
+
+### GraphQL - 5 лаб + шпаргалка
+теория / скрытые запросы / обход brute force / CSRF
+
+### Insecure Deserialization - 8 лаб
+PHP object injection / PHP7 / RCE Java (Apache, ysoserial) / Ruby / Java
+
+### JWT - 9 лаб
+теория / Hashcat брутфорс / Jwk injection / alg:none / Jku / Kid+Path Traversal / Algorithm Confusion (2)
+
+### OS Injection - 5 лаб
+теория / OS command injection (5)
+
+### Path Traversal - 6 лаб
+теория / Path traversal (6)
+
+### Race Conditions - 6 лаб
+теория / Race Conditions (6)
+
+### SQL Injection - 16 лаб
+выводы / 15 практик + теория
+
+### SSRF - 7 лаб
+теория / редирект / Blind + Shellshock / парсеры
+
+### Web Ai LLM - 4 лабы
+теория / LLM (4)
+
+### Web Cache Deception - 5 лаб
+теория / WCD (5)
+
+### XML / XXE - 9 лаб
+теория / XXE (9)
+
+### XSS (база + лаборатории) - 35 лаб
+CSP / DOM XSS / Reflected XSS / Stored XSS / теория
+
+ 
+
+### API Testing (5 лаб)
+### CORS (3 лабы)
+### CSRF (12 лаб)
+### Clickjacking (5 лаб)
+### HTTP Host Header (5 лаб)
+### HTTP Request Smuggling (12 лаб)
+### Information Disclosure (5 лаб)
+### SSTI (5 лаб)
+### Prototype Pollution (10 лаб)
+### Web Cache Poisoning (11 лаб)
+### WebSocket (3 лабы)
+### NoSQL Injection
+### File Upload
+### Race Conditions
 
 ---
 
-### 💼 **Собеседования**
+## 🏛️ Фундаментальные знания
 
-- разбор вопросов для собеса
-    
-- вопросы на Web & App Pentest / AppSec
-   
+### Сети
+OSI / OSI 7 / TCP / UDP / IP / NAT / DNS / HTTP / WAF / SOCKET / PORTs / Tor / VPN / Web Cache / Анатомия веб-запроса
+
+### Криптография
+PKI-сертификаты / X.509 / Hash функции / SSL/TLS рукопожатия / E2EE / Асимметричное и симметричное шифрование
+
+### Базы данных
+SQL / XML / общее
+
+### Языки программирования
+основной мой яп SWIFT (написал 3+ приложения, + работа)
+JavaScript (база + Secure + payloads) / Python / HTML / CSS / SQL
+
+### Операционные системы
+Linux архитектура / Windows архитектура / OS command / POINT RECON
+
+### Браузеры
+Browser DOM / BOM / JS теория
 
 ---
 
+## 📱 Мобильная безопасность (MASTG / MASVS)
 
-ВСЕ СТАТЬИ И ИССЛЕДОВАНИЯ ПРЕДСТАВЛЕННЫ ИСКЛЮЧИТЕЛЬНО В ИНОФОРМАЦИОННЫХ ЦЕЛЯХ ДЛЯ ОБУЧЕНИЯ ЗАЩИТЕ ОТ КИБЕР АТАК, ВСЕ ЧТО ЗДЕСЬ СОДЕРЖИТСЯ - ПРИМЕНЯЛОСЬ ЛИБО НА МОИХ СОБСТВЕННЫХ ПРОЕКТАХ, ЛИБО В СПЕЦ ЛАБОЛАТОРИЯХ. ИСПОЛЬЗОВАТЬ ДАННУЮ ИНФОРМАЦИЮ НА РЕАЛЬНЫХ РЕСУРСАХ ЗАПРЕЩЕНО ЗАКОНОМ
+### ИТОГ: 100% покрытие iOS безопасности по MASVS
 
-| Ст. 272 УК РФ | Ст. 272.1 УК РФ | Ст. 273 УК РФ | (GDPR, COPPA, ФЗ-152) |
+Решены ВСЕ тесты OWASP MASVS (L1, L2, L3/R).
+Протестировано на реальном приложении - соц-сеть MeetWay (iOS).
+Настроена защита + взломана собственная защита
 
-АВТОР КОНТЕНТА НЕ НЕСЕТ НИКАКОЙ ОТВЕТСТВЕННОСТИ И НЕ ОТВЕЧАЕТ ЗА ЛЮБОЕ НЕПРАВИЛЬНОЕ ИСПОЛЬЗОВАНИЕ ИЛИ УЩЕРБ, ПРИЧИНЕННЫЙ ИСПОЛЬЗОВАНИЕМ ДАННЫХ ОТЧЕТОВ И СКРИПТОВ
+### Статистика тестов по категориям MASVS
+
+MASVS-AUTH (аутентификация, биометрия) — 5 тестов (L1, L2)
+MASVS-CODE (SCA, ARC, канарейки) — 3 теста (L1, L2)
+MASVS-CRYPTO (криптография, ключи, хеши) — 7 тестов (L1, L2)
+MASVS-NETWORK (TLS, ATS, Pinning, сокеты) — 4 теста (L1, L2)
+MASVS-PLATFORM (iOS платформа) — 23 теста (L1, L2)
+MASVS-PRIVACY (Privacy Manifest) — 1 тест (P)
+MASVS-RESILIENCE (реверс, jailbreak, анти-дебаг, обфускация) — 10+ тестов (R)
+MASVS-STORAGE (логи, бэкапы, кеш) — 5 тестов (L1, L2)
+
+Дополнительно: Android тестирование (базовое, L1)
+
+**ВСЕГО МОБИЛЬНЫХ ТЕСТОВ / ЛАБОРАТОРНЫХ: 65+**
+
+---
+
+## 🛠️ Инструменты
+
+### Динамический анализ (DAST / Runtime)
+Frida / Objection / LLDB / radare2 / Burp Suite
+
+### Статический анализ (SAST)
+MobSF / Semgrep / strings / nm / otool
+
+### Работа с устройством и файловой системой
+palera1n (джейлбрейк iPhone 8 iOS 16.7.14) / keychain_dumper / iMazing / SSH
+
+### Среда разработки и тестирования
+Xcode / iOS simulator
+
+---
+
+## 🧠 Компетенции по iOS / Mobile AppSec
+
+### Атаки / пентест (DAST)
+Обход SSL Pinning (с джейлбрейком и без)
+Перехват трафика реального iPhone (WiFi + Burp)
+Перехват трафика iOS симулятора
+Обход Jailbreak detection (код + runtime: Frida, radare2, LLDB, патчинг)
+Обход Anti-debug detection
+Keychain — извлечение данных
+Дамп логов / утечки данных
+Проверка приватного хранилища / бэкапов / кеша клавиатуры
+
+### Защита (hardening)
+Certificate Pinning / Jailbreak detection (код + runtime)
+Обфускация / проверка целостности IPA
+Отключение бэкапов для чувствительных данных
+ARC / Stack Canaries / PIC
+Удаление отладочных символов
+Privacy Manifest / Secure Enclave
+
+### Аудит кода (SAST / реверс)
+Хардкод ключей / Insecure Random API
+Слабые алгоритмы шифрования (ECB, устаревшие)
+Слабые хеши (MD5, SHA1)
+Проверка TLS / ATS
+SCA + SBOM (Dependency-Track)
+
+---
+
+## 🔥 Ключевые достижения в мобильной безопасности
+
+1. 100% покрытие MASVS (все тесты, все уровни)
+2. Реальный проект — защита в рабочей соц-сети MeetWay
+3. Сам взломал свою защиту → подтвердил эффективность
+4. Освоил стек: Frida / LLDB / radare2 / MobSF / Semgrep / Burp / keychain_dumper / palera1n
+5. Перехват трафика с реального iPhone и симулятора
+6. Полный цикл: атака → защита → аудит → повторный аудит
+
+---
+
+## 📁 Структура репозитория (MASTGE и смежное)
+
+MASTGE/
+├── MASVS-AUTH/         (5 тестов)
+├── MASVS-CODE/         (3 теста)
+├── MASVS-CRYPTO/       (7 тестов)
+├── MASVS-NETWORK/      (4 теста)
+├── MASVS-PLATFORM/     (23 теста)
+├── MASVS-PRIVACY/      (Privacy Manifest)
+├── MASVS-RESILIENCE/   (10+ тестов)
+├── MASVS-STORAGE/      (5 тестов)
+├── android-testing/    (Android L1)
+├── ios_testing_MeetWay/ (аудит соц-сети)
+├── tools+methods/      (Frida, LLDB, MobSF, Semgrep, radare2, keychain_dumper, iMazing)
+├── общая_теория_введение-кратко/
+├── CI-CD / DevSecOps roadmap
+└── assets/
+
+Дополнительно:
+- Аудит соц-сети MeetWay / план проверки
+- Собеседования (Web & App Pentest / AppSec)
+- Ссылки по инструментам и темам
+
+---
+
+## 🧪 CI-CD / DevSecOps
+
+Начато изучение CI-CD.
+В репозитории присутствует roadmap:
+`общее_CI_CD-DevSecOps===roadmap.md`
+
+---
+
+> 📌 Весь репозиторий рекомендуется открывать в Obsidian — каждая статья будет в цвете и лучше структурирована, чем на GitHub.

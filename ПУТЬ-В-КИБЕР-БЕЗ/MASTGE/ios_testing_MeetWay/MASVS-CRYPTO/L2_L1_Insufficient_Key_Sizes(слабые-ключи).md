@@ -359,11 +359,35 @@ Binary file ./Frameworks/FirebaseAuthInterop.framework/Info.plist matches
 ```
 
 Скрипт, который ищет строки с высокой «случайностью» (энтропией)
-```q
+```js
 strings MeetWay.debug.dylib | while read line; do
     entropy=$(echo -n "$line" | python3 -c "import sys, math; s=sys.stdin.read(); print(-sum((s.count(c)/len(s))*math.log2(s.count(c)/len(s)) for c in set(s)))")
     if (( $(echo "$entropy > 4.5" | bc -l) )); then
         echo "HIGH ENTROPY: $line"
+    fi
+done
+```
+
+или вот - более оптимизированная версия 
+```js
+strings MeetWay.debug.dylib | \
+while IFS= read -r line; do
+    if [ ${#line} -gt 20 ]; then
+        entropy=$(python3 -c "
+import sys, math
+s = '''$line'''
+if len(s) < 2:
+    print(0)
+else:
+    freq = {}
+    for c in s:
+        freq[c] = freq.get(c, 0) + 1
+    ent = -sum((f/len(s)) * math.log2(f/len(s)) for f in freq.values())
+    print(f'{ent:.2f}')
+")
+        if [ -n "$entropy" ] && [ 1 -eq "$(echo "$entropy > 4.5" | bc -l 2>/dev/null)" ]; then
+            echo "HIGH ENTROPY: $line"
+        fi
     fi
 done
 ```
