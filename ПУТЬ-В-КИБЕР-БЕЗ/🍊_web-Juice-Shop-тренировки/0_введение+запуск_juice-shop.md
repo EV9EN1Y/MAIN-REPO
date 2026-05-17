@@ -21,8 +21,8 @@ http://127.0.0.1:3001
 
 juice-shop работает! можно приступать к тестированию!
 
-<img src="../../assets/Снимок2026-05-1711.38.57.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
-]
+<img src="../assets/Снимок2026-05-1711.38.57.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
 
 текущий прогресс нулевой
 `http://localhost:3003/#/score-board`
