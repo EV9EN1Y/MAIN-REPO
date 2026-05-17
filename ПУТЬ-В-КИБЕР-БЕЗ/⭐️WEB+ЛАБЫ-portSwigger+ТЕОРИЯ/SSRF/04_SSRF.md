@@ -732,3 +732,20 @@ localhost:3000/api
 нужно написать такой скритп на питоне!
 
 
+
+------
+
+
+| Категория                      | Примеры путей (выборочно из списков SecLists)                                                                                     |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Стандартные англ.**          | `admin`, `administrator`, `panel`, `dashboard`, `control`,  `admin-login`, `system`, `console`, `user`, `secure`                  |
+| **CMS WordPress**              | `wp-admin`, `wp-login.php`, `wp-content`, `wp-includes`, `login.php`, `admin.php`, `dashboard.php`                                |
+| **CMS Joomla**                 | `administrator`, `joomla/administrator`, `admin/index.php`, `component/users`                                                     |
+| **CMS Drupal**                 | `user/login`, `user/register`, `admin/config`, `admin/dashboard`                                                                  |
+| **Другие CMS/Frameworks**      | `adminer`, `phpmyadmin`, `myadmin`, `database`, `manager/html`, `webdav`, `_admin`, `_panel`                                      |
+| **Пути с расширениями**        | `admin.cgi`, `admin.jsp`, `admin.aspx`, `admin.action`, `admin.do`, `admin.py`                                                    |
+| **Вариации регистра**          | `Admin`, `ADMIN`, `AdMiN`, `aDmIn`                                                                                                |
+| **Защищённые/скрытые**         | `.admin`, `private`, `hidden`, `secret`, `restricted`, `internal`, `staff`, `sysadmin`, `root`                                    |
+| **API/Служебные**              | `api/admin`, `v1/admin`, `internal`, `debug`, `env`, `config`, `.env`, `.git`, `.svn`, `.htaccess`                                |
+| **Актуальные тренды (2020-е)** | `admin123`, `adminarea`, `adminpanel`, `adminportal`, `admincenter`, `superadmin`, `sysadmin`, `platform-admin`, `platform/login` |
+
