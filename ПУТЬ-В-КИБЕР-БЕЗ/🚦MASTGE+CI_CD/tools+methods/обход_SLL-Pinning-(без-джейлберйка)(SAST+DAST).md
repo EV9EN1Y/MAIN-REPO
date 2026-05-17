@@ -19,7 +19,7 @@
 
 и вот я спокойно могу перехватывать весь трафик своего приложения!
 
-<img src="../../../assets/Снимок2026-04-2418.48.34.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2418.48.34.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -184,7 +184,7 @@ echo | openssl s_client -servername firestore.googleapis.com -connect firestore.
 
 но это проблема самого **TrustKit**  - он не может работать с YandexSDK, так как там используется **gRPC**
 
-<img src="../../../assets/Снимок2026-04-2420.11.49.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2420.11.49.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 теперь я добавлю в код функции еще и этот домен:
 ```swift
@@ -263,7 +263,7 @@ TrustKit в Appdelegate
 никаких проблем нет!
 
 теперь отправляю весь трафик с телефона через ip ноутбука - далее через BURP suite - и приложение не запускается !!! 
-<img src="../../../assets/Снимок2026-04-2423.14.14.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2423.14.14.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 а если включить приложение без перехвата - оно запускается , и еще в процессе работы подключить перехват трафика через burp - то все, все вкладки пустые, не грузятся.... соединения рвутся ! ура! полностью работает защита от поддельных сертификатов!
@@ -274,7 +274,7 @@ TrustKit в Appdelegate
 
 старые смс не подгружаются
 
-<img src="../../../assets/Снимок2026-04-2423.15.14.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2423.15.14.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -524,7 +524,7 @@ ENDOFSCRIPT
 [iPhone::MeetWay ]->
 
 
-<img src="../../../assets/Снимок2026-04-2516.28.09.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2516.28.09.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 ------
 
@@ -1564,7 +1564,7 @@ if (appDelegateClass) {
 и не видно ее при перехвате фридой - потому, что она PRIVATE!!!!
 она не видна в ObjC-рантайме!!!
 
-<img src="../../../assets/Снимок2026-04-2518.40.39.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2518.40.39.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -1635,7 +1635,7 @@ afl~Evaluate
 setupTrustKitWithGRPC (выглядит подозрительно, так как TrustKit - это как раз лайбра для пиннинга sll)
 по адрессу  0x004ec554
 
-<img src="../../../assets/Снимок2026-04-2519.03.23.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2519.03.23.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -1738,7 +1738,7 @@ frida -U -f AIVARO22-2025-1.0 -l ~/block-setup-ssl.js
 
 ЭТО победа!
 
-<img src="../../../assets/Снимок2026-04-2519.35.13.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2519.35.13.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 

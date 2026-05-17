@@ -19,7 +19,7 @@ iphone и ноут в одной wifi сети
 в браузер перехожу http://192.168.0.105:8080
 
 (кнопка справа сверху)
-<img src="../../../assets/IMG_3144.jpg" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/IMG_3144.jpg" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 

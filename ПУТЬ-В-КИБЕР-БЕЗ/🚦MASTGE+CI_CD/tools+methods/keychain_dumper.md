@@ -17,7 +17,7 @@
 вот он файл keychain-2.db 
 это бд SQLite
 
-<img src="../../../assets/IMG_6109FA012601-1.jpeg" alt="Скрин" style="width: 99%; max-width: 1000px;" />
+<img src="../../assets/IMG_6109FA012601-1.jpeg" alt="Скрин" style="width: 99%; max-width: 1000px;" />
 
 
 
@@ -28,7 +28,7 @@
 и там ищу нужное приложение 
 - это строка нужного мне приложения!
   это **идентификатор приложения**, которому принадлежат эти данные Keychain
-<img src="../../../assets/IMG_E35B7AE6233F-1.jpeg" alt="Скрин" style="width: 99%; max-width: 1000px;" />
+<img src="../../assets/IMG_E35B7AE6233F-1.jpeg" alt="Скрин" style="width: 99%; max-width: 1000px;" />
 
 
 
@@ -97,7 +97,7 @@ keychain_dumper | grep -A 10 -B 5 "DVIA"
 
 и вуаля - получил все данные из кейчейн!
 
-<img src="../../../assets/Снимок2026-04-2411.21.03.png" alt="Скрин" style="width: 99%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2411.21.03.png" alt="Скрин" style="width: 99%; max-width: 1000px;" />
 
 в том же числе и сам заданный пароль (*55555rrrrrr*), который сохранил в кейчейн в приложении DVIA-v2
 ```c
@@ -161,6 +161,6 @@ sqlite3 /var/Keychains/keychain-2.db "DELETE FROM genp WHERE rowid = 1136;"
 и, да, вижу новое значение 7777
 Keychain Data: 777777
 
-<img src="../../../assets/Снимок2026-04-2411.54.51.png" alt="Скрин" style="width: 99%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2411.54.51.png" alt="Скрин" style="width: 99%; max-width: 1000px;" />
 
 ----------

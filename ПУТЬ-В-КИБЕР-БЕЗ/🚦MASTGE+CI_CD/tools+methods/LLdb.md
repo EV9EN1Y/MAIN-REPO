@@ -203,7 +203,7 @@ process connect connect://localhost:12345
 терминал с iproxy для дебагсервера lldb
 терминал c LLdb
 
-<img src="../../../assets/Снимок2026-04-2117.02.01.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2117.02.01.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -230,7 +230,7 @@ Target 0: (DVIA-v2) stopped.
 `b ptrace`
 
 видно, что брекпоинт есть
-<img src="../../../assets/Снимок2026-04-2117.07.33.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2117.07.33.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -288,7 +288,7 @@ Process 468 resuming
 И ПРИ ЭТОМ - ПРИЛОЖЕНИЕ ПИШЕТ, ЧТО ЗАЩИТА ВКЛЮЧЕНА ))
 НО ПО ФАКТУ - Я ОТКЛЮЧИЛ ЕЕ!
 
-<img src="../../../assets/Снимок2026-04-2117.24.15.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-04-2117.24.15.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 

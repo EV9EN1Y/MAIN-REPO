@@ -119,7 +119,10 @@ Ran 24 rules on 260 files: 336 findings.
 
 каждая находка выглядит вот так
 (адрес файла, ❯❱ обьясняется сработавшее правило, и потом уже номера строк, где это было обнаружено)
-![[Снимок2026-04-2416.37.31.png]]
+
+<img src="../../assets/Снимок2026-04-2416.37.31.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
 ```c
     ❯❱ akabe1-semgrep-rules.ios.swift.storage.hardcoded_secret
           This iOS mobile application seems containing some hardcoded information, this

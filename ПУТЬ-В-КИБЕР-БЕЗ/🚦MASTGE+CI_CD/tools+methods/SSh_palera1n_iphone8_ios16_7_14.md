@@ -87,7 +87,7 @@ mobile:/smx7MYTQIi2M:501:501::0:0:Mobile User:/var/mobile:/usr/bin/zsh
 ..
 ```
 
-<img src="../../../assets/IMG_935A94276B74-1.jpeg" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/IMG_935A94276B74-1.jpeg" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
