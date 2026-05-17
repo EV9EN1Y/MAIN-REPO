@@ -123,7 +123,7 @@ Pulling from library/hello-world
 
 контейнер запустился и выполнил вывод принта и закрылся
 
-<img src="../../../assets/Снимок2026-05-0820.07.54.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-05-0820.07.54.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 --------
@@ -157,7 +157,7 @@ sudo apt install -y gitlab-runner
 вот так настраиваю
 (делаю ранер этот конкретно под проект)
 
-<img src="../../../assets/Снимок2026-05-0820.32.00.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-05-0820.32.00.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -207,7 +207,7 @@ sudo gitlab-runner run
 все отлично - ранер запущен и ждет команды с gitlab
 ((Предупреждение про `request_concurrency` не критично для тестов))
 
-<img src="../../../assets/Снимок2026-05-0820.39.13.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-05-0820.39.13.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 (позже нужно будет запустить раненер как постоянный процесс - постоянно как сервис!)
 
@@ -218,7 +218,7 @@ sudo gitlab-runner run
 иду в браузер в настройки gitlab - CI/CD - runners -
 и вижу = что статус ONLINE
 
-<img src="../../../assets/Снимок2026-05-0820.42.01.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-05-0820.42.01.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 все отлично!!
 раннер в статусе **Online**, с тегами `ios-sast` и `docker`, привязан к моему проекту. Теперь можно писать пайплайны
@@ -303,7 +303,7 @@ test-job:
 и гитлаб просит меня залогиниться у них
 (то есть ошибка не в пайплайне - а в верификации)
 
-<img src="../../../assets/Снимок2026-05-1012.04.55.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-05-1012.04.55.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 и проблема тут не в этом, а в том, что он просит или номер телефона - или номер карты! но при этом - ни РОССИЙСКИЙ ТЕЛЕФОН ни РФ карту не принимает он, поэтому пошел этот GITLAB    НАКУЙ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -352,7 +352,7 @@ sudo systemctl disable gitlab-runner
 
 включаю раннер в нужном мне репозитории
 
-<img src="../../../assets/Снимок2026-05-1012.53.52.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-05-1012.53.52.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 далее:
@@ -384,7 +384,7 @@ tar xzf ./actions-runner-linux-x64-2.334.0.tar.gz
 
 ```
 
-<img src="../../../assets/Снимок2026-05-1013.03.39.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-05-1013.03.39.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 ------
 
@@ -442,7 +442,7 @@ jobs:
 и захожу в гитхаб - и вижу там во вкладке  Actions
 что тест отработал полностью!
 
-<img src="../../../assets/Снимок2026-05-1013.32.46.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-05-1013.32.46.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 в паплайне написано у меня  - показать строчку
    run: echo "Hello from Cloud.ru server!"
@@ -451,7 +451,7 @@ jobs:
 ура!
 
 
-<img src="../../../assets/Снимоr2026-05-1013.33.03.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимоr2026-05-1013.33.03.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 ------------
 
@@ -1287,7 +1287,7 @@ sudo rkhunter --check --sk
 руткитов не найдено
 No warnings were found while checking the system
 
-<img src="../../../assets/Снимок2026-05-1616.18.55.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-05-1616.18.55.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -1787,7 +1787,7 @@ if __name__ == '__main__':
 
 единственное, нужно еще добавить `BUILD_SIGNING_KEY` в настройках GitHub репозитория, ну это уже как для моего частного репозитория - уже излишне будет!
 
-<img src="../../../assets/Снимок2026-05-1614.18.37.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/Снимок2026-05-1614.18.37.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -1811,7 +1811,7 @@ if __name__ == '__main__':
 -------
 
 схема защиты/угроз
-<img src="../../../assets/123123.svg" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../../assets/123123.svg" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
