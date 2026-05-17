@@ -14,7 +14,7 @@ http://localhost:3001
 
 --------
 
-<img src="../../assets/Снимок2026-05-1713.29.40.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../assets/Снимок2026-05-1713.29.40.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -58,7 +58,7 @@ http://localhost:3001
 
 сработало - аллерт есть
 
-<img src="../../assets/Снимок2026-05-1714.12.54.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../assets/Снимок2026-05-1714.12.54.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -69,7 +69,7 @@ http://localhost:3001
 
 вуаля!  и картинку туда подгрузил! но в score-board не вижу прогресса (
 
-<img src="../../assets/Снимок2026-05-1714.15.34.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../assets/Снимок2026-05-1714.15.34.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
@@ -91,12 +91,12 @@ document.getElementById("searchValue").textContent - Возвращает тол
 
 document.getElementById("searchValue").innerHTML  - Возвращает **всё содержимое** тега как HTML-разметку
 
-<img src="../../assets/Снимок2026-05-1717.44.30.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../assets/Снимок2026-05-1717.44.30.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 прогресс - бар  + 1
 
-<img src="../../assets/Снимок2026-05-1714.20.24.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../assets/Снимок2026-05-1714.20.24.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 ------
 

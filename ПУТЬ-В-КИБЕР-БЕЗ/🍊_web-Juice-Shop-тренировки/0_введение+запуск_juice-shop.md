@@ -27,7 +27,7 @@ juice-shop работает! можно приступать к тестиров
 текущий прогресс нулевой
 `http://localhost:3003/#/score-board`
 
-<img src="../../assets/Снимок2026-05-1712.29.53.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+<img src="../assets/Снимок2026-05-1712.29.53.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
 
 
