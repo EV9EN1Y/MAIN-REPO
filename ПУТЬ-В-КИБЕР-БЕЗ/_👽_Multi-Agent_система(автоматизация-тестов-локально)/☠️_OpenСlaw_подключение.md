@@ -242,6 +242,11 @@ openclaw tui
 
 
 openclaw gateway restart
+
+
+вот так начать новый контекст (прямо внутри бота прям сказать)
+ты
+
 ```
 
 -------
@@ -357,6 +362,47 @@ logo_uri на внутренний адрес.Клиент с logo_uri на meta
 
 короче, цель выполнена, запустил все, работает!
 и даже находит базовые уязвимости сам!
+
+
+
+----------
+
+### тулза проверки openclaw на вредонос
+
+```q
+git clone https://github.com/CicadaRelay/openclaw-hardener.git
+cp -r openclaw-hardener ~/.openclaw/skills/
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

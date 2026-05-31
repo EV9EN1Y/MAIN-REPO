@@ -5,7 +5,7 @@
 all interface
 
 ### узнаю ip своего wifi 
-терм - ifconfig (или в настройках)
+терм - ifconfig (или в настройках макбука)
 копирую ip wifi
 
 ### настройка iphone
