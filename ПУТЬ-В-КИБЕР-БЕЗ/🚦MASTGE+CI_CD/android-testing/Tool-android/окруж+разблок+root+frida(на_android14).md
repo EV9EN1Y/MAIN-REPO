@@ -275,6 +275,7 @@ arm64-v8a
 ```
 
 
+
 качаю фрида сперва на мак
 ```q
 cd ~/Downloads
@@ -282,6 +283,14 @@ curl -LO https://github.com/frida/frida/releases/download/17.9.1/frida-server-17
 xz -d frida-server-17.9.1-android-arm64.xz
 adb push frida-server-17.9.1-android-arm64 /data/local/tmp/
 ```
+
+-----
+
+
+
+
+
+
 
 
 # ✅ ✅ ✅ запуск фрида на андроид рут
@@ -292,9 +301,13 @@ adb push frida-server-17.9.1-android-arm64 /data/local/tmp/
 # shell телефона
 adb shell
 su
+
 cd /data/local/tmp
 chmod 755 frida-server-17.9.1-android-arm64
 nohup ./frida-server-17.9.1-android-arm64 &
+
+
+
 exit
 exit
 
