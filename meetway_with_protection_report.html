@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>key-hunter report — meetway_with_protection</title>
+<style>
+  :root {
+    --bg: #0f1115; --panel: #171a21; --border: #262b36;
+    --fg: #e6e9ef; --muted: #8891a0;
+    --crit: #ff5370; --high: #ff9d4d; --med: #ffcf4d;
+    --low: #6dd3a0; --info: #62a0ea; --accent: #7aa2f7;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    line-height: 1.5; }
+  header { padding: 28px 32px; border-bottom: 1px solid var(--border); }
+  header h1 { margin: 0 0 6px 0; font-size: 22px; letter-spacing: -0.01em; }
+  header .meta { color: var(--muted); font-size: 13px; }
+  main { padding: 24px 32px 64px; max-width: 1200px; margin: 0 auto; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 18px; border-bottom: 1px solid var(--border); }
+  .tab { padding: 10px 18px; cursor: pointer; border-radius: 6px 6px 0 0;
+    color: var(--muted); font-weight: 500; user-select: none; }
+  .tab.active { color: var(--fg); background: var(--panel);
+    border: 1px solid var(--border); border-bottom: 1px solid var(--panel);
+    margin-bottom: -1px; }
+  .tab .pill { margin-left: 8px; font-size: 11px; padding: 2px 7px;
+    border-radius: 999px; background: var(--border); color: var(--fg); }
+  .summary { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+    gap: 12px; margin-bottom: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px; }
+  .card .label { color: var(--muted); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.06em; }
+  .card .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .chip { padding: 5px 11px; border-radius: 999px; font-size: 12px;
+    background: var(--panel); border: 1px solid var(--border);
+    cursor: pointer; user-select: none; }
+  .chip.active { background: var(--accent); color: #0f1115; border-color: var(--accent); }
+  .finding { background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 14px; overflow: hidden; }
+  .finding summary { list-style: none; padding: 14px 16px; cursor: pointer;
+    display: flex; gap: 12px; align-items: center; }
+  .finding summary::-webkit-details-marker { display: none; }
+  .sev { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px;
+    letter-spacing: 0.05em; }
+  .sev.CRITICAL { background: rgba(255,83,112,0.15); color: var(--crit); }
+  .sev.HIGH     { background: rgba(255,157,77,0.15); color: var(--high); }
+  .sev.MEDIUM   { background: rgba(255,207,77,0.15); color: var(--med); }
+  .sev.LOW      { background: rgba(109,211,160,0.15); color: var(--low); }
+  .sev.INFO     { background: rgba(98,160,234,0.15); color: var(--info); }
+  .finding .name { font-weight: 600; }
+  .finding .rule-id { color: var(--muted); font-size: 12px; font-family: monospace; }
+  .finding .count { margin-left: auto; color: var(--muted); font-size: 12px; }
+  .finding .body { padding: 0 16px 16px; border-top: 1px solid var(--border); }
+  .finding .body .desc { color: var(--muted); margin: 12px 0; }
+  .kv { display: grid; grid-template-columns: 110px 1fr; gap: 4px 12px;
+    font-size: 13px; margin-bottom: 12px; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    word-break: break-all; }
+  .loc { background: #0b0d12; border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; margin-bottom: 8px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12.5px; }
+  .loc .path { color: var(--accent); margin-bottom: 4px; }
+  .loc pre { margin: 0; white-space: pre-wrap; word-break: break-all; color: #cfd4df; }
+  .loc pre .hit { background: rgba(255,83,112,0.25); border-radius: 2px; }
+  .empty { padding: 40px; text-align: center; color: var(--muted); }
+  input[type=search] { width: 100%; padding: 10px 12px; background: var(--panel);
+    border: 1px solid var(--border); border-radius: 8px; color: var(--fg);
+    margin-bottom: 16px; font-size: 14px; }
+  .panel.hidden { display: none; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>key-hunter report</h1>
+    <div class="meta">Target: <strong>meetway_with_protection</strong> · Generated 2026-07-03 15:31:05</div>
+  </header>
+  <main>
+    <div class="tabs">
+      <div class="tab active" data-panel="secrets">Secrets <span class="pill">8</span></div>
+      <div class="tab" data-panel="urls">URLs / Endpoints <span class="pill">10</span></div>
+    </div>
+
+    <div id="panel-secrets" class="panel">
+      <div class="summary">
+        <div class="card"><div class="label">Unique</div><div class="value">8</div></div>
+        <div class="card"><div class="label">Locations</div><div class="value">9</div></div>
+        <div class="card"><div class="label">Critical</div><div class="value" style="color:var(--crit)">0</div></div>
+        <div class="card"><div class="label">High</div><div class="value" style="color:var(--high)">1</div></div>
+        <div class="card"><div class="label">Medium</div><div class="value" style="color:var(--med)">1</div></div>
+        <div class="card"><div class="label">Low</div><div class="value" style="color:var(--low)">6</div></div>
+      </div>
+      <input type="search" class="q" placeholder="Filter secrets…">
+      <div class="filters">
+        <span class="chip active" data-sev="ALL">All</span>
+        <span class="chip" data-sev="CRITICAL">Critical</span>
+        <span class="chip" data-sev="HIGH">High</span>
+        <span class="chip" data-sev="MEDIUM">Medium</span>
+        <span class="chip" data-sev="LOW">Low</span>
+      </div>
+      <div class="list">
+<details class="finding" data-sev="HIGH">
+  <summary>
+    <span class="sev HIGH">HIGH</span>
+    <span class="name">Google API Key</span>
+    <span class="rule-id">google-api-key</span>
+    <span class="count">2 locations</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Google API Key (AIza...)</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>AIzaSyBYF96ObWXyrvpYIlliH4J07hgcNxKzjEM</dd>
+      <dt>Entropy</dt><dd>5.03 bits/char</dd>
+      <dt>Tags</dt><dd>google, cloud</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/resources/res/values/strings.xml:143:35</div><pre>&lt;string name=&quot;google_api_key&quot;&gt;<span class='hit'>AIzaSyBYF96ObWXyrvpYIlliH4J07hgcNxKzjEM</span>&lt;/string&gt;</pre></div><div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/resources/res/values/strings.xml:145:51</div><pre>&lt;string name=&quot;google_crash_reporting_api_key&quot;&gt;<span class='hit'>AIzaSyBYF96ObWXyrvpYIlliH4J07hgcNxKzjEM</span>&lt;/string&gt;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="MEDIUM">
+  <summary>
+    <span class="sev MEDIUM">MEDIUM</span>
+    <span class="name">Google OAuth Client ID</span>
+    <span class="rule-id">google-oauth-client-id</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Google OAuth 2.0 client ID</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>155577473113-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com</dd>
+      <dt>Entropy</dt><dd>3.31 bits/char</dd>
+      <dt>Tags</dt><dd>google, oauth</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/resources/res/values/strings.xml:69:42</div><pre>&lt;string name=&quot;default_web_client_id&quot;&gt;<span class='hit'>155577473113-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com</span>&lt;/string&gt;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="LOW">
+  <summary>
+    <span class="sev LOW">LOW</span>
+    <span class="name">Generic Key/Secret Assignment</span>
+    <span class="rule-id">generic-key-value-secret</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Variable name suggests a secret and value looks credential-like</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>([a-zA-Z0-9-!#$%&amp;</dd>
+      <dt>Entropy</dt><dd>3.62 bits/char</dd>
+      <dt>Tags</dt><dd>generic</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/okhttp3/MediaType.java:23:42</div><pre>private static final String TOKEN = &quot;<span class='hit'>([a-zA-Z0-9-!#$%&amp;</span>&#x27;*+.^_`{|}~]+)&quot;;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="LOW">
+  <summary>
+    <span class="sev LOW">LOW</span>
+    <span class="name">Generic Key/Secret Assignment</span>
+    <span class="rule-id">generic-key-value-secret</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Variable name suggests a secret and value looks credential-like</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>).append(this.keys[i]).append(</dd>
+      <dt>Entropy</dt><dd>3.86 bits/char</dd>
+      <dt>Tags</dt><dd>generic</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/io/grpc/PersistentHashArrayMappedTrie.java:143:40</div><pre>valuesSb.append(&quot;(key=&quot;<span class='hit'>).append(this.keys[i]).append(</span>&quot; value=&quot;).append(this.values[i]).append(&quot;) &quot;);</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="LOW">
+  <summary>
+    <span class="sev LOW">LOW</span>
+    <span class="name">Generic Key/Secret Assignment</span>
+    <span class="rule-id">generic-key-value-secret</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Variable name suggests a secret and value looks credential-like</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>547697fe6e9d46ea9a7e538922d1425d</dd>
+      <dt>Entropy</dt><dd>3.55 bits/char</dd>
+      <dt>Tags</dt><dd>generic</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/YandexAuthWebViewActivity.java:46:46</div><pre>private static final String CLIENT_ID = &quot;<span class='hit'>547697fe6e9d46ea9a7e538922d1425d</span>&quot;;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="LOW">
+  <summary>
+    <span class="sev LOW">LOW</span>
+    <span class="name">Generic Key/Secret Assignment</span>
+    <span class="rule-id">generic-key-value-secret</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Variable name suggests a secret and value looks credential-like</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>722de50c58c346178ebd3fbf6a31132c</dd>
+      <dt>Entropy</dt><dd>3.80 bits/char</dd>
+      <dt>Tags</dt><dd>generic</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/util/AppConfig.java:21:52</div><pre>public static final String YANDEX_CLIENT_ID = &quot;<span class='hit'>722de50c58c346178ebd3fbf6a31132c</span>&quot;;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="LOW">
+  <summary>
+    <span class="sev LOW">LOW</span>
+    <span class="name">Generic Key/Secret Assignment</span>
+    <span class="rule-id">generic-key-value-secret</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Variable name suggests a secret and value looks credential-like</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>YCAJESl8Vc6eod-TSiavKAGVh</dd>
+      <dt>Entropy</dt><dd>4.40 bits/char</dd>
+      <dt>Tags</dt><dd>generic</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/util/AppConfig.java:16:49</div><pre>public static final String S3_ACCESS_KEY = &quot;<span class='hit'>YCAJESl8Vc6eod-TSiavKAGVh</span>&quot;;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="LOW">
+  <summary>
+    <span class="sev LOW">LOW</span>
+    <span class="name">Generic Key/Secret Assignment</span>
+    <span class="rule-id">generic-key-value-secret</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Variable name suggests a secret and value looks credential-like</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>mobile-subtype</dd>
+      <dt>Entropy</dt><dd>3.52 bits/char</dd>
+      <dt>Tags</dt><dd>generic</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/google/android/datatransport/cct/CctTransportBackend.java:74:47</div><pre>static final String KEY_MOBILE_SUBTYPE = &quot;<span class='hit'>mobile-subtype</span>&quot;;</pre></div>
+    </div>
+  </div>
+</details></div>
+    </div>
+
+    <div id="panel-urls" class="panel hidden">
+      <div class="summary">
+        <div class="card"><div class="label">Unique URLs</div><div class="value">10</div></div>
+        <div class="card"><div class="label">Locations</div><div class="value">17</div></div>
+      </div>
+      <input type="search" class="q" placeholder="Filter URLs…">
+      <div class="list">
+<details class="finding" data-sev="INFO">
+  <summary>
+    <span class="sev INFO">INFO</span>
+    <span class="name">Hardcoded URL</span>
+    <span class="rule-id">url-assignment</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Hardcoded HTTP(S) URL in source — attack-surface information</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>http://empretradingsupport.tilda.ws</dd>
+      <dt>Entropy</dt><dd>4.03 bits/char</dd>
+      <dt>Tags</dt><dd>url</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/ui/screens/auth/RegistrationScreenKt.java:182:77</div><pre>Intent intent = new Intent(&quot;android.intent.action.VIEW&quot;, Uri.parse(&quot;<span class='hit'>http://empretradingsupport.tilda.ws</span>&quot;));</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="INFO">
+  <summary>
+    <span class="sev INFO">INFO</span>
+    <span class="name">Hardcoded URL</span>
+    <span class="rule-id">url-assignment</span>
+    <span class="count">4 locations</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Hardcoded HTTP(S) URL in source — attack-surface information</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>https://baket-ivaaro.storage.yandexcloud.net/</dd>
+      <dt>Entropy</dt><dd>4.30 bits/char</dd>
+      <dt>Tags</dt><dd>url</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/service/ObjectStorageService$getAudioDuration$2.java:102:39</div><pre>String url = &quot;<span class='hit'>https://baket-ivaaro.storage.yandexcloud.net/</span>&quot; + key;</pre></div><div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/service/ObjectStorageService.java:1127:23</div><pre>String url = &quot;<span class='hit'>https://baket-ivaaro.storage.yandexcloud.net/</span>&quot; + key;</pre></div><div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/service/ObjectStorageService.java:1159:23</div><pre>String url = &quot;<span class='hit'>https://baket-ivaaro.storage.yandexcloud.net/</span>&quot; + key;</pre></div><div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/service/ObjectStorageService.java:1187:23</div><pre>String url = &quot;<span class='hit'>https://baket-ivaaro.storage.yandexcloud.net/</span>&quot; + key;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="INFO">
+  <summary>
+    <span class="sev INFO">INFO</span>
+    <span class="name">Hardcoded URL</span>
+    <span class="rule-id">url-assignment</span>
+    <span class="count">2 locations</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Hardcoded HTTP(S) URL in source — attack-surface information</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>https://functions.yandexcloud.net/d4efavboiige7c7leqkf/</dd>
+      <dt>Entropy</dt><dd>4.48 bits/char</dd>
+      <dt>Tags</dt><dd>url</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/util/AppConfig.java:22:62</div><pre>public static final String YANDEX_CLOUD_FUNCTIONS_URL = &quot;<span class='hit'>https://functions.yandexcloud.net/d4efavboiige7c7leqkf/</span>&quot;;</pre></div><div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/service/CloudFunctionService.java:55:45</div><pre>private static final String BASE_URL = &quot;<span class='hit'>https://functions.yandexcloud.net/d4efavboiige7c7leqkf/</span>&quot;;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="INFO">
+  <summary>
+    <span class="sev INFO">INFO</span>
+    <span class="name">Hardcoded URL</span>
+    <span class="rule-id">url-assignment</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Hardcoded HTTP(S) URL in source — attack-surface information</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>https://login.yandex.ru/info?format=json</dd>
+      <dt>Entropy</dt><dd>4.38 bits/char</dd>
+      <dt>Tags</dt><dd>url</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/service/YandexAuthService.java:32:52</div><pre>private static final String YANDEX_INFO_URL = &quot;<span class='hit'>https://login.yandex.ru/info?format=json</span>&quot;;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="INFO">
+  <summary>
+    <span class="sev INFO">INFO</span>
+    <span class="name">Hardcoded URL</span>
+    <span class="rule-id">url-assignment</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Hardcoded HTTP(S) URL in source — attack-surface information</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>https://notifications.yandexcloud.net</dd>
+      <dt>Entropy</dt><dd>4.04 bits/char</dd>
+      <dt>Tags</dt><dd>url</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/util/AppConfig.java:23:61</div><pre>public static final String YC_NOTIFICATIONS_ENDPOINT = &quot;<span class='hit'>https://notifications.yandexcloud.net</span>&quot;;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="INFO">
+  <summary>
+    <span class="sev INFO">INFO</span>
+    <span class="name">Hardcoded URL</span>
+    <span class="rule-id">url-assignment</span>
+    <span class="count">2 locations</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Hardcoded HTTP(S) URL in source — attack-surface information</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>https://oauth.yandex.ru/authorize</dd>
+      <dt>Entropy</dt><dd>3.98 bits/char</dd>
+      <dt>Tags</dt><dd>url</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/YandexAuthWebViewActivity.java:110:35</div><pre>Uri uriBuild = Uri.parse(&quot;<span class='hit'>https://oauth.yandex.ru/authorize</span>&quot;).buildUpon().appendQueryParameter(&quot;response_type&quot;, &quot;token&quot;).appendQueryParameter(&quot;client_id&quot;, CLIENT_ID).appendQueryParameter(&quot;scope&quot;, SCOPE).build();</pre></div><div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/service/YandexAuthService.java:29:45</div><pre>private static final String AUTH_URL = &quot;<span class='hit'>https://oauth.yandex.ru/authorize</span>&quot;;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="INFO">
+  <summary>
+    <span class="sev INFO">INFO</span>
+    <span class="name">Hardcoded URL</span>
+    <span class="rule-id">url-assignment</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Hardcoded HTTP(S) URL in source — attack-surface information</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>https://play.google.com/store/search?q=otpauth&amp;c=apps</dd>
+      <dt>Entropy</dt><dd>4.16 bits/char</dd>
+      <dt>Tags</dt><dd>url</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/google/firebase/auth/internal/zzci.java:83:18</div><pre>zza(&quot;<span class='hit'>https://play.google.com/store/search?q=otpauth&amp;c=apps</span>&quot;);</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="INFO">
+  <summary>
+    <span class="sev INFO">INFO</span>
+    <span class="name">Hardcoded URL</span>
+    <span class="rule-id">url-assignment</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Hardcoded HTTP(S) URL in source — attack-surface information</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>https://storage.yandexcloud.net</dd>
+      <dt>Entropy</dt><dd>4.09 bits/char</dd>
+      <dt>Tags</dt><dd>url</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/util/AppConfig.java:18:47</div><pre>public static final String S3_ENDPOINT = &quot;<span class='hit'>https://storage.yandexcloud.net</span>&quot;;</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="INFO">
+  <summary>
+    <span class="sev INFO">INFO</span>
+    <span class="name">Hardcoded URL</span>
+    <span class="rule-id">url-assignment</span>
+    <span class="count">1 location</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Hardcoded HTTP(S) URL in source — attack-surface information</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>https://storage.yandexcloud.net/baket-ivaaro/users/placeholder/photo.jpg</dd>
+      <dt>Entropy</dt><dd>4.33 bits/char</dd>
+      <dt>Tags</dt><dd>url</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/evgeniy/meetway/data/model/LocatesUser.java:84:106</div><pre>List listListOf = CollectionsKt.listOf(new Place(&quot;Санкт-Петербург&quot;, &quot;Удивительный город 😇&quot;, &quot;<span class='hit'>https://storage.yandexcloud.net/baket-ivaaro/users/placeholder/photo.jpg</span>&quot;, &quot;&quot;, string));</pre></div>
+    </div>
+  </div>
+</details>
+
+<details class="finding" data-sev="INFO">
+  <summary>
+    <span class="sev INFO">INFO</span>
+    <span class="name">Hardcoded URL</span>
+    <span class="rule-id">url-assignment</span>
+    <span class="count">3 locations</span>
+  </summary>
+  <div class="body">
+    <div class="desc">Hardcoded HTTP(S) URL in source — attack-surface information</div>
+    <dl class="kv">
+      <dt>Value</dt><dd>https://www.recaptcha.net/recaptcha/api3</dd>
+      <dt>Entropy</dt><dd>3.68 bits/char</dd>
+      <dt>Tags</dt><dd>url</dd>
+    </dl>
+    <div class="locations">
+      <div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/google/android/recaptcha/internal/zzbr.java:12:15</div><pre>this(&quot;<span class='hit'>https://www.recaptcha.net/recaptcha/api3</span>&quot;);</pre></div><div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/google/android/recaptcha/internal/zzbr.java:16:21</div><pre>this.zza = &quot;<span class='hit'>https://www.recaptcha.net/recaptcha/api3</span>&quot;;</pre></div><div class='loc'><div class='path'>/Users/evgeniy/key-hunter/meetway_with_protection_decompiled/sources/com/google/android/recaptcha/internal/zzcv.java:33:315</div><pre>zzaw[] zzawVarArr = {new zzaw(zzaz.class.getName().hashCode(), new zzaz(null, 1, null)), new zzaw(zzfu.class.getName().hashCode(), new zzfu()), new zzaw(zzbe.class.getName().hashCode(), new zzbe()), new zzaw(zzjd.class.getName().hashCode(), new zzjd()), new zzaw(zzbr.class.getName().hashCode(), new zzbr(&quot;<span class='hit'>https://www.recaptcha.net/recaptcha/api3</span>&quot;)), new zzaw(zzex.class.getName().hashCode(),</pre></div>
+    </div>
+  </div>
+</details></div>
+    </div>
+  </main>
+<script>
+  // Tabs
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.querySelectorAll('.panel').forEach(p => p.classList.add('hidden'));
+    document.getElementById('panel-' + t.dataset.panel).classList.remove('hidden');
+  }));
+
+  // Per-panel filters + search
+  document.querySelectorAll('.panel').forEach(panel => {
+    const q = panel.querySelector('.q');
+    const chips = panel.querySelectorAll('.chip');
+    let sev = 'ALL';
+    function apply() {
+      const term = q ? q.value.toLowerCase() : '';
+      panel.querySelectorAll('.finding').forEach(el => {
+        const ok_sev = (sev === 'ALL' || el.dataset.sev === sev);
+        const ok_q = !term || el.innerText.toLowerCase().includes(term);
+        el.style.display = (ok_sev && ok_q) ? '' : 'none';
+      });
+    }
+    if (q) q.addEventListener('input', apply);
+    chips.forEach(c => c.addEventListener('click', () => {
+      chips.forEach(x => x.classList.remove('active'));
+      c.classList.add('active');
+      sev = c.dataset.sev;
+      apply();
+    }));
+  });
+</script>
+</body>
+</html>
