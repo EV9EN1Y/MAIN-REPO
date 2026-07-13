@@ -283,8 +283,12 @@ jadx-gui /Users/evgeniy/Documents/андроид\+обфускация\!\!\ те
 /Users/evgeniy/Documents/андроид\+обфускация\!\!\
 тестовая/android-meetway/app/build/outputs/mapping/release/mapping.txt
 
+там 200 мб такого:
 
-![[mapping.txt]]
+<img src="../../../assets/Снимок2026-07-1400.57.07.png" alt="Скрин" style="width: 90%; max-width: 1000px;" />
+
+
+
 
 
 покажу небольшой кусочек файла расшифровки
