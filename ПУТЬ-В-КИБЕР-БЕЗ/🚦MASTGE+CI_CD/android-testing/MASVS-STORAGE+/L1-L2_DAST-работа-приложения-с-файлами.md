@@ -15,17 +15,17 @@ https://mas.owasp.org/MASTG/tests/android/MASVS-STORAGE/MASTG-TEST-0201/
 нужно найти методы работы с файлами
 
 ```q
-- `getExternalStorageDirectory()` — получение корневой директории внешнего хранилища.
+- `getExternalStorageDirectory()` – получение корневой директории внешнего хранилища.
     
-- `getExternalStoragePublicDirectory()` — получение стандартных папок (например, `DCIM`, `Pictures`).
+- `getExternalStoragePublicDirectory()` – получение стандартных папок (например, `DCIM`, `Pictures`).
     
-- `getExternalFilesDir()` — получение папки для файлов приложения.
+- `getExternalFilesDir()` – получение папки для файлов приложения.
     
-- `FileOutputStream` — запись в файл.
+- `FileOutputStream` – запись в файл.
     
-- `open()` — общий системный вызов для открытия файлов (может дать много шума, но поймает всё).
+- `open()` – общий системный вызов для открытия файлов (может дать много шума, но поймает всё).
     
-- `MediaStore` API — для сохранения файлов через медиа-провайдер (например, фото в галерею).
+- `MediaStore` API – для сохранения файлов через медиа-провайдер (например, фото в галерею).
 ```
 
 ------
@@ -226,9 +226,9 @@ adb shell su -c 'cat /data/user/0/com.evgeniy.meetway/shared_prefs/meetway_secur
 - ❌ Ни одного вызова `getExternalStorageDirectory()`
 - ❌ Ни одного вызова `getExternalFilesDir()`
 - ❌ Ни одной записи на `/sdcard/` или `/storage/emulated/0/`
-- ✅ Все записи — только во внутреннее хранилище (`/data/user/0/com.evgeniy.meetway/cache/`, `shared_prefs/`)
-- ✅ `SecureStorage` использует `EncryptedSharedPreferences` — данные зашифрованы
-- ✅ Медиафайлы (аудио, видео) кэшируются во внутреннем `cache/` — недоступны другим приложениям
+- ✅ Все записи – только во внутреннее хранилище (`/data/user/0/com.evgeniy.meetway/cache/`, `shared_prefs/`)
+- ✅ `SecureStorage` использует `EncryptedSharedPreferences` – данные зашифрованы
+- ✅ Медиафайлы (аудио, видео) кэшируются во внутреннем `cache/` – недоступны другим приложениям
 
 **Рисков утечки данных через внешнее хранилище нет**
 

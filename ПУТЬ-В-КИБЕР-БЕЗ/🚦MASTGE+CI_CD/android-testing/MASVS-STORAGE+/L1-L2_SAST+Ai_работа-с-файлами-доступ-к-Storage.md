@@ -113,7 +113,7 @@ jadx-gui ~/Desktop/meetway.apk
             </intent-filter>
         </activity>
 
-        <!-- Yandex OAuth WebView (основной вариант — перехват редиректа внутри приложения) -->
+        <!-- Yandex OAuth WebView (основной вариант – перехват редиректа внутри приложения) -->
         <activity
             android:name=".YandexAuthWebViewActivity"
             android:exported="false"

@@ -113,7 +113,7 @@ diff ~/Desktop/files_before.txt ~/Desktop/files_after.txt
 
 ## 🤖 Анализ от open claw 
 
-### 1. Повторная проверка файлов (DAST — динамический анализ)
+### 1. Повторная проверка файлов (DAST – динамический анализ)
 
 Приложение запущено на real устройстве (OnePlus 8T). После того как Джони потыкал приложение:
 
@@ -147,7 +147,7 @@ diff files_before.txt files_after.txt
 <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 ```
 
-**НЕТ** `WRITE_EXTERNAL_STORAGE` — приложение **физически не может** писать во внешнее хранилище.
+**НЕТ** `WRITE_EXTERNAL_STORAGE` – приложение **физически не может** писать во внешнее хранилище.
 
 #### 👉 Где приложение пишет файлы (все во internal storage)
 
@@ -158,12 +158,12 @@ diff files_before.txt files_after.txt
 | `AdvancedVideoRecorder.kt:488` | `context.cacheDir/` | Запись видео |
 | `ObjectStorageService.kt:323,468` | `File.createTempFile()` | Временные файлы аудио/видео из S3 |
 
-**Все пути — `context.cacheDir`** (внутреннее хранилище, недоступное другим приложениям). Ни одного вызова `getExternalStorageDirectory()` или `getExternalFilesDir()`.
+**Все пути – `context.cacheDir`** (внутреннее хранилище, недоступное другим приложениям). Ни одного вызова `getExternalStorageDirectory()` или `getExternalFilesDir()`.
 
 #### 👉 Хранилище данных (SharedPreferences)
 
-- **SecureStorage** — использует `EncryptedSharedPreferences` (аналог iOS Keychain) — зашифровано ✅
-- Обычные `SharedPreferences` — только для некритичных данных (тема оформления, статус онбординга)
+- **SecureStorage** – использует `EncryptedSharedPreferences` (аналог iOS Keychain) – зашифровано ✅
+- Обычные `SharedPreferences` – только для некритичных данных (тема оформления, статус онбординга)
 
 ----
 
@@ -175,7 +175,7 @@ diff files_before.txt files_after.txt
 
 - ❌ Нет пермишена `WRITE_EXTERNAL_STORAGE`
 - ❌ Нет вызовов `getExternalStorageDirectory()` / `getExternalFilesDir()`
-- ❌ При физическом тестировании на real устройстве — 0 новых файлов на `/sdcard/`
+- ❌ При физическом тестировании на real устройстве – 0 новых файлов на `/sdcard/`
 - ✅ Все файлы пишутся только во внутреннее хранилище (`context.cacheDir`)
 - ✅ Чувствительные данные хранятся в `EncryptedSharedPreferences`
 - ✅ Временные медиафайлы (кэш, загрузки) изолированы в `/data/data/com.evgeniy.meetway/cache/`

@@ -59,7 +59,7 @@ cat > /Users/evgeniy/Desktop/hook_crypto_operations.js << 'EOF'
 Java.perform(function() {
     console.log("[*] === Crypto Operations Hook Script Started ===");
 
-    // 1. Перехват Cipher.init() — все режимы
+    // 1. Перехват Cipher.init() – все режимы
     try {
         var Cipher = Java.use("javax.crypto.Cipher");
         Cipher.init.overload('int', 'java.security.Key').implementation = function(opmode, key) {

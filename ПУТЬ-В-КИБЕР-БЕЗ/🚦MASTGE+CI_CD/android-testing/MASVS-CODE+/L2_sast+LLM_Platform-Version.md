@@ -43,14 +43,14 @@ Android-приложения должны **динамически провер
 
 ###  Где используются проверки версий
 
-Все 50+ вхождений `Build.VERSION.SDK_INT` — **в сторонних библиотеках** (androidx.core, Coil, CameraX и т.д.):
+Все 50+ вхождений `Build.VERSION.SDK_INT` – **в сторонних библиотеках** (androidx.core, Coil, CameraX и т.д.):
 
 ```
-androidx/core/...                  — AndroidX Core (совместимость)
-androidx/camera/...                — CameraX (аппаратные фичи)
-androidx/activity/...              — Activity API (back gesture и т.д.)
-androidx/emoji2/...                — EmojiCompat
-coil/util/HardwareBitmaps.java     — Coil (битмапы)
+androidx/core/...                  – AndroidX Core (совместимость)
+androidx/camera/...                – CameraX (аппаратные фичи)
+androidx/activity/...              – Activity API (back gesture и т.д.)
+androidx/emoji2/...                – EmojiCompat
+coil/util/HardwareBitmaps.java     – Coil (битмапы)
 ```
 
 В **коде самого MeetWay** (com.evgeniy.meetway) - **ни одного** вызова `SDK_INT` или `VERSION_CODES`
@@ -63,11 +63,11 @@ coil/util/HardwareBitmaps.java     — Coil (битмапы)
 | `targetSdkVersion` | **36** (Android 16) |
 | `compileSdkVersion` | **36** |
 
-При `minSdk = 33` приложение работает только на Android 13+. Все API, которые использует MeetWay, доступны начиная с этой версии. Явные runtime-проверки не требуются — библиотеки AndroidX сами обрабатывают редкие кейсы совместимости.
+При `minSdk = 33` приложение работает только на Android 13+. Все API, которые использует MeetWay, доступны начиная с этой версии. Явные runtime-проверки не требуются – библиотеки AndroidX сами обрабатывают редкие кейсы совместимости.
 
 ###  Итог
 
-50+ вхождений в jadx-gui — это **библиотечный код**, не app-код.
+50+ вхождений в jadx-gui – это **библиотечный код**, не app-код.
 MeetWay не пишет своих `if (Build.VERSION.SDK_INT >= ...)`, но это оправдано высоким `minSdk = 33`.
 
 ---

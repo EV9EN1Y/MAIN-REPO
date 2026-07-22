@@ -45,7 +45,7 @@ cat > /Users/evgeniy/Desktop/hook_cipher_modes.js << 'EOF'
 Java.perform(function() {
     console.log("[*] === Cipher Mode Hook Script Started ===");
 
-    // 1. Перехват Cipher.getInstance() — все варианты
+    // 1. Перехват Cipher.getInstance() – все варианты
     try {
         var Cipher = Java.use("javax.crypto.Cipher");
 
@@ -173,12 +173,12 @@ frida -U -f com.evgeniy.meetway -l /Users/evgeniy/Desktop/hook_cipher_modes.js
 **AES/GCM/NoPadding (76 вызовов)** - единственный режим, который использует само приложение через `EncryptionUtil`. Это безопасный AEAD-режим. 
 
 **AES/ECB/NoPadding (75 вызовов)** - все вызовы идут из библиотеки **Google Tink**, а именно:
-- `PrfAesCmac` — реализация AES-CMAC (NIST SP 800-38B), которая использует AES-ECB как строительный блок для вычисления MAC-кода
+- `PrfAesCmac` – реализация AES-CMAC (NIST SP 800-38B), которая использует AES-ECB как строительный блок для вычисления MAC-кода
 - Это часть `EncryptedSharedPreferences` (AndroidX Security Crypto), где AES-ECB применяется **не для шифрования данных**, а для криптографически корректного MAC-алгоритма
 - Такой способ использования ECB - **стандартная и безопасная практика** (CMAC/S2V)
 
 **AES/CTR/NoPadding (25 вызовов)** - все вызовы из Google Tink:
-- `AesSiv` — реализация AES-SIV (RFC 5297), детерминированное аутентифицированное шифрование
+- `AesSiv` – реализация AES-SIV (RFC 5297), детерминированное аутентифицированное шифрование
 - Используется `EncryptedSharedPreferences` для шифрования ключей SharedPreferences
 
 ### вывод по тесту

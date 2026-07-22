@@ -13,17 +13,17 @@ https://mas.owasp.org/MASTG/tests/android/MASVS-CODE/MASTG-TEST-0375/
 
 нужен скрипт фриды - который перехватит методы:
 
-- `startActivityForResult` — отправка запроса.
+- `startActivityForResult` – отправка запроса.
     
-- `onActivityResult` — получение результата.
+- `onActivityResult` – получение результата.
     
-- `getData` — чтение URI из результата.
+- `getData` – чтение URI из результата.
     
-- `getExtras` — чтение дополнительных данных.
+- `getExtras` – чтение дополнительных данных.
     
-- `getClipData` — чтение данных из буфера обмена.
+- `getClipData` – чтение данных из буфера обмена.
     
-- `ContentResolver.query` — чтение данных из провайдера.
+- `ContentResolver.query` – чтение данных из провайдера.
 
 ---
 
@@ -310,14 +310,14 @@ java.lang.Exception
 
 ### 1. Проверяет ли приложение, что токен действительно от Яндекса?
 
-**Да, частично — есть server-side валидация, но нет local-side:**
+**Да, частично – есть server-side валидация, но нет local-side:**
 
 | Что проверяет | Статус | Детали |
 |---|---|---|
-| WebView перехватывает только URL с `oauth.yandex.ru` | ⚠️ Слабо | `contains("oauth.yandex.ru")` — поддельный URL может содержать эту строку |
-| `getUserInfoFromYandex(accessToken)` — проверка токена на серверах Яндекса | ✅ Надёжно | GET `https://login.yandex.ru/info` с `Authorization: OAuth <token>` — если токен невалидный, API вернёт ошибку |
+| WebView перехватывает только URL с `oauth.yandex.ru` | ⚠️ Слабо | `contains("oauth.yandex.ru")` – поддельный URL может содержать эту строку |
+| `getUserInfoFromYandex(accessToken)` – проверка токена на серверах Яндекса | ✅ Надёжно | GET `https://login.yandex.ru/info` с `Authorization: OAuth <token>` – если токен невалидный, API вернёт ошибку |
 | Cloud Function дополнительно валидирует токен | ✅ Надёжно | Серверная проверка перед выдачей JWT |
-| `state` параметр (CSRF защита) | ❌ **ОТСУТСТВУЕТ** | В OAuth запросе нет `state` — уязвимость CSRF в OAuth flow |
+| `state` параметр (CSRF защита) | ❌ **ОТСУТСТВУЕТ** | В OAuth запросе нет `state` – уязвимость CSRF в OAuth flow |
 | `nonce` / challenge | ❌ **ОТСУТСТВУЕТ** | Нет дополнительной защиты |
 
 **Вердикт:** Токен проверяется на сервере Яндекса - подделать его нельзя. Но отсутствие `state` параметра делает OAuth flow уязвимым для CSRF-атак

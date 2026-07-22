@@ -71,7 +71,7 @@ jadx-gui ~/Desktop/meetway.apk
 // Проверка доступности биометрии
 BiometricManager biometricManager = context.getSystemService(BiometricManager.class);
 if (biometricManager.canAuthenticate(32783) != 0) {  // 32783 = BIOMETRIC_STRONG | DEVICE_CREDENTIAL
-    // Биометрия не настроена — пропускаем
+    // Биометрия не настроена – пропускаем
     return true;
 }
 

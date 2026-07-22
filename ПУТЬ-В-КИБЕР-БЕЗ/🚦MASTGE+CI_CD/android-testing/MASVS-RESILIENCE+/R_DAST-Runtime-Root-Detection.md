@@ -301,26 +301,26 @@ Spawned `com.evgeniy.meetway`. Resuming main thread!
 ┌───┬────────────────────┬─────────────────────────────────────────────────────┐
 │ № │ Метод              │ Что проверяет                                       │
 ├───┼────────────────────┼─────────────────────────────────────────────────────┤
-│ 1 │ checkRootViaExec() │ su -c id — пытается реально выполнить su. Magisk    │
-│   │                    │ перехватывает. Если вернулся uid=0 — root есть.     │
+│ 1 │ checkRootViaExec() │ su -c id – пытается реально выполнить su. Magisk    │
+│   │                    │ перехватывает. Если вернулся uid=0 – root есть.     │
 ├───┼────────────────────┼─────────────────────────────────────────────────────┤
 │ 2 │ checkMagiskFiles() │ Файлы Magisk в /data/adb/magisk/,                   │
-│   │                    │ /data/adb/modules/ — они есть на диске              │
+│   │                    │ /data/adb/modules/ – они есть на диске              │
 ├───┼────────────────────┼─────────────────────────────────────────────────────┤
-│ 3 │ checkMagiskMount() │ Читает /proc/1/mounts — видит Magisk tmpfs          │
+│ 3 │ checkMagiskMount() │ Читает /proc/1/mounts – видит Magisk tmpfs          │
 │   │                    │ монтирования                                        │
 ├───┼────────────────────┼─────────────────────────────────────────────────────┤
-│ 4 │ checkTestKeys()    │ Build.TAGS — если test-keys, прошивка кастомная     │
+│ 4 │ checkTestKeys()    │ Build.TAGS – если test-keys, прошивка кастомная     │
 ├───┼────────────────────┼─────────────────────────────────────────────────────┤
 │ 5 │ checkSelinux()     │ Читает /sys/fs/selinux/enforce + getenforce         │
 ├───┼────────────────────┼─────────────────────────────────────────────────────┤
-│ 6 │ checkFridaPort()   │ Пытается открыть socket на 127.0.0.1:27042 — порт   │
+│ 6 │ checkFridaPort()   │ Пытается открыть socket на 127.0.0.1:27042 – порт   │
 │   │                    │ Frida                                               │
 └───┴────────────────────┴─────────────────────────────────────────────────────┘
 
 ```
 
-1. В onCreate() — строка 87:
+1. В onCreate() – строка 87:
 
 ```kotlin
   // Было: закомментировано
@@ -331,7 +331,7 @@ Spawned `com.evgeniy.meetway`. Resuming main thread!
   detectCompromisedDevice()
 ```
 
-2. В detectCompromisedDevice() — строка 153:
+2. В detectCompromisedDevice() – строка 153:
 
 ```kotlin
   // Было: без контекста
@@ -504,13 +504,13 @@ Java.perform(function() {
     console.log("[*] === Bypass Root Detection (FIXED) ===");
 
     // ─── 1. Перехват SecurityDetector.isDeviceCompromised() ───
-    // Это главный вход. Если вернуть false — все внутренние проверки
+    // Это главный вход. Если вернуть false – все внутренние проверки
     // (checkRootViaExec, checkMagiskFiles, checkFridaPort, и т.д.)
     // НИКОГДА не будут вызваны.
     try {
         var SecurityDetector = Java.use("com.evgeniy.meetway.util.SecurityDetector");
         SecurityDetector.isDeviceCompromised.implementation = function(context) {
-            console.log("[!] isDeviceCompromised() called — FORCING return false");
+            console.log("[!] isDeviceCompromised() called – FORCING return false");
             return false;
         };
         console.log("[+] SecurityDetector.isDeviceCompromised() → FORCED false");
@@ -518,21 +518,21 @@ Java.perform(function() {
         console.log("[-] Cannot hook SecurityDetector: " + e);
     }
 
-    // ─── 2. Runtime.exec() — НЕ БЛОКИРУЕМ ───
+    // ─── 2. Runtime.exec() – НЕ БЛОКИРУЕМ ───
     // Просто логируем, чтобы видеть что вызывается.
-    // НЕ возвращаем null — это ломает приложение!
+    // НЕ возвращаем null – это ломает приложение!
     try {
         var Runtime = Java.use("java.lang.Runtime");
         Runtime.exec.overload('java.lang.String').implementation = function(command) {
             console.log("[LOG] exec: " + command.substring(0, 120));
             return this.exec(command);
         };
-        console.log("[+] Runtime.exec() — только лог, без блокировки");
+        console.log("[+] Runtime.exec() – только лог, без блокировки");
     } catch (e) {
         console.log("[-] Cannot hook Runtime.exec: " + e);
     }
 
-    // ─── 3. File.exists() — только лог ───
+    // ─── 3. File.exists() – только лог ───
     try {
         var File = Java.use("java.io.File");
         File.exists.implementation = function() {
@@ -544,7 +544,7 @@ Java.perform(function() {
             }
             return result;
         };
-        console.log("[+] File.exists() — только лог");
+        console.log("[+] File.exists() – только лог");
     } catch (e) {
         console.log("[-] Cannot hook File.exists: " + e);
     }
@@ -584,10 +584,10 @@ evgeniy@Evgeniys-MacBook-Pro-2 ~ % frida -U -f com.evgeniy.meetway -l /Users/evg
 Spawning `com.evgeniy.meetway`...                               Spawned `com.evgeniy.meetway`. Resuming main thread!
 [KB2003::com.evgeniy.meetway ]-> [*] === Bypass Root Detection (FIXED) ===
 [+] SecurityDetector.isDeviceCompromised() → FORCED false
-[+] Runtime.exec() — только лог, без блокировки
-[+] File.exists() — только лог
+[+] Runtime.exec() – только лог, без блокировки
+[+] File.exists() – только лог
 [*] === Bypass ready. App should launch normally. ===
-[!] isDeviceCompromised() called — FORCING return false
+[!] isDeviceCompromised() called – FORCING return false
 Device lost
 [KB2003::com.evgeniy.meetway ]->
 

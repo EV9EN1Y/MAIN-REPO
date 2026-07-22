@@ -119,24 +119,24 @@ diff -r /Users/evgeniy/Desktop/app_data_before/shared_prefs/meetway_secure_prefs
 
 ### почему JWT оказался в открытом виде (анализ кода)
 
-нашёл причину — в коде есть **дублирование** сохранения JWT в два разных места
+нашёл причину – в коде есть **дублирование** сохранения JWT в два разных места
 
 в двух активити JWT сохраняется дважды:
-- один раз в `SecureStorage` (зашифрованное хранилище) — это правильно
-- второй раз в `meetway_prefs` (обычные SharedPreferences) — через `putString("internalJWT", jwt)`
+- один раз в `SecureStorage` (зашифрованное хранилище) – это правильно
+- второй раз в `meetway_prefs` (обычные SharedPreferences) – через `putString("internalJWT", jwt)`
 
 **YandexAuthWebViewActivity.kt (строки 148-150):**
 ```kotlin
-SecureStorage.saveJwt(jwt)                                // в шифрованное — ок
+SecureStorage.saveJwt(jwt)                                // в шифрованное – ок
 getSharedPreferences("meetway_prefs", MODE_PRIVATE).edit()
-    .putString("internalJWT", jwt).apply()                 // в открытое — УТЕЧКА
+    .putString("internalJWT", jwt).apply()                 // в открытое – УТЕЧКА
 ```
 
 **AuthRedirectActivity.kt (строки 65-69):**
 ```kotlin
-SecureStorage.saveJwt(jwt)                                // в шифрованное — ок
+SecureStorage.saveJwt(jwt)                                // в шифрованное – ок
 getSharedPreferences("meetway_prefs", MODE_PRIVATE).edit()
-    .putString("internalJWT", jwt).apply()                 // в открытое — УТЕЧКА
+    .putString("internalJWT", jwt).apply()                 // в открытое – УТЕЧКА
 ```
 
 комментарий в коде всё объясняет:
@@ -145,12 +145,12 @@ getSharedPreferences("meetway_prefs", MODE_PRIVATE).edit()
 ```
 
 это баг портирования с iOS. там была связка:
-- Keychain — для реального хранения
-- UserDefaults — для быстрого доступа из UI (в iOS UserDefaults тоже не шифруется, но там код проверки подписи)
+- Keychain – для реального хранения
+- UserDefaults – для быстрого доступа из UI (в iOS UserDefaults тоже не шифруется, но там код проверки подписи)
 
 при переносе на Android разработчик:
-- сделал `SecureStorage` через EncryptedSharedPreferences (аналог Keychain) — ✅
-- но продублировал JWT в обычные SharedPreferences "для ViewModel" — ❌
+- сделал `SecureStorage` через EncryptedSharedPreferences (аналог Keychain) – ✅
+- но продублировал JWT в обычные SharedPreferences "для ViewModel" – ❌
 
 вторая копия JWT лежит в открытом виде в файле `/data/data/com.evgeniy.meetway/shared_prefs/meetway_prefs.xml`
 
@@ -158,12 +158,12 @@ getSharedPreferences("meetway_prefs", MODE_PRIVATE).edit()
 
 ### почему изменились значения в meetway_secure_prefs.xml
 
-это **зашифрованное** хранилище (EncryptedSharedPreferences). изменения там — это норма:
+это **зашифрованное** хранилище (EncryptedSharedPreferences). изменения там – это норма:
 - обновился JWT (новый токен с новым expiration)
 - добавилась тема оформления (`themeColorUser = yellow`)
 - перезаписались зашифрованные значения
 
-с ними всё в порядке — они зашифрованы AES-GCM, ключ в Android KeyStore
+с ними всё в порядке – они зашифрованы AES-GCM, ключ в Android KeyStore
 
 ----
 
@@ -174,7 +174,7 @@ getSharedPreferences("meetway_prefs", MODE_PRIVATE).edit()
 | `meetway_prefs.xml` | ❌ нет | JWT в открытом виде, themeColor | 🔴 УТЕЧКА |
 | `meetway_secure_prefs.xml` | ✅ AES-GCM | зашифрованные ключи и значения | 🟢 ок |
 
-**корень проблемы:** код сохраняет JWT в два места — SecureStorage (правильно) и обычные SharedPreferences (неправильно). второй save — лишний, от него надо избавиться
+**корень проблемы:** код сохраняет JWT в два места – SecureStorage (правильно) и обычные SharedPreferences (неправильно). второй save – лишний, от него надо избавиться
 
 ------
 

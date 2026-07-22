@@ -20,17 +20,17 @@ https://mas.owasp.org/MASTG/tests/android/MASVS-RESILIENCE/MASTG-TEST-0338/
 
 **Ключевые слова для поиска:**
 
-- `javax.crypto.Mac` — класс для вычисления HMAC.
+- `javax.crypto.Mac` – класс для вычисления HMAC.
     
-- `java.security.Signature` — класс для цифровых подписей.
+- `java.security.Signature` – класс для цифровых подписей.
     
-- `java.security.MessageDigest` — класс для хешей (MD5, SHA).
+- `java.security.MessageDigest` – класс для хешей (MD5, SHA).
     
-- `doFinal` — метод, который финализирует вычисление хеша или HMAC.
+- `doFinal` – метод, который финализирует вычисление хеша или HMAC.
     
-- `verify` — метод проверки подписи.
+- `verify` – метод проверки подписи.
     
-- `equals` — часто используется для сравнения вычисленного HMAC с сохраненным.
+- `equals` – часто используется для сравнения вычисленного HMAC с сохраненным.
     
 далее анализ найденных мест:
 
@@ -124,7 +124,7 @@ jadx-gui ~/Desktop/meetway.apk
 
 ---
 
-### 1️⃣ `javax.crypto.Mac` — 32 вхождения всего, 1 в app-коде
+### 1️⃣ `javax.crypto.Mac` – 32 вхождения всего, 1 в app-коде
 
 #### ✅ Анализируемый файл: `ObjectStorageService.java`
 **Путь:** `com.evgeniy.meetway.service.ObjectStorageService.java`
@@ -150,7 +150,7 @@ mac.init(new SecretKeySpec(key, "HmacSHA256"));
 byte[] bArrDoFinal = mac.doFinal(data);
 return bArrDoFinal;
 ```
-**Назначение:** То же — HMAC-SHA256 для SigV4, возвращает raw bytes.
+**Назначение:** То же – HMAC-SHA256 для SigV4, возвращает raw bytes.
 **Используется в `getSignatureKey()`** для вычисления цепочки ключей:
 `kDate → kRegion → kService → kSigning`
 **Это integrity локального хранилища?** ❌ **НЕТ.**
@@ -172,19 +172,19 @@ return bytesToHex(bArrDigest);
 
 ---
 
-### 2️⃣ `java.security.Signature` — 10 вхождений, **0 в app-коде**
+### 2️⃣ `java.security.Signature` – 10 вхождений, **0 в app-коде**
 
 Все 10 вхождений находятся ТОЛЬКО в сторонних библиотеках:
-- `com.google.android.gms.internal.p002firebaseauthapi.*` — Google Play Services (Firebase Auth)
-- `com.google.crypto.tink.*` — Google Tink криптобиблиотека
+- `com.google.android.gms.internal.p002firebaseauthapi.*` – Google Play Services (Firebase Auth)
+- `com.google.crypto.tink.*` – Google Tink криптобиблиотека
 
-**В коде MeetWay — НОЛЬ ИСПОЛЬЗОВАНИЙ.**
+**В коде MeetWay – НОЛЬ ИСПОЛЬЗОВАНИЙ.**
 
 **Вердикт:** ❌ Не используется для цифровых подписей вообще. Тест FAIL по этому критерию.
 
 ---
 
-### 3️⃣ `java.security.MessageDigest` — ~40 вхождений, 3 в app-коде
+### 3️⃣ `java.security.MessageDigest` – ~40 вхождений, 3 в app-коде
 
 #### 3.1 `EncryptionUtil.java`
 **Путь:** `com.evgeniy.meetway.util.EncryptionUtil.java`
@@ -204,7 +204,7 @@ SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
 **Назначение:** 100000 итераций SHA-256 для PBKDF2-like key derivation.
 **Используется для:** Генерация AES-256 ключа шифрования чата на основе соли + passphrase + ID участников.
 **Это integrity локального хранилища?** ⚠️ **КОСВЕННО.** SHA-256 используется для key derivation, но не для верификации целостности хранимых данных. Ключ применяется для AES-GCM шифрования сообщений чата.
-**Важный нюанс:** AES-GCM — authenticated encryption. Если злоумышленник изменит зашифрованные данные, GCM расшифровка выдаст AEADBadTagException. **Это обеспечивает integrity для зашифрованных сообщений.*
+**Важный нюанс:** AES-GCM – authenticated encryption. Если злоумышленник изменит зашифрованные данные, GCM расшифровка выдаст AEADBadTagException. **Это обеспечивает integrity для зашифрованных сообщений.*
 
 ❗ **НО** это не HMAC/подпись для хранилища в целом. Защищены только сообщения чата, но НЕ SharedPreferences, НЕ файлы, НЕ базы данных.
 
@@ -221,38 +221,38 @@ byte[] hashBytes = digest.digest(encoded);
 String actualHash = Base64.encodeToString(hashBytes, 2);
 ```
 **Назначение:** SHA-256 хеш публичного ключа сертификата сервера.
-**Используется для:** SSL Pinning — проверка, что сертификат сервера соответствует ожидаемому.
+**Используется для:** SSL Pinning – проверка, что сертификат сервера соответствует ожидаемому.
 **Это integrity локального хранилища?** ❌ **НЕТ.** Это сетевая безопасность (транспортный уровень), не защита данных на устройстве.
 
-#### 3.3 `ObjectStorageService.java` — уже разобрано в п.1
-**Метод `sha256Hex()`** — SHA-256 для SigV4 подписи API-запросов.
+#### 3.3 `ObjectStorageService.java` – уже разобрано в п.1
+**Метод `sha256Hex()`** – SHA-256 для SigV4 подписи API-запросов.
 **Это integrity локального хранилища?** ❌ **НЕТ.**
 
 **Вердикт по MessageDigest:** ❌ Ни одно из 3 app-вхождений не является HMAC/подписью для проверки integrity локального хранилища.
 
 ---
 
-### 4️⃣ `doFinal` — ~50 вхождений, 4 в app-коде
+### 4️⃣ `doFinal` – ~50 вхождений, 4 в app-коде
 
-#### 4.1 `EncryptionUtil.java:92` — `cipher.doFinal(data)`
+#### 4.1 `EncryptionUtil.java:92` – `cipher.doFinal(data)`
 ```java
 Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
 // ... init in ENCRYPT mode
 byte[] encrypted = cipher.doFinal(data);
 ```
 **Назначение:** AES-GCM шифрование сообщения чата.
-**Integrity?** ⚠️ AES-GCM включает аутентификацию (AEAD). Если данные изменены — GCM тег не совпадёт.
+**Integrity?** ⚠️ AES-GCM включает аутентификацию (AEAD). Если данные изменены – GCM тег не совпадёт.
 
-#### 4.2 `EncryptionUtil.java:126` — `cipher.doFinal(encryptedData)`
+#### 4.2 `EncryptionUtil.java:126` – `cipher.doFinal(encryptedData)`
 ```java
 Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
 // ... init in DECRYPT mode
 byte[] decrypted = cipher.doFinal(encryptedData);
 ```
 **Назначение:** AES-GCM расшифровка сообщения чата.
-**Integrity?** ✅ **ДА, обеспечивает проверку целостности при расшифровке.** Если GCM тест не совпал — вылетит исключение, и decrypt вернёт null.
+**Integrity?** ✅ **ДА, обеспечивает проверку целостности при расшифровке.** Если GCM тест не совпал – вылетит исключение, и decrypt вернёт null.
 
-#### 4.3 & 4.4 `ObjectStorageService.java:1414, 1422` — `mac.doFinal(data)`
+#### 4.3 & 4.4 `ObjectStorageService.java:1414, 1422` – `mac.doFinal(data)`
 **Назначение:** HMAC-SHA256 для подписи S3 запросов (SigV4).
 **Integrity?** ❌ НЕ для локального хранилища.
 
@@ -260,19 +260,19 @@ byte[] decrypted = cipher.doFinal(encryptedData);
 
 ---
 
-### 5️⃣ `.verify(` — ~45 вхождений, **0 в app-коде**
+### 5️⃣ `.verify(` – ~45 вхождений, **0 в app-коде**
 
 Все вызовы `.verify()` в библиотеках:
-- `com.google.crypto.tink` — внутренние проверки подписей Tink
-- `com.google.firebase` — Firebase Auth
+- `com.google.crypto.tink` – внутренние проверки подписей Tink
+- `com.google.firebase` – Firebase Auth
 
-**В коде MeetWay — НОЛЬ ВЫЗОВОВ `.verify()`.**
+**В коде MeetWay – НОЛЬ ВЫЗОВОВ `.verify()`.**
 
 **Вердикт:** ❌ Приложение не использует цифровые подписи для верификации данных.
 
 ---
 
-### 6️⃣ `.equals(` — ~50 вхождений, ВСЕ в UI/моделях
+### 6️⃣ `.equals(` – ~50 вхождений, ВСЕ в UI/моделях
 
 Полный список категорий `.equals()` в app-коде:
 
@@ -311,7 +311,7 @@ if (str.equals("image")) { ... }
 **Используется для:** Определение типа контента в чате.
 **Это integrity?** ❌ НЕТ.
 
-**Вердикт:** ❌ Все `.equals()` — UI/бизнес-логика, НИ ОДИН не для сравнения HMAC/хешей.
+**Вердикт:** ❌ Все `.equals()` – UI/бизнес-логика, НИ ОДИН не для сравнения HMAC/хешей.
 
 ---
 
@@ -319,20 +319,20 @@ if (str.equals("image")) { ... }
 
 ### Тест MASTG-TEST-0338: ❌ **ПРОВАЛЕН**
 
-1. **Нет HMAC для локальных данных** — `Mac` используется только для AWS SigV4 (сетевые запросы), НЕ для проверки целостности SharedPreferences/файлов/БД на устройстве.
+1. **Нет HMAC для локальных данных** – `Mac` используется только для AWS SigV4 (сетевые запросы), НЕ для проверки целостности SharedPreferences/файлов/БД на устройстве.
 
-2. **Нет цифровых подписей** — `Signature` не используется вообще в коде приложения.
+2. **Нет цифровых подписей** – `Signature` не используется вообще в коде приложения.
 
 3. **Нет `.verify()`** для проверки подписей или HMAC на локальных данных.
 
-4. **`.equals()` используется только для UI** — цвета ячеек, типы постов, типы сообщений.
+4. **`.equals()` используется только для UI** – цвета ячеек, типы постов, типы сообщений.
 
 ### Что ЕСТЬ - защита сообщений и все, но не хранилища
 
 | Компонент | Защита | Примечание |
 |---|---|---|
-| `SecureStorage` (SharedPreferences) | ✅ **EncryptedSharedPreferences** (AES256-GCM + AES256-SIV) | Библиотека AndroidX — integrity на уровне фреймворка |
-| Сообщения чата | ✅ **AES-256/GCM** — authenticated encryption | AEAD обеспечивает integrity при расшифровке |
+| `SecureStorage` (SharedPreferences) | ✅ **EncryptedSharedPreferences** (AES256-GCM + AES256-SIV) | Библиотека AndroidX – integrity на уровне фреймворка |
+| Сообщения чата | ✅ **AES-256/GCM** – authenticated encryption | AEAD обеспечивает integrity при расшифровке |
 | JWT токен | ✅ Хранится в EncryptedSharedPreferences | Защищён самой библиотекой |
 ###  Чего НЕТ (уязвимости):
 

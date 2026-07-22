@@ -21,9 +21,9 @@ PIE (Position-Independent Executable) 
 readelf -h имя_библиотеки.so | grep "Type:"
 ```
 
-- Если Type = `DYN (Shared object file)` — PIC включён. Тест пройден ✅
-- Если Type = `EXEC (Executable file)` — PIC выключен. Тест провален ❌
-- Для самопроверки: `readelf -d имя_библиотеки.so | grep TEXTREL` — если есть вывод, то код содержит непозиционно-независимые ссылки (плохо)
+- Если Type = `DYN (Shared object file)` – PIC включён. Тест пройден ✅
+- Если Type = `EXEC (Executable file)` – PIC выключен. Тест провален ❌
+- Для самопроверки: `readelf -d имя_библиотеки.so | grep TEXTREL` – если есть вывод, то код содержит непозиционно-независимые ссылки (плохо)
 
 ----------
 
@@ -77,8 +77,8 @@ $:   Type:                              DYN (Shared object file)
  
 Команда `readelf -d | grep -i pic` **не является корректным способом** проверки PIC.
 PIC в .so файлах определяется через **ELF header type**:
-- `DYN (Shared object file)` — PIC включён ✅
-- `EXEC (Executable file)` — PIC выключен ❌
+- `DYN (Shared object file)` – PIC включён ✅
+- `EXEC (Executable file)` – PIC выключен ❌
 
 ### Результат проверки всех .so файлов MeetWay (arm64-v8a)
 

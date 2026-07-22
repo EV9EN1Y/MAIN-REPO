@@ -133,7 +133,7 @@ https://mas.owasp.org/MASTG/tests/android/MASVS-STORAGE/MASTG-TEST-0262/
 
   
 
-        <!-- Yandex OAuth WebView (основной вариант — перехват редиректа внутри приложения) -->
+        <!-- Yandex OAuth WebView (основной вариант – перехват редиректа внутри приложения) -->
 
         **<activity**
 

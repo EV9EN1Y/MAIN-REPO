@@ -40,21 +40,21 @@ https://mas.owasp.org/MASTG/tests/android/MASVS-CODE/MASTG-TEST-0374/
 чек лист поиска
 
 ```q
-new Intent( — поиск создания интентов. 
+new Intent( – поиск создания интентов. 
 
-Intent() — поиск конструктора без параметров. 
+Intent() – поиск конструктора без параметров. 
 
-setAction( — метод, который задает действие для интента (признак неявного интента). 
+setAction( – метод, который задает действие для интента (признак неявного интента). 
 
-startActivity — отправка интента для запуска Activity. 
+startActivity – отправка интента для запуска Activity. 
 
-startActivityForResult — отправка интента с ожиданием результата. 
+startActivityForResult – отправка интента с ожиданием результата. 
 
-startService — отправка интента для запуска сервиса. 
+startService – отправка интента для запуска сервиса. 
 
-bindService — отправка интента для привязки к сервису. 
+bindService – отправка интента для привязки к сервису. 
 
-sendBroadcast — отправка широковещательного интента. 
+sendBroadcast – отправка широковещательного интента. 
 
 launch (в контексте ActivityResultLauncher)
 ```
@@ -80,7 +80,7 @@ launch (в контексте ActivityResultLauncher)
 
 | Файл | Intent | Назначение | Безопасность |
 |---|---|---|---|
-| `SettingScreenKt.java:68` | `ACTION_SEND` + `createChooser()` | Экспорт данных — пользователь сам выбирает приёмник | ⚠️ Нормально |
+| `SettingScreenKt.java:68` | `ACTION_SEND` + `createChooser()` | Экспорт данных – пользователь сам выбирает приёмник | ⚠️ Нормально |
 | `RegistrationScreenKt.java:1135` | `ACTION_VIEW` + URL | Открытие ссылки в браузере | ⚠️ Нормально |
 | `LentaMainViewScreenKt.java:3277` | `APPLICATION_DETAILS_SETTINGS` | Открытие настроек приложения | ⚠️ Нормально |
 
@@ -103,31 +103,31 @@ public final void sendAppBroadcast(String action, String chatId, String otherUse
 
 | Action                                        | Данные                  |
 | --------------------------------------------- | ----------------------- |
-| `com.evgeniy.meetway.APP_ACTIVE`              | —                       |
-| `com.evgeniy.meetway.APP_DID_BECOME_ACTIVE`   | —                       |
+| `com.evgeniy.meetway.APP_ACTIVE`              | –                       |
+| `com.evgeniy.meetway.APP_DID_BECOME_ACTIVE`   | –                       |
 | `com.evgeniy.meetway.PUSH_MESSAGE`            | `chatId`                |
 | `com.evgeniy.meetway.UPDATE_CHAT_FROM_PUSH`   | `chatId`, `otherUserID` |
 | `com.evgeniy.meetway.OPEN_CHAT`               | `chatId`, `otherUserID` |
-| `com.evgeniy.meetway.NAVIGATE_TO_WELCOME`     | —                       |
-| `com.evgeniy.meetway.NAVIGATE_TO_FIRST_SCRIN` | —                       |
+| `com.evgeniy.meetway.NAVIGATE_TO_WELCOME`     | –                       |
+| `com.evgeniy.meetway.NAVIGATE_TO_FIRST_SCRIN` | –                       |
 
 ### BroadcastReceiver
 
 | Компонент | exported | Безопасность |
 |---|---|---|
-| `NotificationActionReceiver` (нотификации) | `false` ✅ | Надёжно — только внутренние вызовы с explicit Intent |
+| `NotificationActionReceiver` (нотификации) | `false` ✅ | Надёжно – только внутренние вызовы с explicit Intent |
 
 ###  Итоговая таблица
 
 | Паттерн | Explicit | Implicit (внешний) | Implicit (внутренний) | Риск |
 |---|---|---|---|---|
 | Activity → Activity | ✅ Все | ❌ Нет | ❌ Нет | ✅ Низкий |
-| Intent → Browser/Share | — | ✅ 3 шт | — | ⚠️ Приемлемо |
-| `sendBroadcast()` | `NotificationActionReceiver` | — | ⚠️ `sendAppBroadcast()` | ⚠️ Средний |
+| Intent → Browser/Share | – | ✅ 3 шт | – | ⚠️ Приемлемо |
+| `sendBroadcast()` | `NotificationActionReceiver` | – | ⚠️ `sendAppBroadcast()` | ⚠️ Средний |
 
 ### Замечание
 
-`sendAppBroadcast()` использует неявные интенты для внутренней коммуникации — это **нарушение best practices** MASTG-TEST-0372. Однако приёмников для этих broadcast'ов в приложении нет (dead code или незавершённая реализация)
+`sendAppBroadcast()` использует неявные интенты для внутренней коммуникации – это **нарушение best practices** MASTG-TEST-0372. Однако приёмников для этих broadcast'ов в приложении нет (dead code или незавершённая реализация)
 
 Данные `chatId` и `otherUserID` не являются критически чувствительными (chatId = ID диалога, otherUserID = ID собеседника)
 

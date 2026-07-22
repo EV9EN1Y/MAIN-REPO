@@ -95,7 +95,7 @@ Java_androidx_camera_core_impl_utils_SurfaceUtil_nativeGetSurfaceInfo
 mNativePath
 ```
 
-**Итог:** Все JNI-методы — от AndroidX. Моего кода (`com.evgeniy.meetway`) нет.
+**Итог:** Все JNI-методы – от AndroidX. Моего кода (`com.evgeniy.meetway`) нет.
 
 ### ищу строки приложения в .so
 
@@ -113,10 +113,10 @@ for f in *.so; do readelf -S "$f" | grep debug; done
 
 че нашел=
 ```
-libandroidx.graphics.path.so        — debug-символов НЕТ
-libdatastore_shared_counter.so      — debug-символов НЕТ
-libimage_processing_util_jni.so     — debug-символов НЕТ
-libsurface_util_jni.so              — debug-символов НЕТ
+libandroidx.graphics.path.so        – debug-символов НЕТ
+libdatastore_shared_counter.so      – debug-символов НЕТ
+libimage_processing_util_jni.so     – debug-символов НЕТ
+libsurface_util_jni.so              – debug-символов НЕТ
 ```
 
 Все библиотеки stripped (без отладочных символов)
@@ -134,7 +134,7 @@ grep -rn "native " sources/com/evgeniy/
 
 ## вывод
 
-Приложение MeetWay **не содержит кастомного нативного кода (C/C++)**. Все .so файлы в APK — стандартные библиотеки AndroidX:
+Приложение MeetWay **не содержит кастомного нативного кода (C/C++)**. Все .so файлы в APK – стандартные библиотеки AndroidX:
 
 | библиотека                        | назначение                    | это системная?  |
 | --------------------------------- | ----------------------------- | --------------- |

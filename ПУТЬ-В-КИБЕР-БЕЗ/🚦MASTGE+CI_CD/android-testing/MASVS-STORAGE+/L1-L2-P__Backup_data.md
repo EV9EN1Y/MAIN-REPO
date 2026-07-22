@@ -40,7 +40,7 @@ meetway.tar
   # распаковываем
   tar xf meetway.tar
 
-  # смотрим что внутри — ищем JWT, токены, ключи
+  # смотрим что внутри – ищем JWT, токены, ключи
   grep -r "internalJWT\|token\|password\|secret" apps/com.evgeniy.meetway/
 ```
 
@@ -164,7 +164,7 @@ android-meetway/app/src/main/AndroidManifest.xml
 
   
 
-        <!-- Yandex OAuth WebView (основной вариант — перехват редиректа внутри приложения) -->
+        <!-- Yandex OAuth WebView (основной вариант – перехват редиректа внутри приложения) -->
 
         **<activity**
 
@@ -267,7 +267,7 @@ adb backup -f meetway.ab -apk -noshared com.evgeniy.meetway
   # распаковываем
   tar xf meetway.tar
 
-  # смотрим что внутри — ищем JWT, токены, ключи
+  # смотрим что внутри – ищем JWT, токены, ключи
   grep -r "internalJWT\|token\|password\|secret" apps/com.evgeniy.meetway/
 ```
 
@@ -297,7 +297,7 @@ grep подтвердил что JWT и токены в бэкапе есть. �
 ### проверка backup_rules.xml и data_extraction_rules.xml
 
 ```xml
-<!-- backup_rules.xml — пустой, всё закомментировано -->
+<!-- backup_rules.xml – пустой, всё закомментировано -->
 <full-backup-content>
     <!--
     <include domain="sharedpref" path="."/>
@@ -307,7 +307,7 @@ grep подтвердил что JWT и токены в бэкапе есть. �
 ```
 
 ```xml
-<!-- data_extraction_rules.xml — тоже пустой, всё TODO -->
+<!-- data_extraction_rules.xml – тоже пустой, всё TODO -->
 <data-extraction-rules>
     <cloud-backup>
         <!-- TODO: Use <include> and <exclude> -->

@@ -13,12 +13,12 @@ https://mas.owasp.org/MASTG/tests/android/MASVS-CRYPTO/MASTG-TEST-0205/
 **1. "Классические" источники времени**  
 Это самые прямые и очевидные признаки, с которых обычно начинают.
 
-- `System.currentTimeMillis()` — стандартный способ получить текущее время в миллисекундах
+- `System.currentTimeMillis()` – стандартный способ получить текущее время в миллисекундах
     
-- `Date().getTime()` — делает то же самое, но через объект `Date
+- `Date().getTime()` – делает то же самое, но через объект `Date
     
-- `Calendar.getInstance().getTimeInMillis()` — еще один способ получить время через календарь
-- `Calendar.MILLISECOND` — обращение к конкретному полю календаря[](https://mas.owasp.org/MASTG/tests/android/MASVS-CRYPTO/MASTG-TEST-0205/)[](https://mas.owasp.ac.cn/MASTG/tests/android/MASVS-CRYPTO/MASTG-TEST-0205/).
+- `Calendar.getInstance().getTimeInMillis()` – еще один способ получить время через календарь
+- `Calendar.MILLISECOND` – обращение к конкретному полю календаря[](https://mas.owasp.org/MASTG/tests/android/MASVS-CRYPTO/MASTG-TEST-0205/)[](https://mas.owasp.ac.cn/MASTG/tests/android/MASVS-CRYPTO/MASTG-TEST-0205/).
     
 
 **2. "Хитрые" и непрямые пути**  
@@ -26,7 +26,7 @@ https://mas.owasp.org/MASTG/tests/android/MASVS-CRYPTO/MASTG-TEST-0205/
 
 - **`System.nanoTime()`**: Дает время с наносекундной точностью, но _не_ является источником энтропии и подходит только для измерения интервалов. Использовать его для генерации "случайных" значений - плохая идея.
     
-- **`Calendar` без явного вызова `getTimeInMillis()`**: Например, `Calendar.getInstance().get(Calendar.SECOND)` или `get(Calendar.MILLISECOND)` — это тоже неслучайные значения.
+- **`Calendar` без явного вызова `getTimeInMillis()`**: Например, `Calendar.getInstance().get(Calendar.SECOND)` или `get(Calendar.MILLISECOND)` – это тоже неслучайные значения.
     
 - **`new Date()`**: Сам по себе объект `Date` содержит время создания.
     

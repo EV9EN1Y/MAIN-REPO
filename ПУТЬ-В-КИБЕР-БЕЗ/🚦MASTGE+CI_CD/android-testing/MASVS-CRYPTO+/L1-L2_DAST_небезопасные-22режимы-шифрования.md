@@ -45,7 +45,7 @@ cat > /Users/evgeniy/Desktop/hook_cipher_modes.js << 'EOF'
 Java.perform(function() {
     console.log("[*] === Cipher Mode Hook Script Started ===");
 
-    // 1. Перехват Cipher.getInstance() — все варианты
+    // 1. Перехват Cipher.getInstance() – все варианты
     try {
         var Cipher = Java.use("javax.crypto.Cipher");
 

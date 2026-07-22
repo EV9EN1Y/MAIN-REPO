@@ -50,18 +50,18 @@ jadx-gui ~/Desktop/meetway.apk
 Тест **пройден** 🟢
 
 
-1. Прошёлся grep -rn по всем Java-файлам в com.evgeniy/meetway — искал
+1. Прошёлся grep -rn по всем Java-файлам в com.evgeniy/meetway – искал
    вхождения DES, RC4, ARC4, Blowfish, ECB, KeyGenerator,
    SecretKeyFactory, Cipher.getInstance.
-2. Проверил все найденные Cipher.getInstance — их два в
+2. Проверил все найденные Cipher.getInstance – их два в
    EncryptionUtil.java, оба с "AES/GCM/NoPadding". Никаких других
    вызовов нет.
-3. Проверил содержимое этих находок RC4/ECB в OkHttp — открыл
+3. Проверил содержимое этих находок RC4/ECB в OkHttp – открыл
    CipherSuite.java и убедился: это просто статические константы с
    названиями TLS-шифров, а не вызовы Cipher.getInstance().
-4. Проверил Google библиотеки — те же константы/DESTROYED, никакого
+4. Проверил Google библиотеки – те же константы/DESTROYED, никакого
    ECB.
-5. Проверил на наличие AES без режима (что по умолчанию дало бы ECB) —
+5. Проверил на наличие AES без режима (что по умолчанию дало бы ECB) –
    в коде приложения такого нет, в SecretKeySpec(keyBytes, "AES") это
    просто указание алгоритма, не режим.
 

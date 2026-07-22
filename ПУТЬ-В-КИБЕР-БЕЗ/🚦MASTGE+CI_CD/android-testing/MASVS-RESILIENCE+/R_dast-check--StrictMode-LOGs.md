@@ -83,7 +83,7 @@ u0_a300      26253  1114    6724676 207500 0                   0 S com.evgeniy.m
  
  ну и вижу тут кучу логов 
  
- 6-26 17:07:42.360 26253 26253 I System.out: ❌ Биометрия не настроена — пропускаем
+ 6-26 17:07:42.360 26253 26253 I System.out: ❌ Биометрия не настроена – пропускаем
 06-26 17:07:42.361 26253 26285 I okhttp.OkHttpClient: --> POST https://functions.yandexcloud.net/d4efavboiige7c7leqkf/
 06-26 17:07:42.361 26253 26285 I okhttp.OkHttpClient: Content-Length: 330
 06-26 17:07:42.362 26253 26285 I okhttp.OkHttpClient: Content-Type: application/json

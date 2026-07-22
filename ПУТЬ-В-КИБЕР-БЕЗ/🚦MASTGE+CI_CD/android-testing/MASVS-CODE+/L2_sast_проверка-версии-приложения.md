@@ -15,29 +15,29 @@ https://mas.owasp.org/MASTG/tests/android/MASVS-CODE/MASTG-TEST-0392/
 
 а потом искать места:
 
-- `AppUpdateManagerFactory` — создание менеджера обновлений.
+- `AppUpdateManagerFactory` – создание менеджера обновлений.
     
-- `AppUpdateManager` — основной класс для работы с обновлениями.
+- `AppUpdateManager` – основной класс для работы с обновлениями.
     
-- `getAppUpdateInfo` — получение информации об обновлении.
+- `getAppUpdateInfo` – получение информации об обновлении.
     
-- `startUpdateFlowForResult` — запуск процесса обновления.
+- `startUpdateFlowForResult` – запуск процесса обновления.
     
-- `AppUpdateType.IMMEDIATE` — немедленное обновление.
+- `AppUpdateType.IMMEDIATE` – немедленное обновление.
     
-- `UpdateAvailability` — статус доступности обновления.
+- `UpdateAvailability` – статус доступности обновления.
     
-- `DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS` — статус обновления.
+- `DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS` – статус обновления.
     
-- `BuildConfig.VERSION_NAME` — имя версии приложения.
+- `BuildConfig.VERSION_NAME` – имя версии приложения.
     
-- `BuildConfig.VERSION_CODE` — код версии приложения.
+- `BuildConfig.VERSION_CODE` – код версии приложения.
     
-- `PackageManager.getPackageInfo` — получение информации о пакете (версия).
+- `PackageManager.getPackageInfo` – получение информации о пакете (версия).
     
-- `minVersion` — минимальная версия.
+- `minVersion` – минимальная версия.
     
-- `updateRequired` — признак необходимости обновления
+- `updateRequired` – признак необходимости обновления
 
 и смотреть - есть ли в приложении код который блокирует функции работы приложения проверив актуальность версии приложения, или нет!
 

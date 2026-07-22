@@ -143,7 +143,7 @@ WiFi → моя сеть → настройка → прокси вручную:
 
 
 ```js
-// meetway-nuke-v2.js — ВЫЖИГАЕМ ВСЮ SSL ЗАЩИТУ
+// meetway-nuke-v2.js – ВЫЖИГАЕМ ВСЮ SSL ЗАЩИТУ
 console.log("[*] MeetWay SSL Nuke v2");
 
 Java.perform(function() {
@@ -172,10 +172,10 @@ Java.perform(function() {
         console.log("[+] OkHttpClient.Builder.certificatePinner: blocked");
     } catch(e){}
 
-    // ===== NetworkModule — ГЛАВНЫЙ ПИННЕР! =====
+    // ===== NetworkModule – ГЛАВНЫЙ ПИННЕР! =====
     try {
         var NM = Java.use("com.evgeniy.meetway.data.remote.NetworkModule");
-        // Ленивая инициализация — перехватываем фабрику
+        // Ленивая инициализация – перехватываем фабрику
         NM.createCertificatePinner.implementation = function() {
             console.log("[+] NetworkModule.createCertificatePinner: returning empty pinner");
             var Builder = Java.use("okhttp3.CertificatePinner$Builder");
@@ -204,7 +204,7 @@ Java.perform(function() {
         console.log("[+] SslPinningInterceptor: OK");
     } catch(e){}
 
-    // ===== MeetWayApp — getCertificatePinner =====
+    // ===== MeetWayApp – getCertificatePinner =====
     try {
         Java.use("com.evgeniy.meetway.MeetWayApp").getCertificatePinner.implementation = function() {
             var B = Java.use("okhttp3.CertificatePinner$Builder");
@@ -283,13 +283,13 @@ conscrypt на Android 14 не пропускает Burp-сертификат н
 - Прокси на телефоне настроил ✅
 - Написал Frida скрипты для обхода анти-дебага и SSL пиннинга ✅
 - Через Frida обошёл `NetworkModule`, `CertificatePinner`, `SslPinningInterceptor` ✅
-- Добрался до нативного BoringSSL — перехватил `SSL_set_verify`, `SSL_CTX_set_custom_verify`, `SSL_get_verify_result` ✅
+- Добрался до нативного BoringSSL – перехватил `SSL_set_verify`, `SSL_CTX_set_custom_verify`, `SSL_get_verify_result` ✅
 
 **НО** трафик через Burp так и не пошёл.
 
 Проблема не в MeetWay, а в **Android 14**. Google вынес SSL/TLS в отдельный модуль (`com.android.conscrypt` APEX), который не использует `/system/etc/security/cacerts/`. У него свой изолированный список сертификатов, и Magisk туда не пробивается.
 
-`curl` с телефона через Burp ходит нормально, а Java-приложения — нет. Падают с `Trust anchor for certification path not found`.
+`curl` с телефона через Burp ходит нормально, а Java-приложения – нет. Падают с `Trust anchor for certification path not found`.
 
 **Вывод:** на OnePlus 8T с Android 14 перехватить HTTPS трафик MeetWay через Burp не получилось. Не из-за защиты приложения (она там чисто символическая), а из-за платформы.
 

@@ -284,8 +284,8 @@ static final String KEY_MOBILE_SUBTYPE = "mobile-subtype";
 
 ### 1. S3 Object Storage – CRITICAL
 Файл: `AppConfig.java`
-- **S3_ACCESS_KEY**: `YCCEC3JESCE85R6dod-TSiavKAGVh`  — доступ к Object Storage
-- **S3_SECRET_KEY**: `YeWvrgs2XIevrenfJerqeCdfxjrfKtG$FD$7ep2`  — полный доступ к Object Storage
+- **S3_ACCESS_KEY**: `YCCEC3JESCE85R6dod-TSiavKAGVh`  – доступ к Object Storage
+- **S3_SECRET_KEY**: `YeWvrgs2XIevrenfJerqeCdfxjrfKtG$FD$7ep2`  – полный доступ к Object Storage
 - **S3_ENDPOINT**: `https://storage.cloud.net`
 - **S3_BUCKET**: `baket-ivaro`
 - **S3_REGION**: `eu-west-1`

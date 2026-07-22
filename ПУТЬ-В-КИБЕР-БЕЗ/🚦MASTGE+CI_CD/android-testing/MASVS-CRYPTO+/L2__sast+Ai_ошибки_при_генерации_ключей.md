@@ -65,9 +65,9 @@ jadx-gui ~/Desktop/meetway.apk
 - `KeyProperties` - содержит константы для назначений (например, `PURPOSE_ENCRYPT`
 
 ```q
-- Если передается `KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT` (или другие разрешенные комбинации) — это безопасно.
+- Если передается `KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT` (или другие разрешенные комбинации) – это безопасно.
     
-- Если передается что-то, что включает `PURPOSE_SIGN` вместе с `PURPOSE_ENCRYPT` или `PURPOSE_DECRYPT` — это критично.
+- Если передается что-то, что включает `PURPOSE_SIGN` вместе с `PURPOSE_ENCRYPT` или `PURPOSE_DECRYPT` – это критично.
 ```
 
 -----

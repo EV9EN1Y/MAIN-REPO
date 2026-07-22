@@ -276,27 +276,27 @@ RASP-защита в рантайме: обнаружение рута, отл�
 
 ---
 
-## 🔄 Отчёт OpenСlaw — независимая перепроверка        
+## 🔄 Отчёт OpenСlaw – независимая перепроверка        
 
 ### Методология
 
 Я провёл независимый анализ того же APK-файла (`~/Desktop/meetway.apk`):
-1. **jadx CLI v1.5.5** — полная декомпиляция в Java-исходники (27,947 файлов)
-2. **APKiD** — не удалось установить (yara-python-dex не собирается под Python 3.14 на ARM), но jadx анализ перекрывает
-3. **Ручной анализ** — grep по именам классов, строковым литералам, импортам JNI, шаблонам шифрования
+1. **jadx CLI v1.5.5** – полная декомпиляция в Java-исходники (27,947 файлов)
+2. **APKiD** – не удалось установить (yara-python-dex не собирается под Python 3.14 на ARM), но jadx анализ перекрывает
+3. **Ручной анализ** – grep по именам классов, строковым литералам, импортам JNI, шаблонам шифрования
 
-### 1. BuildConfig — DEBUG сборка 🚩
+### 1. BuildConfig – DEBUG сборка 🚩
 
 ```java
 public static final String BUILD_TYPE = "debug";
 public static final boolean DEBUG = Boolean.parseBoolean("true");
 ```
 
-Это критично: **debug-сборка никогда не обфусцируется** — Android Gradle Plugin отключает minifyEnabled=true для debug по умолчанию. Если в release сборке `minifyEnabled = true`, то тест пройден иначе.
+Это критично: **debug-сборка никогда не обфусцируется** – Android Gradle Plugin отключает minifyEnabled=true для debug по умолчанию. Если в release сборке `minifyEnabled = true`, то тест пройден иначе.
 
-### 2. Имена классов — полное отсутствие обфускации ✅ подтверждаю
+### 2. Имена классов – полное отсутствие обфускации ✅ подтверждаю
 
-**298 классов** в пакете `com.evgeniy.meetway` — **0 односимвольных имён**:
+**298 классов** в пакете `com.evgeniy.meetway` – **0 односимвольных имён**:
 
 | Компонент | Исходное имя | Обфускация |
 |---|---|---|
@@ -310,7 +310,7 @@ public static final boolean DEBUG = Boolean.parseBoolean("true");
 
 Все методы тоже сохранены: `createCertificatePinner()`, `decryptMessages()`, `saveJwt()`, `sendMessage()`.
 
-### 3. Строковые литералы — открытым текстом ✅ подтверждаю
+### 3. Строковые литералы – открытым текстом ✅ подтверждаю
 
 Никакого шифрования строк не обнаружено. Хардкодом видны:
 - **6 sha256 хешей для SSL Pinning** (Yandex API, Object Storage, Cloud Functions)
@@ -320,11 +320,11 @@ public static final boolean DEBUG = Boolean.parseBoolean("true");
 
 ### 4. Дополнительные находки
 
-**HttpLoggingInterceptor Level.BODY** — в debug сборке все HTTP-запросы и ответы логируются в logcat с полными телами. В production так нельзя.
+**HttpLoggingInterceptor Level.BODY** – в debug сборке все HTTP-запросы и ответы логируются в logcat с полными телами. В production так нельзя.
 
-**JWT-токены** — передаются через `EncryptedSharedPreferences` (AES256-GCM), но логируются в logcat с длиной, что позволит при реверсе понять, где искать.
+**JWT-токены** – передаются через `EncryptedSharedPreferences` (AES256-GCM), но логируются в logcat с длиной, что позволит при реверсе понять, где искать.
 
-**Native библиотеки** — только стандартные AndroidX:
+**Native библиотеки** – только стандартные AndroidX:
 - `libdatastore_shared_counter.so` (Jetpack DataStore)
 - `libsurface_util_jni.so` (Surface utilities)
 - `libandroidx.graphics.path.so` (Graphics path)
@@ -332,9 +332,9 @@ public static final boolean DEBUG = Boolean.parseBoolean("true");
 
 Никакой обфускации нативных функций не обнаружено. ОLLVM / Obfuscator-LLVM не используется.
 
-**Anti-VM есть** — подтверждаю: `Build.FINGERPRINT`, `Build.MANUFACTURER`, `Build.HARDWARE`, `Build.MODEL`, `Build.PRODUCT`, `Build.TAGS`, `Build.BOARD` — проверки присутствуют в коде.
+**Anti-VM есть** – подтверждаю: `Build.FINGERPRINT`, `Build.MANUFACTURER`, `Build.HARDWARE`, `Build.MODEL`, `Build.PRODUCT`, `Build.TAGS`, `Build.BOARD` – проверки присутствуют в коде.
 
-### 5. ProGuard/R8 — следов нет
+### 5. ProGuard/R8 – следов нет
 
 - mapping.txt в APK: **отсутствует**
 - proguard-rules.pro в APK: **отсутствует**
@@ -351,7 +351,7 @@ public static final boolean DEBUG = Boolean.parseBoolean("true");
 | Anti-VM проверки | ✅ Присутствуют |
 | ProGuard/R8 включён | ❌ Нет (debug сборка) |
 
-**MASTG-TEST-0051: FAIL** — приложение **не соответствует** MASVS-RESILIENCE-3.
+**MASTG-TEST-0051: FAIL** – приложение **не соответствует** MASVS-RESILIENCE-3.
 
 Вывод подтверждаю полностью. Единственный нюанс: это **debug APK**. Перед продакшеном стоит убедиться, что release сборка включает R8 с `minifyEnabled = true` и, желательно, шифрование строк для критических данных (PIN-сертификатов, API-ключей).
 
@@ -369,7 +369,7 @@ public static final boolean DEBUG = Boolean.parseBoolean("true");
        }
    }
    ```
-2. **Добавить шифрование строк** для URL, PIN-хешей, ключей — через `EncryptedSharedPreferences` или кастомную утилиту
+2. **Добавить шифрование строк** для URL, PIN-хешей, ключей – через `EncryptedSharedPreferences` или кастомную утилиту
 3. **Вынести HttpLoggingInterceptor** только под `BuildConfig.DEBUG`
 4. **Убрать прямые `Log.d()`** вызовы из production-сборки (или обернуть в conditional)
 

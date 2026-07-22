@@ -63,7 +63,7 @@ https://mas.owasp.org/MASTG/tests/android/MASVS-RESILIENCE/MASTG-TEST-0352/
 
 Generic-поиск по JADX (для любого APK)
 
-### Уровень 1 — Отладчик (Debug Detection)
+### Уровень 1 – Отладчик (Debug Detection)
 
 Эти методы стандартные, разработчики редко их переименовывают:
 
@@ -79,7 +79,7 @@ Generic-поиск по JADX (для любого APK)
   TracerPid                              # /proc/self/status
 ```
 
-### Уровень 2 — Смертельные методы (куда приводят проверки)
+### Уровень 2 – Смертельные методы (куда приводят проверки)
 
 Даже если класс обозвали MySuperProtection, он в конце вызывает:
 
@@ -91,9 +91,9 @@ Generic-поиск по JADX (для любого APK)
   killProcess                            # без префикса
 ```
 
-Если нашёл killProcess или System.exit — смотри stack trace, кто вызвал.
+Если нашёл killProcess или System.exit – смотри stack trace, кто вызвал.
 
-### Уровень 3 — Root-детекция (generic strings)
+### Уровень 3 – Root-детекция (generic strings)
 
 Эти пути разработчики не меняют, они жёстко зашиты:
 
@@ -114,7 +114,7 @@ Generic-поиск по JADX (для любого APK)
   /cache/recovery
 ```
 
-### Уровень 4 — Опасные пакеты (PackageManager)
+### Уровень 4 – Опасные пакеты (PackageManager)
 
 Разработчики проверяют эти package names, они стандартные:
 
@@ -129,7 +129,7 @@ Generic-поиск по JADX (для любого APK)
   com.saurik.substrate                   # Cydia Substrate
 ```
 
-### Уровень 5 — Нативные проверки (в .so файлах)
+### Уровень 5 – Нативные проверки (в .so файлах)
 
 Если приложение тянет кастомный .so (не AndroidX, не Firebase):
 
@@ -143,7 +143,7 @@ Generic-поиск по JADX (для любого APK)
   strings lib/*.so | grep -i "antidebug\|anti_debug\|antiDebug"
 ```
 
-### Уровень 6 — Самодельные классы (остаётся только искать по логике)
+### Уровень 6 – Самодельные классы (остаётся только искать по логике)
 
 Если разработчик назвал класс abcABC, generic уже не спасёт. Тогда смотри:
 
@@ -181,7 +181,7 @@ Generic-поиск по JADX (для любого APK)
 | `android.os.Debug` | ❌ Не найдено |
 | `Debug.isDebuggerConnected()` | ❌ Не найдено |
 | `isDebuggerConnected` | ❌ Не найдено |
-| `FLAG_DEBUGGABLE` | ✅ **Найдено** (в MeetWayApp — для лога, не для kill) |
+| `FLAG_DEBUGGABLE` | ✅ **Найдено** (в MeetWayApp – для лога, не для kill) |
 | `ApplicationInfo.FLAG_DEBUGGABLE` | ✅ **Найдено** (там же) |
 | `ro.debuggable` | ❌ Не найдено |
 | `TracerPid` | ❌ Не найдено |
@@ -189,20 +189,20 @@ Generic-поиск по JADX (для любого APK)
 **Вывод:** Стандартные `Debug.isDebuggerConnected()` не используются. `FLAG_DEBUGGABLE` используется только для логирования
 
 **Generic search strings (на что жать в JADX):**
-- ❌ `android.os.Debug` — не найден
-- ❌ `Debug.isDebuggerConnected` — не найден
-- ✅ `FLAG_DEBUGGABLE` — **найден** (но это лог, не защита)
+- ❌ `android.os.Debug` – не найден
+- ❌ `Debug.isDebuggerConnected` – не найден
+- ✅ `FLAG_DEBUGGABLE` – **найден** (но это лог, не защита)
 
 ---
 
-## Уровень 2 — Смертельные методы (крашат аппку)
+## Уровень 2 – Смертельные методы (крашат аппку)
 
 | Ключевое слово | Результат | Где |
 |---|---|---|
 | `Process.killProcess` | ✅ **Найдено** | MeetWayApp.java:135 |
 | `Process.myPid()` | ✅ **Найдено** | MeetWayApp.java:135 |
 | `System.exit(1)` | ✅ **Найдено** | MeetWayApp.java:136 |
-| `Runtime.getRuntime().exit` | ❌ Не найдено | — |
+| `Runtime.getRuntime().exit` | ❌ Не найдено | – |
 
 **Контекст вызова:**
 ```java
@@ -220,12 +220,12 @@ private void detectCompromisedDevice() {
 и метод ясно дает понять что он делает! System.exit
 
 **Generic search strings (на что жать в JADX):**
-- ✅ `Process.killProcess` — найден
-- ✅ `System.exit` — **найден**
+- ✅ `Process.killProcess` – найден
+- ✅ `System.exit` – **найден**
 
 ---
 
-## Уровень 3 — Root-детекция (generic строки)
+## Уровень 3 – Root-детекция (generic строки)
 
 | Путь/строка | Результат |
 |---|---|
@@ -258,8 +258,8 @@ private void detectCompromisedDevice() {
 
 **Generic search strings (на что жать в JADX):**
 - ❌ Ни один из пакетов не найден
-- ✅ `magisk` — **найден** (в строках `/data/adb/magisk/...`)
-- ✅ `/data/adb` — **найден**
+- ✅ `magisk` – **найден** (в строках `/data/adb/magisk/...`)
+- ✅ `/data/adb` – **найден**
 
 ---
 
@@ -283,11 +283,11 @@ for f in /path/to/lib/arm64-v8a/*.so; do
 done
 ```
 
-**Вывод:** Кастомных `.so` библиотек нет. Только стандартные AndroidX. Вся защита — в Java/Kotlin слое
+**Вывод:** Кастомных `.so` библиотек нет. Только стандартные AndroidX. Вся защита – в Java/Kotlin слое
 
 ---
 
-## Уровень 6 — Самодельные классы (поиск по логике)
+## Уровень 6 – Самодельные классы (поиск по логике)
 
 ### `System.loadLibrary` / native JNI
 | Ключевое слово | Результат |
