@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720" font-family="Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555"/>
+    </marker>
+    <style>
+      .entity { fill:#e8f0fe; stroke:#1a73e8; stroke-width:2; rx:8; }
+      .process { fill:#fef7e0; stroke:#f9ab00; stroke-width:2; }
+      .store { fill:#e6f4ea; stroke:#188038; stroke-width:2; }
+      .trust { stroke:#d93025; stroke-width:2; stroke-dasharray:8,5; }
+      .text { fill:#202124; font-size:13px; }
+      .text-title { fill:#202124; font-size:16px; font-weight:bold; }
+      .text-small { fill:#5f6368; font-size:11px; }
+      .label { fill:#333; font-size:12px; }
+      .boundary-label { fill:#d93025; font-size:12px; font-weight:bold; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="720" fill="#ffffff"/>
+
+  <!-- Заголовок -->
+  <text x="500" y="30" text-anchor="middle" class="text-title">DFD - Потоки данных социальной сети MeetWay (уровень 1)</text>
+  <text x="500" y="48" text-anchor="middle" class="text-small">Авторизация · Посты · Чат · Поиск людей</text>
+
+  <!-- Внешняя сущность: Пользователь -->
+  <rect x="40" y="90" width="180" height="70" class="entity"/>
+  <text x="130" y="118" text-anchor="middle" class="text">Пользователь</text>
+  <text x="130" y="136" text-anchor="middle" class="text-small">(внешняя сущность)</text>
+
+  <!-- Мобильное приложение -->
+  <rect x="320" y="80" width="180" height="90" class="process"/>
+  <text x="410" y="112" text-anchor="middle" class="text">Мобильное приложение</text>
+  <text x="410" y="130" text-anchor="middle" class="text-small">iOS / Android</text>
+  <text x="410" y="148" text-anchor="middle" class="text-small">(процесс P1)</text>
+
+  <!-- Trust boundary: клиент -->
+  <rect x="290" y="60" width="240" height="130" fill="none" class="trust"/>
+  <text x="410" y="75" text-anchor="middle" class="boundary-label">Trust Boundary: устройство</text>
+
+  <!-- API Gateway -->
+  <rect x="600" y="80" width="180" height="90" class="process"/>
+  <text x="690" y="112" text-anchor="middle" class="text">API Gateway</text>
+  <text x="690" y="130" text-anchor="middle" class="text-small">TLS termination,</text>
+  <text x="690" y="148" text-anchor="middle" class="text-small">auth, rate limit (P2)</text>
+
+  <!-- Поток: пользователь -> приложение -->
+  <line x1="220" y1="125" x2="318" y2="125" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="269" y="115" text-anchor="middle" class="label">действия, ввод</text>
+
+  <!-- Поток: приложение -> gateway -->
+  <line x1="502" y1="125" x2="598" y2="125" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="550" y="115" text-anchor="middle" class="label">HTTPS (JWT)</text>
+
+  <!-- Backend сервисы -->
+  <rect x="320" y="280" width="160" height="80" class="process"/>
+  <text x="400" y="310" text-anchor="middle" class="text">Auth Service</text>
+  <text x="400" y="328" text-anchor="middle" class="text-small">регистрация, логин,</text>
+  <text x="400" y="344" text-anchor="middle" class="text-small">refresh (P3)</text>
+
+  <rect x="520" y="280" width="160" height="80" class="process"/>
+  <text x="600" y="310" text-anchor="middle" class="text">Post Service</text>
+  <text x="600" y="328" text-anchor="middle" class="text-small">посты, лайки,</text>
+  <text x="600" y="344" text-anchor="middle" class="text-small">комментарии (P4)</text>
+
+  <rect x="720" y="280" width="160" height="80" class="process"/>
+  <text x="800" y="310" text-anchor="middle" class="text">Chat Service</text>
+  <text x="800" y="328" text-anchor="middle" class="text-small">сообщения,</text>
+  <text x="800" y="344" text-anchor="middle" class="text-small">push (P5)</text>
+
+  <rect x="320" y="420" width="160" height="80" class="process"/>
+  <text x="400" y="450" text-anchor="middle" class="text">Search Service</text>
+  <text x="400" y="468" text-anchor="middle" class="text-small">поиск людей,</text>
+  <text x="400" y="484" text-anchor="middle" class="text-small">фильтры (P6)</text>
+
+  <!-- Хранилища -->
+  <rect x="560" y="420" width="150" height="60" class="store"/>
+  <text x="635" y="446" text-anchor="middle" class="text">БД Users</text>
+  <text x="635" y="464" text-anchor="middle" class="text-small">(D1)</text>
+
+  <rect x="740" y="420" width="150" height="60" class="store"/>
+  <text x="815" y="446" text-anchor="middle" class="text">БД Posts</text>
+  <text x="815" y="464" text-anchor="middle" class="text-small">(D2)</text>
+
+  <rect x="560" y="530" width="150" height="60" class="store"/>
+  <text x="635" y="556" text-anchor="middle" class="text">БД Chats</text>
+  <text x="635" y="574" text-anchor="middle" class="text-small">(D3)</text>
+
+  <rect x="740" y="530" width="150" height="60" class="store"/>
+  <text x="815" y="556" text-anchor="middle" class="text">Кэш/Redis</text>
+  <text x="815" y="574" text-anchor="middle" class="text-small">(D4)</text>
+
+  <!-- Trust boundary: backend -->
+  <rect x="290" y="250" width="630" height="380" fill="none" class="trust"/>
+  <text x="605" y="268" text-anchor="middle" class="boundary-label">Trust Boundary: внутренняя сеть (DMZ/private)</text>
+
+  <!-- Потоки: gateway -> сервисы -->
+  <line x1="690" y1="172" x2="400" y2="278" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="505" y="225" text-anchor="middle" class="label">маршрутизация</text>
+  <line x1="700" y1="172" x2="620" y2="278" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="720" y1="172" x2="790" y2="278" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Потоки: auth -> users db -->
+  <line x1="480" y1="330" x2="600" y2="445" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="520" y="390" text-anchor="middle" class="label">SQL</text>
+
+  <!-- post -> posts db -->
+  <line x1="680" y1="340" x2="780" y2="445" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="735" y="395" text-anchor="middle" class="label">SQL</text>
+
+  <!-- chat -> chats db -->
+  <line x1="740" y1="360" x2="680" y2="528" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="745" y="450" text-anchor="middle" class="label">SQL</text>
+
+  <!-- search -> users db (поиск по users) -->
+  <line x1="400" y1="500" x2="600" y2="475" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="480" y="512" text-anchor="middle" class="label">поиск по users</text>
+
+  <!-- search -> redis (кэш) -->
+  <line x1="480" y1="460" x2="690" y2="560" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="600" y="525" text-anchor="middle" class="label">кэш</text>
+
+  <!-- Внешние сервисы -->
+  <rect x="40" y="420" width="180" height="70" class="entity"/>
+  <text x="130" y="448" text-anchor="middle" class="text">SMS / Push</text>
+  <text x="130" y="466" text-anchor="middle" class="text-small">(внешние)</text>
+  <line x1="220" y1="450" x2="400" y2="360" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="270" y="400" text-anchor="middle" class="label">SMS-код, push</text>
+
+  <rect x="40" y="530" width="180" height="70" class="entity"/>
+  <text x="130" y="558" text-anchor="middle" class="text">Object Storage</text>
+  <text x="130" y="576" text-anchor="middle" class="text-small">(фото, файлы)</text>
+  <line x1="222" y1="565" x2="560" y2="480" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="330" y="540" text-anchor="middle" class="label">фото постов</text>
+
+  <!-- Легенда -->
+  <rect x="40" y="640" width="920" height="70" fill="#f8f9fa" stroke="#dadce0"/>
+  <text x="60" y="660" class="label">Легенда:</text>
+  <rect x="130" y="648" width="20" height="16" fill="#e8f0fe" stroke="#1a73e8"/>
+  <text x="155" y="662" class="text-small">Внешняя сущность</text>
+  <rect x="290" y="648" width="20" height="16" fill="#fef7e0" stroke="#f9ab00"/>
+  <text x="315" y="662" class="text-small">Процесс</text>
+  <rect x="420" y="648" width="20" height="16" fill="#e6f4ea" stroke="#188038"/>
+  <text x="445" y="662" class="text-small">Хранилище данных</text>
+  <line x1="580" y1="656" x2="620" y2="656" stroke="#d93025" stroke-width="2" stroke-dasharray="8,5"/>
+  <text x="628" y="662" class="text-small">Граница доверия</text>
+  <line x1="780" y1="656" x2="820" y2="656" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="828" y="662" class="text-small">Поток данных</text>
+</svg>
