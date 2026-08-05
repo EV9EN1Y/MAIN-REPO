@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Краткий список (API Top 10 – 2023)
+##  (API Top 10 – 2023)
 
 1. **API1:2023 – Broken Object Level Authorization (BOLA)** – нарушенная авторизация на уровне объектов (IDOR)
 2. **API2:2023 – Broken Authentication** – нарушенная аутентификация
@@ -21,7 +21,7 @@
 
 ---
 
-## 🎯 API1:2023 – Broken Object Level Authorization (BOLA)
+##  API1:2023 – Broken Object Level Authorization (BOLA)
 
 **Что это:** нарушенная авторизация на уровне объектов = классический **IDOR**. API доверяет ID из запроса и не проверяет, принадлежит ли объект пользователю. **Самый частый и опасный риск API.**
 
