@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <!-- Градиенты для ролей -->
+    <linearGradient id="anonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#94A3B8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#64748B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="userGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="adminGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EF4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DC2626;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:0.05" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.1"/>
+    </filter>
+    <filter id="shadowLight">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.06"/>
+    </filter>
+    <marker id="arrowAnon" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748B"/>
+    </marker>
+    <marker id="arrowUser" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3B82F6"/>
+    </marker>
+    <marker id="arrowAdmin" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#EF4444"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10B981"/>
+    </marker>
+  </defs>
+
+  <!-- Фон -->
+  <rect width="1200" height="900" fill="#F8FAFC" rx="12"/>
+  
+  <!-- Заголовок -->
+  <rect x="0" y="0" width="1200" height="65" rx="12" fill="#1E293B"/>
+  <rect y="53" width="1200" height="12" fill="#1E293B"/>
+  <text x="600" y="28" text-anchor="middle" font-size="22" font-weight="bold" fill="#FFFFFF">Карта рабочих потоков (Workflows) типового веб-приложения</text>
+  <text x="600" y="50" text-anchor="middle" font-size="13" fill="#94A3B8">Интернет-магазин: Регистрация → Профиль → Покупка → Администрирование</text>
+
+  <!-- ============================================================ -->
+  <!-- БЛОК 1: АНОНИМНЫЙ ПОЛЬЗОВАТЕЛЬ (серый)                       -->
+  <!-- ============================================================ -->
+  
+  <rect x="30" y="80" width="260" height="45" rx="8" fill="url(#anonGrad)" filter="url(#shadow)"/>
+  <text x="160" y="108" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFF">👤 Анонимный пользователь</text>
+
+  <!-- Карточки анонима -->
+  <rect x="30" y="135" width="260" height="50" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="50" y="157" font-size="13" font-weight="bold" fill="#475569">Главная страница</text>
+  <text x="50" y="174" font-size="11" fill="#64748B">Просмотр товаров, поиск, категории</text>
+
+  <rect x="30" y="195" width="260" height="50" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="50" y="217" font-size="13" font-weight="bold" fill="#475569">Регистрация</text>
+  <text x="50" y="234" font-size="11" fill="#64748B">Создание аккаунта (email, пароль)</text>
+
+  <rect x="30" y="255" width="260" height="50" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="50" y="277" font-size="13" font-weight="bold" fill="#475569">Авторизация (Login)</text>
+  <text x="50" y="294" font-size="11" fill="#64748B">Вход в систему по логину/паролю</text>
+
+  <rect x="30" y="315" width="260" height="50" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="50" y="337" font-size="13" font-weight="bold" fill="#475569">Восстановление пароля</text>
+  <text x="50" y="354" font-size="11" fill="#64748B">Ссылка на email для сброса</text>
+
+  <!-- Стрелки внутри анонима -->
+  <path d="M 160 185 L 160 190" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arrowAnon)"/>
+  <path d="M 160 245 L 160 250" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arrowAnon)"/>
+
+  <!-- ============================================================ -->
+  <!-- БЛОК 2: АВТОРИЗОВАННЫЙ ПОЛЬЗОВАТЕЛЬ (синий)                 -->
+  <!-- ============================================================ -->
+  
+  <rect x="340" y="80" width="280" height="45" rx="8" fill="url(#userGrad)" filter="url(#shadow)"/>
+  <text x="480" y="108" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFF">👤 Авторизованный пользователь</text>
+
+  <!-- ПРОФИЛЬ (левый подблок) -->
+  <rect x="340" y="135" width="130" height="180" rx="6" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1" filter="url(#shadowLight)"/>
+  <text x="405" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E3A5F">👤 Профиль</text>
+  <line x1="350" y1="165" x2="460" y2="165" stroke="#93C5FD" stroke-width="0.8"/>
+  
+  <text x="355" y="182" font-size="11" fill="#334155">• Просмотр/редактирование</text>
+  <text x="355" y="198" font-size="11" fill="#334155">  личных данных</text>
+  <text x="355" y="218" font-size="11" fill="#334155">• Смена пароля</text>
+  <text x="355" y="238" font-size="11" fill="#334155">• История заказов</text>
+  <text x="355" y="258" font-size="11" fill="#334155">• Список желаний</text>
+  <text x="355" y="278" font-size="11" fill="#334155">• Управление подписками</text>
+
+  <!-- ПОКУПКА (правый подблок) -->
+  <rect x="490" y="135" width="130" height="180" rx="6" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1" filter="url(#shadowLight)"/>
+  <text x="555" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E3A5F">🛒 Покупка</text>
+  <line x1="500" y1="165" x2="610" y2="165" stroke="#93C5FD" stroke-width="0.8"/>
+  
+  <text x="505" y="182" font-size="11" fill="#334155">• Добавление в корзину</text>
+  <text x="505" y="202" font-size="11" fill="#334155">• Просмотр корзины</text>
+  <text x="505" y="222" font-size="11" fill="#334155">• Оформление заказа</text>
+  <text x="505" y="242" font-size="11" fill="#334155">• Выбор доставки/оплаты</text>
+  <text x="505" y="262" font-size="11" fill="#334155">• Подтверждение заказа</text>
+  <text x="505" y="282" font-size="11" fill="#334155">• Отслеживание статуса</text>
+
+  <!-- Стрелки внутри пользователя -->
+  <path d="M 470 225 L 485 225" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#arrowUser)"/>
+  
+  <!-- Связь между карточками пользователя -->
+  <path d="M 380 315 L 380 335" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#arrowUser)"/>
+  <path d="M 555 315 L 555 335" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#arrowUser)"/>
+
+  <!-- ============================================================ -->
+  <!-- БЛОК 3: АДМИНИСТРАТОР (красный)                             -->
+  <!-- ============================================================ -->
+  
+  <rect x="680" y="80" width="240" height="45" rx="8" fill="url(#adminGrad)" filter="url(#shadow)"/>
+  <text x="800" y="108" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFF">🛡️ Администратор</text>
+
+  <!-- Карточки админа -->
+  <rect x="680" y="135" width="240" height="50" rx="6" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="700" y="157" font-size="13" font-weight="bold" fill="#991B1B">Вход в админку</text>
+  <text x="700" y="174" font-size="11" fill="#7F1D1D">Доступ только для администраторов</text>
+
+  <rect x="680" y="195" width="240" height="50" rx="6" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="700" y="217" font-size="13" font-weight="bold" fill="#991B1B">Управление товарами</text>
+  <text x="700" y="234" font-size="11" fill="#7F1D1D">Добавление, редактирование, удаление</text>
+
+  <rect x="680" y="255" width="240" height="50" rx="6" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="700" y="277" font-size="13" font-weight="bold" fill="#991B1B">Управление пользователями</text>
+  <text x="700" y="294" font-size="11" fill="#7F1D1D">Блокировка, смена ролей, просмотр</text>
+
+  <rect x="680" y="315" width="240" height="50" rx="6" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="700" y="337" font-size="13" font-weight="bold" fill="#991B1B">Управление заказами</text>
+  <text x="700" y="354" font-size="11" fill="#7F1D1D">Изменение статусов, отмена</text>
+
+  <!-- Стрелки внутри админа -->
+  <path d="M 800 185 L 800 190" stroke="#EF4444" stroke-width="1.5" marker-end="url(#arrowAdmin)"/>
+  <path d="M 800 245 L 800 250" stroke="#EF4444" stroke-width="1.5" marker-end="url(#arrowAdmin)"/>
+
+  <!-- ============================================================ -->
+  <!-- ПЕРЕХОДЫ МЕЖДУ БЛОКАМИ                                        -->
+  <!-- ============================================================ -->
+  
+  <!-- Аноним → Авторизованный (регистрация/логин) -->
+  <path d="M 290 220 L 335 220" stroke="#10B981" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#arrowGreen)"/>
+  <text x="312" y="212" font-size="10" font-weight="bold" fill="#059669">Регистрация/Логин</text>
+
+  <!-- Авторизованный → Админ (вход в админку) -->
+  <path d="M 620 220 L 675 220" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#arrowAdmin)"/>
+  <text x="647" y="212" font-size="10" font-weight="bold" fill="#D97706">Повышение прав</text>
+
+  <!-- ============================================================ -->
+  <!-- СВЯЗЬ МЕЖДУ КАРТОЧКАМИ ВНУТРИ ПОТОКОВ                      -->
+  <!-- ============================================================ -->
+  
+  <!-- Выход из системы -->
+  <path d="M 620 315 L 620 355 L 800 355 L 800 380" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrowAnon)"/>
+  <text x="710" y="370" font-size="10" fill="#D97706">Выход (Logout)</text>
+
+  <!-- ============================================================ -->
+  <!-- ПРИМЕЧАНИЕ ВНИЗУ                                             -->
+  <!-- ============================================================ -->
+  
+  <rect x="30" y="420" width="890" height="90" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="50" y="445" font-size="14" font-weight="bold" fill="#1E293B">📌 Ключевые точки для тестирования безопасности:</text>
+  <text x="50" y="468" font-size="12" fill="#334155">🔹 <tspan font-weight="bold">Аутентификация:</tspan> регистрация, логин, восстановление пароля (проверка на слабые пароли, брутфорс).</text>
+  <text x="50" y="486" font-size="12" fill="#334155">🔹 <tspan font-weight="bold">Авторизация:</tspan> профиль, админка (проверка на IDOR, вертикальное/горизонтальное повышение прав).</text>
+  <text x="50" y="504" font-size="12" fill="#334155">🔹 <tspan font-weight="bold">Бизнес-логика:</tspan> оформление заказа, управление товарами (проверка на изменение цен, отрицательные количества).</text>
+
+</svg>

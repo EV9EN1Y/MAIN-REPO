@@ -4,6 +4,20 @@ open -e ~/.zshrc    МЕНЯЛ в терминале цвет приглащен
 
 <img src="../../assets/" alt="Скрин" style="width: 90%; max-width: 1000px;" />
 
+
+
+
+откр порт
+nc -l 4444
+
+подключаюсь
+nc 192.168.0.101 4444
+
+
+
+
+
+
 https://github.com/opa334/darksword-kexploit/blob/main/src/main.m
 
 🧑‍💻 Евгений Черников | iOS Developer → Application Security Engineer

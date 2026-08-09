@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <!-- Градиенты -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1E3A5F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2B6CB0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="phaseGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="phaseGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="phaseGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D97706;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.12"/>
+    </filter>
+    <filter id="shadowLight">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <!-- Маркеры для стрелок -->
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3B82F6"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10B981"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F59E0B"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Базовый фон -->
+  <rect width="1000" height="750" fill="#F8FAFC" rx="12"/>
+  
+  <!-- Заголовок -->
+  <rect x="0" y="0" width="1000" height="70" fill="url(#headerGrad)" rx="12"/>
+  <rect y="58" width="1000" height="12" fill="url(#headerGrad)"/>
+  <text x="500" y="32" text-anchor="middle" font-size="24" font-weight="bold" fill="#FFFFFF" letter-spacing="1">
+    OWASP WSTG — Этап 1: Сбор информации (Information Gathering)
+  </text>
+  <text x="500" y="54" text-anchor="middle" font-size="13" fill="#BEE3F8">
+    От DNS-разведки до картирования точек входа (WSTG-INFO-04 — WSTG-INFO-07)
+  </text>
+
+  <!-- ======================== -->
+  <!-- БЛОК 1: DNS-РАЗВЕДКА    -->
+  <!-- ======================== -->
+  
+  <!-- Заголовок блока -->
+  <rect x="40" y="100" width="270" height="45" rx="8" fill="url(#phaseGrad1)" filter="url(#shadow)"/>
+  <text x="175" y="128" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFF">🔍 DNS и поиск активов</text>
+  
+  <!-- Карточки внутри -->
+  <rect x="40" y="155" width="270" height="60" rx="6" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="55" y="177" font-size="13" font-weight="bold" fill="#1E3A5F">WSTG-INFO-04</text>
+  <text x="55" y="195" font-size="12" fill="#475569">Анализ DNS: dig/nslookup, поиск поддоменов</text>
+  <text x="55" y="210" font-size="11" fill="#64748B">Инструменты: dig, host, amass</text>
+
+  <rect x="40" y="225" width="270" height="60" rx="6" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="55" y="247" font-size="13" font-weight="bold" fill="#1E3A5F">WSTG-INFO-03</text>
+  <text x="55" y="265" font-size="12" fill="#475569">Поиск скрытых/неиндексированных файлов</text>
+  <text x="55" y="280" font-size="11" fill="#64748B">robots.txt, sitemap.xml, .git, .env</text>
+
+  <!-- ======================== -->
+  <!-- БЛОК 2: КАРТИРОВАНИЕ     -->
+  <!-- ======================== -->
+  
+  <rect x="365" y="100" width="270" height="45" rx="8" fill="url(#phaseGrad2)" filter="url(#shadow)"/>
+  <text x="500" y="128" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFF">🗺️ Анализ веб-страниц</text>
+  
+  <rect x="365" y="155" width="270" height="60" rx="6" fill="#FFFFFF" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="380" y="177" font-size="13" font-weight="bold" fill="#065F46">WSTG-INFO-05</text>
+  <text x="380" y="195" font-size="12" fill="#475569">Утечка данных в HTML/JS/CSS</text>
+  <text x="380" y="210" font-size="11" fill="#64748B">Комментарии, метаданные, source map</text>
+
+  <rect x="365" y="225" width="270" height="60" rx="6" fill="#FFFFFF" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="380" y="247" font-size="13" font-weight="bold" fill="#065F46">WSTG-INFO-06</text>
+  <text x="380" y="265" font-size="12" fill="#475569">Выявление точек входа в приложение</text>
+  <text x="380" y="280" font-size="11" fill="#64748B">GET/POST, параметры, скрытые поля</text>
+
+  <!-- ======================== -->
+  <!-- БЛОК 3: ПУТИ ВЫПОЛНЕНИЯ  -->
+  <!-- ======================== -->
+  
+  <rect x="690" y="100" width="270" height="45" rx="8" fill="url(#phaseGrad3)" filter="url(#shadow)"/>
+  <text x="825" y="128" text-anchor="middle" font-size="16" font-weight="bold" fill="#FFF">🧩 Пути выполнения</text>
+  
+  <rect x="690" y="155" width="270" height="60" rx="6" fill="#FFFFFF" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="705" y="177" font-size="13" font-weight="bold" fill="#92400E">WSTG-INFO-07</text>
+  <text x="705" y="195" font-size="12" fill="#475569">Картирование рабочих потоков (workflows)</text>
+  <text x="705" y="210" font-size="11" fill="#64748B">Spidering, точки принятия решений</text>
+
+  <!-- ======================== -->
+  <!-- СТРЕЛКИ между блоками    -->
+  <!-- ======================== -->
+  
+  <!-- Стрелка: Блок 1 → Блок 2 -->
+  <line x1="310" y1="190" x2="355" y2="190" stroke="#3B82F6" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <text x="332" y="182" font-size="9" fill="#64748B" text-anchor="middle">данные</text>
+  
+  <!-- Стрелка: Блок 2 → Блок 3 -->
+  <line x1="635" y1="190" x2="680" y2="190" stroke="#10B981" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <text x="657" y="182" font-size="9" fill="#64748B" text-anchor="middle">карта</text>
+
+  <!-- ======================== -->
+  <!-- СТРЕЛКИ внутри блоков    -->
+  <!-- ======================== -->
+  
+  <!-- Внутри блока 1: INFO-04 -> INFO-03 -->
+  <path d="M 175 215 L 175 220" stroke="#93C5FD" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  
+  <!-- Внутри блока 2: INFO-05 -> INFO-06 -->
+  <path d="M 500 285 L 500 290" stroke="#6EE7B7" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- ======================== -->
+  <!-- ПРИМЕЧАНИЕ ВНИЗУ         -->
+  <!-- ======================== -->
+  
+  <rect x="40" y="320" width="920" height="130" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1" filter="url(#shadowLight)"/>
+  <text x="60" y="345" font-size="14" font-weight="bold" fill="#1E3A5F">📌 Что даёт каждый тест:</text>
+  
+  <text x="60" y="370" font-size="12" fill="#334155">
+    <tspan font-weight="bold" fill="#2563EB">WSTG-INFO-04</tspan> → Список IP, поддоменов, NS-записей, почтовых серверов.
+  </text>
+  <text x="60" y="390" font-size="12" fill="#334155">
+    <tspan font-weight="bold" fill="#2563EB">WSTG-INFO-03/05</tspan> → Находка скрытых файлов, API-ключей, паролей в коде.
+  </text>
+  <text x="60" y="410" font-size="12" fill="#334155">
+    <tspan font-weight="bold" fill="#2563EB">WSTG-INFO-06</tspan> → Все точки входа (URL, параметры, заголовки, куки).
+  </text>
+  <text x="60" y="430" font-size="12" fill="#334155">
+    <tspan font-weight="bold" fill="#2563EB">WSTG-INFO-07</tspan> → Карта бизнес-процессов для тестирования логики и авторизации.
+  </text>
+
+  <!-- ======================== -->
+  <!-- СВЯЗЬ С ДАЛЬНЕЙШИМИ ТЕСТАМИ -->
+  <!-- ======================== -->
+  
+  <rect x="40" y="480" width="920" height="45" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="500" y="508" text-anchor="middle" font-size="14" font-weight="bold" fill="#475569">
+    ⬇️ Результаты этапа «Сбор информации» → Используются в тестах: Аутентификация (ATHN), Авторизация (ATHZ), 
+  </text>
+  <text x="500" y="522" text-anchor="middle" font-size="14" font-weight="bold" fill="#475569">
+    Инъекции (INPV), Бизнес-логика (BUSLOGIC), Конфигурация (CONFIG)
+  </text>
+
+  <!-- ======================== -->
+  <!-- ЛЕГЕНДА (справа внизу)   -->
+  <!-- ======================== -->
+  
+  <rect x="690" y="560" width="270" height="70" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" filter="url(#shadowLight)"/>
+  <text x="710" y="582" font-size="12" font-weight="bold" fill="#1E293B">Легенда:</text>
+  <rect x="710" y="590" width="14" height="14" rx="2" fill="#3B82F6"/>
+  <text x="730" y="602" font-size="11" fill="#475569">DNS и разведка</text>
+  <rect x="830" y="590" width="14" height="14" rx="2" fill="#10B981"/>
+  <text x="850" y="602" font-size="11" fill="#475569">Анализ страниц</text>
+  <rect x="710" y="610" width="14" height="14" rx="2" fill="#F59E0B"/>
+  <text x="730" y="622" font-size="11" fill="#475569">Картирование путей</text>
+
+</svg>
